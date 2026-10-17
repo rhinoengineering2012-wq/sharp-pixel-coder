@@ -32,96 +32,108 @@
 #notifBar{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:92%;max-width:440px;background:linear-gradient(135deg,#facc15,#eab308);color:#000;padding:12px 16px;border-radius:14px;font-weight:700;font-size:12px;display:none;z-index:99999;box-shadow:0 10px 30px rgba(0,0,0,.5)}
 .profilePic{width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);display:block;margin:0 auto}
 .toggle{width:44px;height:26px;background:#334155;border-radius:100px;position:relative;cursor:pointer;transition:.3s}.toggle.on{background:#22c55e}.toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.3s}.toggle.on::after{left:21px}
-.chartWrap{display:flex;gap:12px;margin-top:12px}.barCol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}.barBg{width:100%;height:80px;background:rgba(255,255,255,.06);border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:flex-end}.barFill{width:100%;border-radius:10px 10px 0 0;transition:1s}.pie{width:110px;height:110px;border-radius:50%;background:conic-gradient(#facc15 0% 30%,#3b82f6 30% 60%,#22c55e 60% 85%,#ef4444 85% 100%);margin:0 auto;box-shadow:0 0 0 4px rgba(255,255,255,.08)}
+.chartWrap{display:flex;gap:12px;margin-top:12px}.barCol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}.barBg{width:100%;height:80px;background:rgba(255,255,255,.06);border-radius:10px;position:relative;overflow:hidden;display:flex;align-items:flex-end}.barFill{width:100%;border-radius:10px 10px 0 0;transition:1s}.pie{width:110px;height:110px;border-radius:50%;background:conic-gradient(#facc15 0% 40%,#3b82f6 40% 75%,#22c55e 75% 100%);margin:0 auto;box-shadow:0 0 0 4px rgba(255,255,255,.08)}
 </style></head>
 <body>
 <div id="notifBar">🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault...</div>
-<div id="splash"><div class="logoBox">🦏</div><div class="splash-title">RHINO <b>DATA BANK</b></div><div class="sub">Ver: 0.2 • Lyca Mobile Added</div><div class="loaderWrap"><div class="track"><div class="bar"></div></div><div style="text-align:center;margin-top:8px;font-size:10px;color:#60a5fa;letter-spacing:1px">LOADING VAULT Ver: 0.2...</div></div></div>
+<div id="splash"><div class="logoBox">🦏</div><div class="splash-title">RHINO <b>DATA BANK</b></div><div class="sub">Ver: 0.2</div><div class="loaderWrap"><div class="track"><div class="bar"></div></div><div style="text-align:center;margin-top:8px;font-size:10px;color:#60a5fa;letter-spacing:1px">LOADING VAULT Ver: 0.2...</div></div></div>
 <div class="bg"><div class="orb o1"></div><div class="orb o2"></div></div>
 <div class="app"><div class="container" id="app">
-<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Save Data Forever • Ver: 0.2 • +Lyca Mobile</div></div>
+<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Save Data Forever • Ver: 0.2</div></div>
 
 <div id="screen-login" class="screen active"><div class="card"><div class="cTitle">Sign Up / Login Ver: 0.2</div>
-<div class="label">📱 Phone Number *</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="phone" placeholder="Enter 07xxxxxxxx / Lyca +44"></div>
+<div class="label">📱 Phone Number *</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="phone" placeholder="Enter 07xxxxxxxx"></div>
 <div class="label">👤 Full Name *</div><div class="inputWrap"><div class="icon">👤</div><input class="input" id="name" placeholder="Enter your full name"></div>
-<div class="label">📶 Network - NOW WITH LYCA MOBILE</div><select class="input" id="network" style="padding-left:16px">
-<option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile UK ⭐ NEW</option><option>Lyca Mobile Uganda</option><option>All Networks Premium</option>
-</select>
+<div class="label">📶 Network</div><select class="input" id="network" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Both Premium</option></select>
 <button class="btn" onclick="login()">🔓 SIGN UP / LOGIN Ver: 0.2</button>
 <button class="btn btnGoogle" onclick="googleLogin()"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"> Continue with Google</button>
 </div></div>
 
-<div id="screen-home" class="screen"><div class="bal"><div style="font-size:10px;opacity:.8">TOTAL DATA VAULT BALANCE</div><div style="font-size:36px;font-weight:800;margin:6px 0">12.5 GB</div><div style="font-size:12px;opacity:.9" id="welcome">Welcome, User • Ver: 0.2 + Lyca</div>
-<div style="margin-top:12px;background:rgba(0,0,0,.3);border-radius:12px;padding:10px;display:flex;justify-content:space-between;align-items:center"><div><div style="font-size:10px;opacity:.7">AUTO-SAVE BEFORE EXPIRE</div><div style="font-size:11px;font-weight:700;color:#22c55e">ON • All Networks incl Lyca</div></div><div class="toggle on" id="autoToggle" onclick="toggleAuto()"></div></div>
-</div>
-<div class="grid"><div class="act" onclick="showScreen('save')"><div style="font-size:24px">💾</div><div style="font-weight:700;font-size:12px;margin-top:6px">Save Data</div></div><div class="act" onclick="showScreen('buy')"><div style="font-size:24px">📦</div><div style="font-weight:700;font-size:12px;margin-top:6px">Buy Bundle</div></div><div class="act" onclick="showScreen('analytics')"><div style="font-size:24px">📊</div><div style="font-weight:700;font-size:12px;margin-top:6px">Analytics</div></div><div class="act" onclick="showScreen('refer')"><div style="font-size:24px">🎁</div><div style="font-weight:700;font-size:12px;margin-top:6px">Refer & Earn</div></div></div>
-<div class="card" style="padding:16px"><div style="display:flex;justify-content:space-between;margin-bottom:10px"><b style="font-size:13px">Recent Activity</b><span style="color:var(--gold);font-size:11px;font-weight:700;cursor:pointer" onclick="showScreen('history')">View All →</span></div>
-<div class="listItem"><div style="display:flex;gap:10px;align-items:center"><div style="width:32px;height:32px;background:rgba(239,68,68,.15);border-radius:9px;display:grid;place-items:center">🇬🇧</div><div><div style="font-weight:600;font-size:12px">Lyca Mobile Data Saved</div><div style="font-size:10px;opacity:.5">Today • Lyca UK Auto-saved</div></div></div><div style="color:#22c55e;font-weight:700">+3 GB</div></div>
-</div></div>
+<div id="screen-home" class="screen"><div class="bal"><div style="font-size:10px;opacity:.8">TOTAL DATA VAULT BALANCE</div><div style="font-size:36px;font-weight:800;margin:6px 0">12.5 GB</div><div style="font-size:12px;opacity:.9" id="welcome">Welcome, User • Ver: 0.2</div></div>
+<div class="grid"><div class="act" onclick="showScreen('save')"><div style="font-size:24px">💾</div><div style="font-weight:700;font-size:12px;margin-top:6px">Save Data</div></div><div class="act" onclick="showScreen('buy')"><div style="font-size:24px">📦</div><div style="font-weight:700;font-size:12px;margin-top:6px">Buy Bundle</div></div><div class="act" onclick="showScreen('analytics')"><div style="font-size:24px">📊</div><div style="font-weight:700;font-size:12px;margin-top:6px">Analytics</div></div><div class="act" onclick="showScreen('refer')"><div style="font-size:24px">🎁</div><div style="font-weight:700;font-size:12px;margin-top:6px">Refer & Earn</div></div></div></div>
 
-<div id="screen-analytics" class="screen"><div class="card"><div class="cTitle">📊 Analytics Dashboard + Lyca</div>
-<div class="grid" style="margin-top:0"><div class="bal" style="margin:0;text-align:center"><div style="font-size:10px;opacity:.8">Total Saved</div><div style="font-size:20px;font-weight:800">50.5 GB</div></div><div class="bal" style="margin:0;text-align:center;background:linear-gradient(135deg,#facc15,#eab308);color:#000"><div style="font-size:10px">Lyca Saved</div><div style="font-size:20px;font-weight:800">3 GB</div></div></div>
-
-<div style="margin-top:16px"><b style="font-size:12px">📊 Bar Chart - Usage incl Lyca</b>
-<div class="chartWrap"><div class="barCol"><div class="barBg"><div class="barFill" style="height:40%;background:#3b82f6"></div></div><span style="font-size:10px">Mon</span></div><div class="barCol"><div class="barBg"><div class="barFill" style="height:75%;background:#facc15"></div></div><span style="font-size:10px">Tue</span></div><div class="barCol"><div class="barBg"><div class="barFill" style="height:60%;background:#22c55e"></div></div><span style="font-size:10px">Wed</span></div><div class="barCol"><div class="barBg"><div class="barFill" style="height:90%;background:#ef4444"></div></div><span style="font-size:10px">Lyca</span></div><div class="barCol"><div class="barBg"><div class="barFill" style="height:55%;background:#a855f7"></div></div><span style="font-size:10px">Fri</span></div></div>
-</div>
-
-<div style="margin-top:18px"><b style="font-size:12px">🥧 Pie Chart - Data Sources + Lyca Mobile</b>
-<div style="display:flex;align-items:center;gap:16px;margin-top:10px"><div class="pie"></div><div style="font-size:11px;line-height:1.8"><div><span style="display:inline-block;width:10px;height:10px;background:#facc15;border-radius:2px"></span> MTN 30% - 15GB</div><div><span style="display:inline-block;width:10px;height:10px;background:#3b82f6;border-radius:2px"></span> Airtel 30% - 15GB</div><div><span style="display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:2px"></span> Rewards 25% - 12GB</div><div><span style="display:inline-block;width:10px;height:10px;background:#ef4444;border-radius:2px"></span> Lyca 15% - 7.5GB</div></div></div>
-</div>
-
-<div class="listItem" style="margin-top:12px"><div><b>Lyca Users</b></div><b style="color:#ef4444">247 NEW</b></div><div class="listItem"><div><b>Total Users</b></div><b>1,494</b></div><div class="listItem" style="border:none"><div><b>Data Saved Forever</b></div><b style="color:var(--gold)">2.8 TB</b></div>
+<div id="screen-analytics" class="screen"><div class="card"><div class="cTitle">📊 Analytics Dashboard Ver: 0.2</div>
+<div class="grid"><div class="bal" style="margin:0;text-align:center"><div style="font-size:10px;opacity:.8">Total Saved</div><div style="font-size:20px;font-weight:800">47.5 GB</div></div><div class="bal" style="margin:0;text-align:center;background:linear-gradient(135deg,#facc15,#eab308);color:#000"><div style="font-size:10px">Earned Refer</div><div style="font-size:20px;font-weight:800">5.5 GB</div></div></div>
+<div class="chartWrap"><div class="barCol"><div class="barBg"><div class="barFill" style="height:40%;background:#3b82f6"></div></div><span style="font-size:10px">Mon</span></div><div class="barCol"><div class="barBg"><div class="barFill" style="height:75%;background:#facc15"></div></div><span style="font-size:10px">Tue</span></div><div class="barCol"><div class="barBg"><div class="barFill" style="height:60%;background:#22c55e"></div></div><span style="font-size:10px">Wed</span></div><div class="barCol"><div class="barBg"><div class="barFill" style="height:90%;background:#ef4444"></div></div><span style="font-size:10px">Thu</span></div><div class="barCol"><div class="barBg"><div class="barFill" style="height:55%;background:#a855f7"></div></div><span style="font-size:10px">Fri</span></div></div>
+<div style="margin-top:18px"><b style="font-size:12px">🥧 Pie Chart</b><div style="display:flex;align-items:center;gap:16px;margin-top:10px"><div class="pie"></div><div style="font-size:11px;line-height:1.8"><div><span style="display:inline-block;width:10px;height:10px;background:#facc15;border-radius:2px"></span> MTN 40%</div><div><span style="display:inline-block;width:10px;height:10px;background:#3b82f6;border-radius:2px"></span> Airtel 35%</div><div><span style="display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:2px"></span> Rewards 25%</div></div></div></div>
 <button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-refer" class="screen"><div class="card"><div class="cTitle">🎁 Refer & Get Rewards + Lyca</div>
-<div class="bal" style="text-align:center"><div style="font-size:40px">🎁</div><div style="font-size:18px;font-weight:800;margin-top:6px">Get 1GB For Every Friend!</div><div style="font-size:11px;opacity:.8;margin-top:4px">Works for MTN, Airtel & Lyca Mobile!</div></div>
+<div id="screen-refer" class="screen"><div class="card"><div class="cTitle">🎁 Refer & Get Rewards</div>
+<div class="bal" style="text-align:center"><div style="font-size:40px">🎁</div><div style="font-size:18px;font-weight:800;margin-top:6px">Get 1GB For Every Friend!</div></div>
 <div style="margin-top:12px"><div class="label">🔗 Your Refer Link</div><div class="input" style="padding-left:12px;font-size:11px;background:#0f172a;color:#facc15;border:1px dashed var(--gold)" id="referLink">https://rhinoengineering2012-wq.github.io/sharp-pixel-coder/?ref=LINDON0783</div>
-<div class="grid"><button class="btn" onclick="copyRefer()">📋 COPY LINK</button><button class="btn btnGhost" onclick="shareRefer()">💬 SHARE WHATSAPP</button></div></div>
-<div class="grid" style="margin-top:10px"><div class="bal" style="margin:0;text-align:center"><div style="font-size:22px;font-weight:800">14</div><div style="font-size:9px">Friends Invited</div></div><div class="bal" style="margin:0;text-align:center;background:linear-gradient(135deg,#facc15,#eab308);color:#000"><div style="font-size:22px;font-weight:800">6.5 GB</div><div style="font-size:9px">Rewards Earned</div></div></div>
+<div class="grid"><button class="btn" onclick="copyRefer()">📋 COPY LINK</button><button class="btn btnGhost" onclick="shareRefer()">💬 SHARE</button></div></div>
 <button class="btn btnGhost" style="margin-top:10px" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-save" class="screen"><div class="card"><div class="cTitle">💾 Save Data Forever - All Networks</div><select class="input" id="saveAmount" style="padding-left:16px"><option>1 GB MTN/Airtel/Lyca - 30 Days</option><option>5 GB All Networks ⭐ Popular - Forever</option><option>10 GB Lyca Mobile UK Premium</option><option>15 GB All Networks Premium Forever</option></select><button class="btn" onclick="triggerNotif()">💾 SAVE TO VAULT + Enable Alerts</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-buy" class="screen"><div class="card"><div class="cTitle">📦 Buy Data Bundle - incl Lyca</div><div class="bundle active" onclick="selectBundle(this)"><div><b>1 GB Daily</b><div style="font-size:9px;opacity:.6">MTN/Airtel/Lyca</div></div><div><b style="color:var(--gold)">5,000 UGX / £2 Lyca</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>5 GB Weekly ⭐ Best</b></div><div><b style="color:var(--gold)">20k UGX / £8 Lyca UK</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>Lyca Mobile UK 12GB 🇬🇧 NEW</b></div><div><b style="color:var(--gold)">£10</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>12.5 GB Monthly</b></div><div><b style="color:var(--gold)">45k UGX / £15 Lyca</b></div></div><button class="btn" onclick="alert('📦 Pay via MoMo 0783554841 or Lyca TopUp')">💳 BUY WITH MOMO / LYCA</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-vault" class="screen"><div class="card"><div class="cTitle">🛡️ My Data Vault - All Networks</div><div class="bal"><div style="font-size:10px;opacity:.8">Total Locked Forever</div><div style="font-size:30px;font-weight:800">15.5 GB</div></div><div class="listItem"><div><b>MTN Vault 5GB</b></div><div style="color:var(--gold);font-weight:700">Forever</div></div><div class="listItem"><div><b>Airtel Vault 2.5GB</b></div><div style="color:var(--gold);font-weight:700">Forever</div></div><div class="listItem"><div><b>🇬🇧 Lyca Mobile UK 3GB NEW</b></div><div style="color:#ef4444;font-weight:700">Forever</div></div><div class="listItem" style="border:none"><div><b>Rhino Premium 5GB</b></div><div style="color:#22c55e;font-weight:700">Forever</div></div><button class="btn" onclick="showScreen('save')">💾 SAVE MORE</button></div></div>
-<div id="screen-history" class="screen"><div class="card"><div class="cTitle">📜 Transaction History</div><div class="listItem"><div><b>🇬🇧 Lyca Mobile Saved</b><div style="font-size:10px;opacity:.5">Today • Lyca UK 3GB</div></div><div style="color:#ef4444">+3 GB</div></div><div class="listItem"><div><b>Saved 2.5 GB Auto</b></div><div style="color:#22c55e">+2.5 GB</div></div><div class="listItem" style="border:none"><div><b>Refer Reward</b></div><div style="color:#22c55e">+1 GB</div></div><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-support" class="screen"><div class="card"><div class="cTitle">💬 Support Center - All Networks</div><div class="act" style="text-align:left;display:flex;gap:12px;align-items:center" onclick="window.open('https://wa.me/256745550768','_blank')"><div style="font-size:26px">💬</div><div><b>WhatsApp Support</b><div style="font-size:11px;opacity:.7">MTN/Airtel/Lyca +256 745 550 768</div></div></div><button class="btn btnGhost" style="margin-top:10px" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-profile" class="screen"><div class="card"><div class="cTitle">👤 My Profile - Upload Photo</div>
+<div id="screen-save" class="screen"><div class="card"><div class="cTitle">💾 Save Data Forever</div><select class="input" id="saveAmount" style="padding-left:16px"><option>1 GB - Save 30 Days</option><option>5 GB - Save Forever ⭐ Popular</option><option>10 GB - Premium Forever</option></select><button class="btn" onclick="triggerNotif()">💾 SAVE TO VAULT</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
+<div id="screen-buy" class="screen"><div class="card"><div class="cTitle">📦 Buy Data Bundle</div><div class="bundle active" onclick="selectBundle(this)"><div><b>1 GB Daily</b></div><div><b style="color:var(--gold)">5,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>5 GB Weekly ⭐ Best</b></div><div><b style="color:var(--gold)">20,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>12.5 GB Monthly</b></div><div><b style="color:var(--gold)">45,000 UGX</b></div></div><button class="btn" onclick="alert('📦 Pay via MoMo 0783554841')">💳 BUY WITH MOMO</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
+<div id="screen-vault" class="screen"><div class="card"><div class="cTitle">🛡️ My Data Vault</div><div class="bal"><div style="font-size:10px;opacity:.8">Total Locked Forever</div><div style="font-size:30px;font-weight:800">12.5 GB</div></div><div class="listItem"><div><b>MTN Vault 5GB</b></div><div style="color:var(--gold)">Forever</div></div><div class="listItem" style="border:none"><div><b>Airtel Vault 2.5GB</b></div><div style="color:var(--gold)">Forever</div></div><button class="btn" onclick="showScreen('save')">💾 SAVE MORE</button></div></div>
+<div id="screen-history" class="screen"><div class="card"><div class="cTitle">📜 History</div><div class="listItem"><div><b>Saved 2.5 GB Auto</b></div><div style="color:#22c55e">+2.5 GB</div></div><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
+
+<div id="screen-support" class="screen"><div class="card"><div class="cTitle">For Support:</div>
+<div class="bal" style="background:rgba(255,255,255,.06);padding:18px">
+<div style="margin-bottom:14px">
+<div style="font-size:11px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Tel / Whatsapp</div>
+<div style="display:flex;align-items:center;gap:10px">
+<div style="width:40px;height:40px;background:#22c55e;border-radius:10px;display:grid;place-items:center;font-size:18px">📞</div>
+<div style="font-size:16px;font-weight:800;color:var(--gold)">+256 745 550 768</div>
+</div>
+<div style="display:flex;gap:8px;margin-top:10px">
+<button class="btn" style="margin:0;padding:10px;font-size:11px" onclick="window.open('https://wa.me/256745550768','_blank')">💬 WHATSAPP</button>
+<button class="btn btnGhost" style="margin:0;padding:10px;font-size:11px" onclick="window.location.href='tel:+256745550768'">📞 CALL</button>
+</div>
+</div>
+
+<div style="height:1px;background:rgba(255,255,255,.08);margin:4px 0 14px"></div>
+
+<div>
+<div style="font-size:11px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">E-mail</div>
+<div style="display:flex;align-items:center;gap:10px">
+<div style="width:40px;height:40px;background:var(--gold);border-radius:10px;display:grid;place-items:center;font-size:18px">📧</div>
+<div style="font-size:12px;font-weight:700">rhinoengineering2012@gmail.com</div>
+</div>
+<button class="btn btnGhost" style="margin-top:10px;padding:10px;font-size:11px" onclick="window.location.href='mailto:rhinoengineering2012@gmail.com'">📧 SEND EMAIL</button>
+</div>
+
+</div>
+<div style="text-align:center;margin-top:12px;font-size:10px;opacity:.4">RHINO DATA BANK Ver: 0.2 • Save Data Forever</div>
+<button class="btn btnGhost" style="margin-top:12px" onclick="showScreen('home')">← Back to Home</button>
+</div></div>
+
+<div id="screen-profile" class="screen"><div class="card"><div class="cTitle">👤 My Profile</div>
 <div style="text-align:center;padding:10px 0 14px">
 <img id="profilePic" class="profilePic" src="" style="display:none"><div id="profilePicPlaceholder" style="width:90px;height:90px;border-radius:50%;background:linear-gradient(145deg,#ffef8a,#facc15);display:grid;place-items:center;font-size:36px;margin:0 auto;border:3px solid var(--gold)">🦏</div>
 <input type="file" id="photoUpload" accept="image/*" style="display:none" onchange="uploadPhoto(event)">
-<button class="btn btnGhost" style="margin-top:12px;font-size:11px;padding:10px" onclick="document.getElementById('photoUpload').click()">📸 UPLOAD PROFILE PHOTO</button>
-<div style="font-weight:800;font-size:16px;margin-top:12px" id="profileName">User</div><div style="font-size:11px;opacity:.6" id="profilePhone">No phone • Ver: 0.2 + Lyca</div>
+<button class="btn btnGhost" style="margin-top:12px;font-size:11px;padding:10px" onclick="document.getElementById('photoUpload').click()">📸 UPLOAD PHOTO</button>
+<div style="font-weight:800;font-size:16px;margin-top:12px" id="profileName">User</div><div style="font-size:11px;opacity:.6" id="profilePhone">No phone • Ver: 0.2</div>
 </div>
-<div class="listItem"><div><b>Network</b></div><b id="profileNet">Lyca Mobile UK</b></div>
-<div class="listItem"><div><b>Auto-Save All Networks</b></div><div class="toggle on" onclick="toggleAuto()"></div></div>
-<button class="btn" onclick="logout()">🔓 LOGOUT - Ask Login Again</button></div></div>
+<button class="btn" onclick="logout()">🔓 LOGOUT</button></div></div>
+
 </div></div>
 <div class="bottom" id="bottomNav" style="display:none">
 <div class="nav active" id="nav-home" onclick="showScreen('home')"><span>🏠</span>Home</div>
 <div class="nav" id="nav-vault" onclick="showScreen('vault')"><span>🛡️</span>Vault</div>
 <div class="nav" id="nav-history" onclick="showScreen('analytics')"><span>📊</span>Analytics</div>
-<div class="nav" id="nav-support" onclick="showScreen('refer')"><span>🎁</span>Refer</div>
+<div class="nav" id="nav-support" onclick="showScreen('support')"><span>🎁</span>Support</div>
 <div class="nav" id="nav-profile" onclick="showScreen('profile')"><span>👤</span>Profile</div>
 </div>
 <script>
 setTimeout(()=>{document.getElementById('splash').classList.add('hide');document.getElementById('app').classList.add('show');},2800);
-function login(){const p=document.getElementById('phone').value.trim();const n=document.getElementById('name').value.trim();const net=document.getElementById('network').value;if(!p||!n){alert('⚠️ Enter phone & name!');return}
-localStorage.setItem('rhino_user','1');localStorage.setItem('rhino_phone',p);localStorage.setItem('rhino_name',n);localStorage.setItem('rhino_net',net);
+function login(){const p=document.getElementById('phone').value.trim();const n=document.getElementById('name').value.trim();if(!p||!n){alert('⚠️ Enter phone & name!');return}
+localStorage.setItem('rhino_user','1');localStorage.setItem('rhino_phone',p);localStorage.setItem('rhino_name',n);
 document.getElementById('screen-login').classList.remove('active');showScreen('home');document.getElementById('bottomNav').style.display='flex';
-document.getElementById('welcome').innerText='Welcome, '+n.split(' ')[0]+' • '+net;document.getElementById('profileName').innerText=n;document.getElementById('profilePhone').innerText=p+' • '+net;document.getElementById('profileNet').innerText=net;document.getElementById('referLink').innerText='https://rhinoengineering2012-wq.github.io/sharp-pixel-coder/?ref='+n.split(' ')[0]+p.slice(-4);loadSavedPhoto();}
-function googleLogin(){alert('🔐 Google Verified ✓\nLyca Mobile Supported!');const p='0783554841';const n='NATUKWASA LINDON';document.getElementById('phone').value=p;document.getElementById('name').value=n;login();}
+document.getElementById('welcome').innerText='Welcome, '+n.split(' ')[0];document.getElementById('profileName').innerText=n;document.getElementById('profilePhone').innerText=p;loadSavedPhoto();}
+function googleLogin(){const p='0783554841';const n='NATUKWASA LINDON';document.getElementById('phone').value=p;document.getElementById('name').value=n;login();}
 function showScreen(name){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const t=document.getElementById('screen-'+name);if(t)t.classList.add('active');
-document.querySelectorAll('.bottom .nav').forEach(n=>n.classList.remove('active'));const navId='nav-'+(name==='analytics'?'history':name==='refer'?'support':['home','vault','history','support','profile'].includes(name)?name:'home');const navEl=document.getElementById(navId);if(navEl)navEl.classList.add('active');window.scrollTo(0,0);}
+document.querySelectorAll('.bottom .nav').forEach(n=>n.classList.remove('active'));const navId='nav-'+(name==='analytics'?'history':name==='refer'?'support':['home','vault','history','support','profile'].includes(name)?name:'home');if(name==='support')document.getElementById('nav-support').classList.add('active');else{const navEl=document.getElementById(navId);if(navEl)navEl.classList.add('active')}window.scrollTo(0,0);}
 function selectBundle(el){document.querySelectorAll('.bundle').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
 function logout(){localStorage.removeItem('rhino_user');document.getElementById('phone').value='';document.getElementById('name').value='';document.getElementById('bottomNav').style.display='none';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-login').classList.add('active');}
-function uploadPhoto(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(ev){const img=document.getElementById('profilePic');img.src=ev.target.result;img.style.display='block';document.getElementById('profilePicPlaceholder').style.display='none';localStorage.setItem('rhino_profile_pic',ev.target.result);alert('✅ Photo Uploaded!');};reader.readAsDataURL(file);}
+function uploadPhoto(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(ev){const img=document.getElementById('profilePic');img.src=ev.target.result;img.style.display='block';document.getElementById('profilePicPlaceholder').style.display='none';localStorage.setItem('rhino_profile_pic',ev.target.result);};reader.readAsDataURL(file);}
 function loadSavedPhoto(){const saved=localStorage.getItem('rhino_profile_pic');if(saved){const img=document.getElementById('profilePic');img.src=saved;img.style.display='block';document.getElementById('profilePicPlaceholder').style.display='none';}}
-function triggerNotif(){const bar=document.getElementById('notifBar');bar.style.display='block';setTimeout(()=>{bar.innerText='✅ Auto-Saved! Lyca + MTN + Airtel Forever!';},2000);setTimeout(()=>bar.style.display='none',5000);alert('✅ Saved All Networks including Lyca!');}
-function toggleAuto(){document.querySelectorAll('.toggle').forEach(t=>t.classList.toggle('on'));const bar=document.getElementById('notifBar');bar.innerText=document.getElementById('autoToggle').classList.contains('on')?'🔔 Auto-Save OFF':'✅ Auto-Save ON - Lyca incl';bar.style.display='block';setTimeout(()=>bar.style.display='none',3000);}
-function copyRefer(){navigator.clipboard.writeText(document.getElementById('referLink').innerText);alert('✅ Refer link copied!');}
-function shareRefer(){const link=document.getElementById('referLink').innerText;window.open('https://wa.me/?text='+encodeURIComponent('🦏 Join RHINO DATA BANK + Lyca Mobile! Save Data Forever! FREE 500MB: '+link),'_blank');}
+function triggerNotif(){alert('✅ Saved!');}
+function copyRefer(){navigator.clipboard.writeText(document.getElementById('referLink').innerText);alert('✅ Copied!');}
+function shareRefer(){const link=document.getElementById('referLink').innerText;window.open('https://wa.me/?text='+encodeURIComponent('🦏 Join RHINO DATA BANK: '+link),'_blank');}
 window.onload=()=>{loadSavedPhoto();logout();}
 </script>
 </body>
