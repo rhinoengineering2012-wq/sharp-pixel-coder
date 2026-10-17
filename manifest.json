@@ -1,0 +1,25 @@
+{
+  "name": "RHINO DATABANK - Super Premium V100",
+  "short_name": "Rhino Bank",
+  "description": "Save Data Forever - MTN Airtel Uganda - Premium Data Vault V100 - Support +256 745 550 768 - rhinoengineering2012@gmail.com",
+  "start_url": "/sharp-pixel-coder/?pwa=1",
+  "display": "standalone",
+  "background_color": "#020b1f",
+  "theme_color": "#facc15",
+  "orientation": "portrait",
+  "scope": "/sharp-pixel-coder/",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2972/2972017.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2972/2972017.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
