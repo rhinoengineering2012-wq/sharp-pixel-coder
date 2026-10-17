@@ -1,7 +1,7 @@
 {
-  "name": "Rhino Databank",
-  "short_name": "Rhino Databank",
-  "description": "Rhino Engineering Databank - All Engineering Materials",
+  "name": "RHINO DATA BANK",
+  "short_name": "RHINO DATA BANK",
+  "description": "RHINO DATA BANK - All Engineering Materials",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
