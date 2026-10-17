@@ -19,7 +19,7 @@ const week = [
   { d: "Mon", gb: 1.2 }, { d: "Tue", gb: 2.4 }, { d: "Wed", gb: 0.8 }, { d: "Thu", gb: 3.1 }, { d: "Fri", gb: 2.0 }, { d: "Sat", gb: 4.5 }, { d: "Sun", gb: 1.5 },
 ];
 const nets = [
-  { name: "MTN", v: 58, c: "var(--gold)" }, { name: "Airtel", v: 30, c: "var(--destructive)" }, { name: "Africell", v: 12, c: "var(--primary)" },
+  { name: "MTN", v: 58, c: "var(--gold)" }, { name: "Airtel", v: 30, c: "var(--destructive)" }, { name: "Lyca Mobile", v: 12, c: "var(--primary)" },
 ];
 
 function Analytics() {

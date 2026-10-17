@@ -25,7 +25,7 @@ let state: State = {
     { id: "2", type: "withdrawal", amount: 3, unit: "GB", network: "Airtel", label: "Withdraw to my number", at: now - 6 * h },
     { id: "3", type: "reward", amount: 1, unit: "GB", network: "RHINO", label: "Referral reward", at: now - 26 * h },
     { id: "4", type: "sale", amount: 10000, unit: "UGX", network: "Market", label: "Sold 2.5GB on market", at: now - 50 * h },
-    { id: "5", type: "deposit", amount: 2.5, unit: "GB", network: "Africell", label: "Deposit from Africell", at: now - 72 * h },
+    { id: "5", type: "deposit", amount: 2.5, unit: "GB", network: "Lyca Mobile", label: "Deposit from Lyca Mobile", at: now - 72 * h },
   ],
 };
 const subs = new Set<() => void>();

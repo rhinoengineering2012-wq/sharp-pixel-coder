@@ -11,7 +11,7 @@ export const Route = createFileRoute("/deposit")({
       { title: "Save Expiring Data — RHINO DATABANK" },
       { name: "description", content: "Deposit expiring bundles and keep 90% of your data." },
       { property: "og:title", content: "Save Expiring Data — RHINO DATABANK" },
-      { property: "og:description", content: "Deposit MTN, Airtel or Africell data before it expires." },
+      { property: "og:description", content: "Deposit MTN, Airtel or Lyca Mobile data before it expires." },
     ],
   }),
   component: Deposit,
