@@ -57,7 +57,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.47 0.27 265);
+  --primary: #0A3DFF;
   --primary-glow: oklch(0.55 0.23 262);
   --primary-light: oklch(0.66 0.17 258);
   --primary-foreground: oklch(1 0 0);
@@ -74,19 +74,19 @@
   --destructive-soft: oklch(0.98 0.012 20);
   --success: oklch(0.76 0.23 145);
   --success-soft: oklch(0.95 0.06 145);
-  --gold: oklch(0.85 0.17 85);
+  --gold: #FFC300;
   --gold-deep: oklch(0.8 0.17 75);
   --gold-soft: oklch(0.96 0.06 90);
   --border: oklch(0.92 0.008 265);
   --input: oklch(0.92 0.008 265);
-  --ring: oklch(0.47 0.27 265);
-  --chart-1: oklch(0.47 0.27 265);
-  --chart-2: oklch(0.85 0.17 85);
+  --ring: var(--primary);
+  --chart-1: var(--primary);
+  --chart-2: var(--gold);
   --chart-3: oklch(0.76 0.23 145);
   --chart-4: oklch(0.66 0.17 258);
   --chart-5: oklch(0.65 0.23 28);
 
-  --gradient-splash: linear-gradient(160deg, oklch(0.145 0 0) 0%, oklch(0.47 0.27 265) 65%, oklch(0.55 0.23 262) 100%);
+  --gradient-splash: linear-gradient(160deg, var(--ink) 0%, var(--primary) 65%, var(--primary-glow) 100%);
   --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
   --gradient-card: linear-gradient(135deg, var(--primary) 0%, var(--primary-glow) 55%, var(--primary-light) 100%);
   --gradient-gold: linear-gradient(135deg, var(--gold), var(--gold-deep));
@@ -125,3 +125,17 @@
 @utility animate-dot { animation: dot-bounce 1.2s infinite ease-in-out; }
 @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @utility animate-rise { animation: rise 0.5s ease-out both; }
+
+:root { --nav-height: calc(72px + env(safe-area-inset-bottom, 0px)); }
+html, body { margin: 0; min-width: 0; }
+body { overflow-x: clip; }
+img { object-fit: cover; max-width: 100%; }
+input { min-width: 0; }
+.app-frame { min-height: 100dvh; padding-top: env(safe-area-inset-top, 0px); padding-bottom: calc(var(--nav-height) + 24px); }
+.bottom-nav { min-height: var(--nav-height); padding: 4px 8px calc(4px + env(safe-area-inset-bottom, 0px)); }
+.nav-item { min-height: 56px; }
+.app-bar { padding-top: max(16px, env(safe-area-inset-top, 0px)); }
+.splash-screen { min-height: 100dvh; padding-bottom: var(--nav-height); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
