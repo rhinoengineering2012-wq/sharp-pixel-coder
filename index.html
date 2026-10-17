@@ -35,15 +35,14 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 .toggle{width:44px;height:26px;background:#334155;border-radius:100px;position:relative;cursor:pointer;transition:.3s}.toggle.on{background:#22c55e}.toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.3s}.toggle.on::after{left:21px}
 .chartWrap{display:flex;gap:10px;margin-top:14px;align-items:flex-end}.barCol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}.barBg{width:100%;height:80px;background:rgba(255,255,255,.08);border-radius:10px;display:flex;align-items:flex-end;overflow:hidden}.barFill{width:100%;border-radius:10px 10px 0 0;transition:1s}
 .pie{width:110px;height:110px;border-radius:50%;background:conic-gradient(#facc15 0% 40%,#3b82f6 40% 75%,#22c55e 75% 100%);margin:0 auto;box-shadow:0 0 0 4px rgba(255,255,255,.1)}
+.setRow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}.setRow:last-child{border:none}
 </style></head>
 <body>
 <div id="notifBar">🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault...</div>
 <div id="splash"><div class="logoBox">🦏</div><div class="splash-title">RHINO <b>DATA BANK</b></div><div class="sub">Ver: 0.2</div><div class="loaderWrap"><div class="track"><div class="bar"></div></div><div style="text-align:center;margin-top:8px;font-size:10px;color:#60a5fa;letter-spacing:1px">LOADING VAULT Ver: 0.2...</div></div></div>
 <div class="bg"><div class="orb o1"></div><div class="orb o2"></div></div>
 <div class="app"><div class="container" id="app">
-<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Save Data Forever • Ver: 0.2</div>
-<div style="display:flex;justify-content:center;align-items:center;gap:8px;margin-top:12px"><span style="font-size:10px;opacity:.7">🌙 Dark</span><div class="toggle on" id="themeToggle" onclick="toggleTheme()"></div><span style="font-size:10px;opacity:.7">☀️ Light</span></div>
-</div>
+<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Save Data Forever • Ver: 0.2</div></div>
 
 <div id="screen-login" class="screen active"><div class="card"><div class="cTitle">Sign Up / Login Ver: 0.2</div>
 <div class="label">📱 Phone Number *</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="phone" placeholder="Enter 07xxxxxxxx"></div>
@@ -67,7 +66,6 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 
 <div id="screen-analytics" class="screen"><div class="card"><div class="cTitle">📊 Analytics Dashboard Ver: 0.2</div>
 <div class="grid"><div class="bal" style="margin:0;text-align:center"><div style="font-size:10px;opacity:.8">Total Saved</div><div style="font-size:20px;font-weight:800">47.5 GB</div></div><div class="bal" style="margin:0;text-align:center;background:linear-gradient(135deg,#facc15,#eab308);color:#000"><div style="font-size:10px">Earned Refer</div><div style="font-size:20px;font-weight:800">5.5 GB</div></div></div>
-
 <div style="margin-top:16px"><b style="font-size:12px">📈 Weekly Usage</b>
 <div class="chartWrap">
 <div class="barCol"><div class="barBg"><div class="barFill" style="height:40%;background:#3b82f6"></div></div><span style="font-size:10px">Mon</span></div>
@@ -76,9 +74,7 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 <div class="barCol"><div class="barBg"><div class="barFill" style="height:90%;background:#ef4444"></div></div><span style="font-size:10px">Thu</span></div>
 <div class="barCol"><div class="barBg"><div class="barFill" style="height:55%;background:#a855f7"></div></div><span style="font-size:10px">Fri</span></div>
 </div></div>
-
 <div style="margin-top:18px"><b style="font-size:12px">🥧 Pie Chart - Networks</b><div style="display:flex;align-items:center;gap:16px;margin-top:10px"><div class="pie"></div><div style="font-size:11px;line-height:1.8"><div><span style="display:inline-block;width:10px;height:10px;background:#facc15;border-radius:2px"></span> MTN 40%</div><div><span style="display:inline-block;width:10px;height:10px;background:#3b82f6;border-radius:2px"></span> Airtel 35%</div><div><span style="display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:2px"></span> Lyca 25%</div></div></div></div>
-
 <button class="btn btnGhost" style="margin-top:16px" onclick="showScreen('home')">← Back</button>
 </div></div>
 
@@ -116,7 +112,6 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 <div id="screen-save" class="screen"><div class="card"><div class="cTitle">💾 Save Data Forever</div><select class="input" id="saveAmount" style="padding-left:16px"><option>1 GB - Save 30 Days</option><option>5 GB - Save Forever ⭐ Popular</option><option>10 GB - Premium Forever</option></select><button class="btn" onclick="triggerNotif()">💾 SAVE TO VAULT</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
 <div id="screen-buy" class="screen"><div class="card"><div class="cTitle">📦 Buy Data Bundle</div><div class="bundle active" onclick="selectBundle(this)"><div><b>1 GB Daily</b></div><div><b style="color:var(--gold)">5,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>5 GB Weekly ⭐ Best</b></div><div><b style="color:var(--gold)">20,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>12.5 GB Monthly</b></div><div><b style="color:var(--gold)">45,000 UGX</b></div></div><button class="btn" onclick="showNotif('📦 Pay via MoMo 0783554841 - Request sent!')">💳 BUY WITH MOMO</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
 <div id="screen-vault" class="screen"><div class="card"><div class="cTitle">🛡️ My Data Vault</div><div class="bal"><div style="font-size:10px;opacity:.8">Total Locked Forever</div><div style="font-size:30px;font-weight:800">12.5 GB</div></div><div class="listItem"><div><b>MTN Vault 5GB</b></div><div style="color:var(--gold)">Forever</div></div><div class="listItem"><div><b>Airtel Vault 2.5GB</b></div><div style="color:var(--gold)">Forever</div></div><div class="listItem" style="border:none"><div><b>Lyca Mobile Uganda 5GB</b></div><div style="color:var(--gold)">Forever</div></div><button class="btn" onclick="showScreen('save')">💾 SAVE MORE</button></div></div>
-<div id="screen-history" class="screen"><div class="card"><div class="cTitle">📜 History</div><div class="listItem"><div><b>Saved 2.5 GB Auto</b></div><div style="color:#22c55e">+2.5 GB</div></div><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
 
 <div id="screen-support" class="screen"><div class="card"><div class="cTitle">For Support:</div>
 <div class="bal" style="background:rgba(255,255,255,.06);padding:18px">
@@ -151,9 +146,15 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 <input type="file" id="photoUpload" accept="image/*" style="display:none" onchange="uploadPhoto(event)">
 <button class="btn btnGhost" style="margin-top:12px;font-size:11px;padding:10px" onclick="document.getElementById('photoUpload').click()">📸 UPLOAD PHOTO</button>
 <div style="font-weight:800;font-size:16px;margin-top:12px" id="profileName">User</div><div style="font-size:11px;opacity:.6" id="profilePhone">No phone • Ver: 0.2</div>
-<div style="margin-top:14px;display:flex;justify-content:center;align-items:center;gap:8px"><span style="font-size:11px">Theme:</span><div class="toggle on" onclick="toggleTheme()"></div></div>
 </div>
-<button class="btn" onclick="logout()">🔓 LOGOUT</button></div></div>
+
+<div style="margin-top:6px;background:rgba(255,255,255,.05);border-radius:16px;padding:10px 14px">
+<div class="setRow"><div><div style="font-weight:700;font-size:13px">🌓 Theme Switcher</div><div style="font-size:10px;opacity:.6">Dark / Light Mode</div></div><div class="toggle on" id="themeToggle" onclick="toggleTheme()"></div></div>
+<div class="setRow"><div><div style="font-weight:700;font-size:13px">🔔 Notifications</div><div style="font-size:10px;opacity:.6">Enable pop-up alerts</div></div><div class="toggle on" id="notifToggle" onclick="toggleNotif()"></div></div>
+<div class="setRow"><div><div style="font-weight:700;font-size:13px">💾 Auto Data Saver</div><div style="font-size:10px;opacity:.6">Auto save before expiry</div></div><div class="toggle on" id="autoToggle" onclick="toggleAutoSaver()"></div></div>
+</div>
+
+<button class="btn" style="margin-top:14px" onclick="logout()">🔓 LOGOUT</button></div></div>
 
 </div></div>
 <div class="bottom" id="bottomNav" style="display:none">
@@ -166,11 +167,72 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 
 <script>
 let notifInterval;
-function showNotif(msg){const bar=document.getElementById('notifBar');bar.innerText=msg;bar.style.display='block';setTimeout(()=>{bar.style.display='none';},5000);}
-function triggerNotif(){showNotif('🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault...');setTimeout(()=>{showNotif('✅ Saved! 2.5GB secured to Vault Forever!');},2000);}
-function startAutoNotif(){if(notifInterval) clearInterval(notifInterval);notifInterval=setInterval(()=>{showNotif('🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault...');},15000);}
-setTimeout(()=>{document.getElementById('splash').classList.add('hide');document.getElementById('app').classList.add('show');startAutoNotif();showNotif('🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault...');},2800);
-function toggleTheme(){document.body.classList.toggle('light');const t=document.getElementById('themeToggle');t.classList.toggle('on');showNotif(document.body.classList.contains('light')?'☀️ Light Theme On':'🌙 Dark Theme On');}
+let notifEnabled = localStorage.getItem('rhino_notif') !== 'off';
+let autoSaverEnabled = localStorage.getItem('rhino_autosaver') !== 'off';
+
+function showNotif(msg){
+  if(!notifEnabled) return;
+  const bar=document.getElementById('notifBar');
+  bar.innerText=msg;
+  bar.style.display='block';
+  setTimeout(()=>{bar.style.display='none';},5000);
+}
+function triggerNotif(){
+  if(!autoSaverEnabled){ showNotif('⚠️ Auto Saver is OFF! Enable in Profile'); return; }
+  showNotif('🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault...');
+  setTimeout(()=>{ if(autoSaverEnabled) showNotif('✅ Saved! 2.5GB secured to Vault Forever! Auto-Saver ON'); },2000);
+}
+function startAutoNotif(){
+  if(notifInterval) clearInterval(notifInterval);
+  notifInterval=setInterval(()=>{
+    if(!notifEnabled) return;
+    if(autoSaverEnabled){
+      showNotif('🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault... (Auto-Saver ON)');
+    } else {
+      showNotif('🔔 Alert: Your 2.5GB expires in 2 hours! (Auto-Saver OFF - Enable in Profile)');
+    }
+  },15000);
+}
+setTimeout(()=>{
+  document.getElementById('splash').classList.add('hide');
+  document.getElementById('app').classList.add('show');
+  startAutoNotif();
+  showNotif('🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault...');
+  syncToggles();
+},2800);
+
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  const t=document.getElementById('themeToggle');
+  if(t) t.classList.toggle('on');
+  localStorage.setItem('rhino_theme', document.body.classList.contains('light') ? 'light' : 'dark');
+  showNotif(document.body.classList.contains('light')?'☀️ Light Theme On':'🌙 Dark Theme On');
+}
+function toggleNotif(){
+  notifEnabled = !notifEnabled;
+  const t=document.getElementById('notifToggle');
+  if(notifEnabled){ t.classList.add('on'); localStorage.setItem('rhino_notif','on'); showNotif('🔔 Notifications ON'); }
+  else { t.classList.remove('on'); localStorage.setItem('rhino_notif','off'); document.getElementById('notifBar').style.display='none'; }
+}
+function toggleAutoSaver(){
+  autoSaverEnabled = !autoSaverEnabled;
+  const t=document.getElementById('autoToggle');
+  if(autoSaverEnabled){ t.classList.add('on'); localStorage.setItem('rhino_autosaver','on'); showNotif('💾 Auto Data Saver ON - Will save before expiry'); }
+  else { t.classList.remove('on'); localStorage.setItem('rhino_autosaver','off'); showNotif('💾 Auto Data Saver OFF'); }
+}
+function syncToggles(){
+  const nt=document.getElementById('notifToggle');
+  const at=document.getElementById('autoToggle');
+  const th=document.getElementById('themeToggle');
+  if(nt){ if(notifEnabled) nt.classList.add('on'); else nt.classList.remove('on'); }
+  if(at){ if(autoSaverEnabled) at.classList.add('on'); else at.classList.remove('on'); }
+  if(th){ 
+    const savedTheme=localStorage.getItem('rhino_theme');
+    if(savedTheme==='light'){ document.body.classList.add('light'); th.classList.add('on'); }
+    else { document.body.classList.remove('light'); }
+  }
+}
+
 function login(){const p=document.getElementById('phone').value.trim();const n=document.getElementById('name').value.trim();if(!p||!n){alert('⚠️ Enter phone & name!');return}
 localStorage.setItem('rhino_user','1');localStorage.setItem('rhino_phone',p);localStorage.setItem('rhino_name',n);
 document.getElementById('screen-login').classList.remove('active');showScreen('home');document.getElementById('bottomNav').style.display='flex';
@@ -185,7 +247,7 @@ function uploadPhoto(e){const file=e.target.files[0];if(!file)return;const reade
 function loadSavedPhoto(){const saved=localStorage.getItem('rhino_profile_pic');if(saved){const img=document.getElementById('profilePic');img.src=saved;img.style.display='block';document.getElementById('profilePicPlaceholder').style.display='none';}}
 function copyRefer(){navigator.clipboard.writeText(document.getElementById('referLink').innerText);alert('✅ Copied!');}
 function shareRefer(){const link=document.getElementById('referLink').innerText;window.open('https://wa.me/?text='+encodeURIComponent('🦏 Join RHINO DATA BANK: '+link),'_blank');}
-window.onload=()=>{loadSavedPhoto();logout();}
+window.onload=()=>{loadSavedPhoto();logout(); syncToggles();}
 </script>
 </body>
 </html>
