@@ -8,6 +8,8 @@ import { DEPOSIT_FEE, deposit, depositNet, haptic } from "@/lib/store";
 export const Route = createFileRoute("/deposit")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Save Expiring Data — RHINO DATABANK" },
       { name: "description", content: "Deposit expiring bundles and keep 90% of your data." },
       { property: "og:title", content: "Save Expiring Data — RHINO DATABANK" },
@@ -54,11 +56,11 @@ function Deposit() {
         <div className="flex flex-col gap-3">
           {sources.map(({ id, label, icon: Icon }) => (
             <button key={id} onClick={() => setSrc(id)} className={`flex items-center gap-3 rounded-[14px] border-[1.5px] bg-card p-4 text-left ${src === id ? "border-primary" : "border-input"}`}>
-              <span className={`grid h-5 w-5 place-items-center rounded-full border-2 ${src === id ? "border-primary" : "border-muted-foreground"}`}>
+              <span className={`grid h-5 w-5 shrink-0 place-items-center rounded-full border-2 ${src === id ? "border-primary" : "border-muted-foreground"}`}>
                 {src === id && <span className="h-2.5 w-2.5 rounded-full bg-primary" />}
               </span>
-              <Icon className="h-5 w-5 text-primary" />
-              <span className="font-bold text-ink">{label}</span>
+              <Icon className="h-5 w-5 shrink-0 text-primary" />
+              <span className="min-w-0 text-sm font-bold text-ink">{label}</span>
             </button>
           ))}
         </div>

@@ -1,11 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Bar, BarChart, Cell, Pie, PieChart, ResponsiveContainer, XAxis } from "recharts";
-import { BottomNav, Frame } from "@/components/rhino/AppFrame";
+import { Frame } from "@/components/rhino/AppFrame";
 import { UGX_PER_GB, useBank } from "@/lib/store";
 
 export const Route = createFileRoute("/analytics")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Analytics — RHINO DATABANK" },
       { name: "description", content: "Track how much data and money RHINO saved you." },
       { property: "og:title", content: "Analytics — RHINO DATABANK" },
@@ -27,9 +29,9 @@ function Analytics() {
   return (
     <Frame className="pb-28">
       <h1 className="px-5 pt-6 text-2xl font-extrabold text-ink">Analytics</h1>
-      <div className="mt-4 grid grid-cols-3 gap-3 px-5">
+      <div className="mt-4 grid grid-cols-3 gap-2 px-5">
         {[[`${b.stored}GB`, "Saved"], [`${Math.round(b.stored * UGX_PER_GB / 1000)}k`, "UGX saved"], ["94%", "Rescue rate"]].map(([v, l]) => (
-          <div key={l} className="rounded-[20px] bg-card p-4 shadow-soft">
+          <div key={l} className="rounded-[20px] bg-card p-3 shadow-soft">
             <p className="text-lg font-extrabold text-ink">{v}</p>
             <p className="text-[11px] text-muted-foreground">{l}</p>
           </div>
@@ -47,7 +49,7 @@ function Analytics() {
         </div>
       </section>
       <section className="mx-5 mt-5 flex items-center gap-4 rounded-3xl bg-card p-5 shadow-elegant">
-        <div className="h-32 w-32">
+        <div className="h-32 w-32 shrink-0">
           <ResponsiveContainer>
             <PieChart>
               <Pie data={nets} dataKey="v" innerRadius={38} outerRadius={60} paddingAngle={3} stroke="none">
@@ -56,7 +58,7 @@ function Analytics() {
             </PieChart>
           </ResponsiveContainer>
         </div>
-        <ul className="flex flex-1 flex-col gap-2">
+        <ul className="flex min-w-0 flex-1 flex-col gap-2">
           <li className="text-sm font-bold text-ink">By network</li>
           {nets.map((n) => (
             <li key={n.name} className="flex items-center justify-between text-sm">
@@ -66,7 +68,6 @@ function Analytics() {
           ))}
         </ul>
       </section>
-      <BottomNav />
     </Frame>
   );
 }

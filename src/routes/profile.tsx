@@ -1,11 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Bell, ChevronRight, Fingerprint, Gift, HelpCircle, LogOut, ShieldCheck } from "lucide-react";
-import { BottomNav, Frame } from "@/components/rhino/AppFrame";
+import { Frame } from "@/components/rhino/AppFrame";
 import { useBank } from "@/lib/store";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Profile — RHINO DATABANK" },
       { name: "description", content: "Manage your account, security and referrals." },
       { property: "og:title", content: "Profile — RHINO DATABANK" },
@@ -45,7 +47,6 @@ function Profile() {
       <Link to="/login" className="mx-5 mt-5 flex h-12 items-center justify-center gap-2 rounded-[14px] border border-destructive text-sm font-bold text-destructive">
         <LogOut className="h-4 w-4" />Sign Out
       </Link>
-      <BottomNav />
     </Frame>
   );
 }
