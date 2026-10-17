@@ -37,8 +37,8 @@ function Login() {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     haptic();
-    if (phone.replace(/\D/g, "").length < 9) return toast.error("Enter a valid phone number");
-    if (!agree) return toast.error("Please accept the Terms");
+    if (phone.replace(/\D/g, "").length < 9) { toast.error("Enter a valid phone number"); return; }
+    if (!agree) { toast.error("Please accept the Terms"); return; }
     nav({ to: "/dashboard" });
   };
   return (

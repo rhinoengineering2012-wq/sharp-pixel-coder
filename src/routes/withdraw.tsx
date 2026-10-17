@@ -34,7 +34,7 @@ function Withdraw() {
   const [step, setStep] = useState(-1);
   const confirm = () => {
     haptic();
-    try { withdraw(gb, net, `Withdraw — ${dest}`); } catch (e) { return toast.error((e as Error).message); }
+    try { withdraw(gb, net, `Withdraw — ${dest}`); } catch (e) { toast.error((e as Error).message); return; }
     setStep(0);
     setTimeout(() => setStep(1), 600);
     setTimeout(() => { setStep(2); toast.success(`${gb}GB sent via ${net}`); }, 1400);

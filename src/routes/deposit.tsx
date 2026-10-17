@@ -31,7 +31,7 @@ function Deposit() {
   const fee = +(gb * DEPOSIT_FEE).toFixed(2);
   const confirm = () => {
     haptic();
-    if (!(gb > 0)) return toast.error("Enter an amount");
+    if (!(gb > 0)) { toast.error("Enter an amount"); return; }
     deposit(gb, src);
     toast.success(`${depositNet(gb)}GB saved to your vault`);
     nav({ to: "/dashboard" });

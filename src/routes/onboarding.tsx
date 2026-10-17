@@ -24,7 +24,7 @@ const pages = [
 function Onboarding() {
   const [i, setI] = useState(0);
   const nav = useNavigate();
-  const p = pages[i];
+  const p = pages[i]!;
   const next = () => { haptic(); i < 2 ? setI(i + 1) : nav({ to: "/login" }); };
   return (
     <Frame className="relative flex flex-col bg-card">
