@@ -1,15 +1,16 @@
 {
   "name": "RHINO DATA BANK",
   "short_name": "RHINO DATA BANK",
-  "start_url": ".",
+  "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#020b1f",
-  "theme_color": "#facc15",
+  "background_color": "#050505",
+  "theme_color": "#FFD700",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
