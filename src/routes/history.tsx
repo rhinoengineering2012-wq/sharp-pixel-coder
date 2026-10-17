@@ -1,12 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, ArrowUp, Banknote, FileText, Gift, Search, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
-import { BottomNav, Frame } from "@/components/rhino/AppFrame";
+import { Frame } from "@/components/rhino/AppFrame";
 import { timeAgo, useBank, type TxType } from "@/lib/store";
 
 export const Route = createFileRoute("/history")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Transaction History — RHINO DATABANK" },
       { name: "description", content: "Every deposit, withdrawal, reward and sale in one place." },
       { property: "og:title", content: "Transaction History — RHINO DATABANK" },
@@ -49,11 +51,11 @@ function HistoryPage() {
           const s = style[t.type]; const Icon = s.icon;
           return (
             <li key={t.id} className="flex items-center gap-3 rounded-2xl bg-card p-4 shadow-soft animate-rise">
-              <span className={`h-2 w-2 rounded-full ${s.dot}`} />
-              <span className={`grid h-10 w-10 place-items-center rounded-full ${s.soft}`}><Icon className={`h-5 w-5 ${s.fg}`} /></span>
-              <div className="flex-1">
-                <div className="flex justify-between gap-2">
-                  <p className="text-sm font-bold text-ink">{t.label}</p>
+              <span className={`h-2 w-2 shrink-0 rounded-full ${s.dot}`} />
+              <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-full ${s.soft}`}><Icon className={`h-5 w-5 ${s.fg}`} /></span>
+              <div className="min-w-0 flex-1">
+                <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2">
+                  <p className="break-words text-sm font-bold text-ink">{t.label}</p>
                   <p className={`text-sm font-bold ${s.fg}`}>{s.sign}{t.unit === "UGX" ? `UGX ${t.amount.toLocaleString()}` : `${t.amount}GB`}</p>
                 </div>
                 <p className="text-[11px] text-muted-foreground">{timeAgo(t.at)} · {t.network}</p>
@@ -66,7 +68,6 @@ function HistoryPage() {
       <button onClick={() => window.print()} className="mx-5 mt-5 flex h-12 w-[calc(100%-2.5rem)] items-center justify-center gap-2 rounded-[14px] border border-input bg-card text-sm font-bold text-ink">
         <FileText className="h-5 w-5 text-destructive" />Export PDF
       </button>
-      <BottomNav />
     </Frame>
   );
 }

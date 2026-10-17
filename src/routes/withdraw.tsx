@@ -8,6 +8,8 @@ import { haptic, useBank, withdraw, withdrawFeeUGX } from "@/lib/store";
 export const Route = createFileRoute("/withdraw")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Withdraw Data — RHINO DATABANK" },
       { name: "description", content: "Withdraw as data, MoMo cash, or sell on the Rhino Market." },
       { property: "og:title", content: "Withdraw Data — RHINO DATABANK" },

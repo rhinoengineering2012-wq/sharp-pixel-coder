@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">RHINO DATABANK</string>
+    <string name="title_activity_main">RHINO DATABANK</string>
+    <string name="package_name">com.rhino.databank</string>
+    <string name="custom_url_scheme">com.rhino.databank</string>
+</resources>

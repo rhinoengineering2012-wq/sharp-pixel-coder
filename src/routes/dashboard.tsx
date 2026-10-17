@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AlertTriangle, BarChart3, Bell, Eye, EyeOff, Gift, History, PlusCircle, Share2, Wallet } from "lucide-react";
 import { useState } from "react";
-import { BottomNav, Frame } from "@/components/rhino/AppFrame";
+import { Frame } from "@/components/rhino/AppFrame";
 import { UGX_PER_GB, useBank } from "@/lib/store";
 
 const BG = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800";
@@ -9,6 +9,10 @@ const BG = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800";
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: BG },
+      { name: "twitter:image", content: BG },
       { title: "Dashboard — RHINO DATABANK" },
       { name: "description", content: "Your data balance, stats and quick actions." },
       { property: "og:title", content: "Dashboard — RHINO DATABANK" },
@@ -32,8 +36,8 @@ function Dashboard() {
   const greet = hr < 12 ? "Good Morning" : hr < 17 ? "Good Afternoon" : "Good Evening";
   return (
     <Frame className="pb-28">
-      <header className="flex items-center justify-between p-5">
-        <div>
+      <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 p-5">
+        <div className="min-w-0">
           <p className="text-[13px] text-muted-foreground">{greet}, Alex</p>
           <p className="text-lg font-bold text-ink">Data Banker 👋</p>
         </div>
@@ -46,10 +50,10 @@ function Dashboard() {
         </div>
       </header>
 
-      <section className="relative mx-5 overflow-hidden rounded-4xl bg-gradient-card p-6 shadow-glow animate-rise">
+      <section className="relative mx-5 overflow-hidden rounded-4xl bg-gradient-card p-5 shadow-glow animate-rise">
         <img src={BG} alt="" className="absolute inset-0 h-full w-full object-cover opacity-10" />
         <div className="relative">
-          <div className="flex items-center justify-between">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
             <span className="text-sm font-medium text-primary-foreground/90">Data Balance</span>
             <button onClick={() => setHide(!hide)} className="flex items-center gap-2" aria-label="Toggle balance">
               {hide ? <EyeOff className="h-5 w-5 text-primary-foreground" /> : <Eye className="h-5 w-5 text-primary-foreground" />}
@@ -61,9 +65,9 @@ function Dashboard() {
         </div>
       </section>
 
-      <section className="mx-5 mt-5 grid grid-cols-3 gap-3">
+      <section className="mx-5 mt-5 grid grid-cols-3 gap-2">
         {[[b.stored, "Stored"], [b.withdrawn, "Withdrawn"], [b.earned, "Earned"]].map(([v, l]) => (
-          <div key={l} className="rounded-[20px] bg-card p-4 shadow-soft">
+          <div key={l} className="rounded-[20px] bg-card p-3 shadow-soft">
             <p className="text-lg font-extrabold text-ink">{v}GB</p>
             <p className="text-[11px] text-muted-foreground">{l}</p>
           </div>
@@ -96,7 +100,6 @@ function Dashboard() {
         <AlertTriangle className="h-5 w-5 shrink-0 text-destructive" />
         <p className="text-[13px] font-bold text-destructive">Your 3GB MTN expires in 2hrs. Save Now!</p>
       </Link>
-      <BottomNav />
     </Frame>
   );
 }

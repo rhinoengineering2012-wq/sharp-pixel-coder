@@ -10,6 +10,10 @@ const BG = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800";
 export const Route = createFileRoute("/login")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: BG },
+      { name: "twitter:image", content: BG },
       { title: "Create Account — RHINO DATABANK" },
       { name: "description", content: "Open your bank-grade data vault in seconds." },
       { property: "og:title", content: "Create Account — RHINO DATABANK" },
