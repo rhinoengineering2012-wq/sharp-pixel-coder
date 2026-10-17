@@ -1,24 +1,43 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { ShieldCheck } from "lucide-react";
+import { useEffect } from "react";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const BG = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "RHINO DATABANK — Data Bank of Africa" },
+      { name: "description", content: "Save expiring MTN, Airtel and Africell data bundles and withdraw anytime." },
+      { property: "og:title", content: "RHINO DATABANK — Data Bank of Africa" },
+      { property: "og:description", content: "Never lose expiring data again. Deposit, store and withdraw your bundles." },
+      { property: "og:image", content: BG },
+      { name: "twitter:image", content: BG },
+    ],
+  }),
+  component: Splash,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function Splash() {
+  const nav = useNavigate();
+  useEffect(() => {
+    const t = setTimeout(() => nav({ to: "/onboarding" }), 2500);
+    return () => clearTimeout(t);
+  }, [nav]);
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="relative mx-auto flex min-h-screen max-w-md flex-col items-center justify-center overflow-hidden bg-gradient-splash text-center">
+      <img src={BG} alt="" className="absolute inset-0 h-full w-full object-cover opacity-20" />
+      <div className="relative flex flex-col items-center animate-rise">
+        <ShieldCheck className="h-24 w-24 text-gold" strokeWidth={1.6} />
+        <h1 className="mt-4 text-4xl font-bold tracking-wide text-primary-foreground">RHINO DATABANK</h1>
+        <p className="mt-2 text-[11px] font-bold uppercase tracking-[0.3em] text-gold">Data Bank of Africa</p>
+        <div className="mt-10 flex gap-2">
+          {[0, 1, 2].map((i) => (
+            <span key={i} className="h-2.5 w-2.5 rounded-full bg-gold animate-dot" style={{ animationDelay: `${i * 0.16}s` }} />
+          ))}
+        </div>
+        <p className="mt-4 text-[13px] text-gold opacity-70">Initializing Secure Data Vault...</p>
+      </div>
     </div>
   );
 }
