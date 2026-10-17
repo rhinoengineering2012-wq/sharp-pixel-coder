@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RHINO DATA BANK - Ver: 0.3</title>
+<title>RHINO DATA BANK - Ver: 0.2</title>
 <link rel="icon" type="image/png" href="icon.png">
 <link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
@@ -9,10 +9,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>*{margin:0;padding:0;box-sizing:border-box}:root{--gold:#facc15}body{font-family:'Outfit',sans-serif;background:#020b1f;color:#fff;min-height:100vh;overflow-x:hidden;transition:.3s}
 body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255,255,255,.9);border-color:rgba(0,0,0,.1)}body.light .bottom{background:rgba(255,255,255,.94)}body.light .bal{background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff}
-#splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(1200px 800px at 50% -10%, #1e40af 0%, #0a192f 50%, #020b1f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform 1s,opacity .8s}#splash.hide{transform:translateY(-100%);opacity:0;pointer-events:none}
+#splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(1200px 800px at 50% -10%, #1e40af 0%, #0a192f 50%, #020b1f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .6s,opacity .5s;cursor:pointer}#splash.hide{transform:translateY(-100%);opacity:0;pointer-events:none}
 .logoBox{width:280px;height:280px;border-radius:48px;background:linear-gradient(145deg,#ffef8a,#facc15,#eab308);display:grid;place-items:center;font-size:110px;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 2px rgba(250,204,21,.5),0 0 90px rgba(250,204,21,.4);animation:float 3s infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .splash-title{margin-top:28px;font-family:'Space Grotesk';font-size:36px;font-weight:800;text-align:center}.splash-title b{color:var(--gold)}.sub{margin-top:10px;color:#93c5fd;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700}
-.loaderWrap{margin-top:32px;width:220px}.track{height:4px;background:rgba(255,255,255,.1);border-radius:100px;overflow:hidden}.bar{height:100%;width:0%;background:linear-gradient(90deg,#3b82f6,#facc15);animation:load 2.8s forwards}@keyframes load{0%{width:0%}100%{width:100%}}
+.loaderWrap{margin-top:32px;width:220px}.track{height:4px;background:rgba(255,255,255,.1);border-radius:100px;overflow:hidden}.bar{height:100%;width:0%;background:linear-gradient(90deg,#3b82f6,#facc15);animation:load 1.5s forwards}@keyframes load{0%{width:0%}100%{width:100%}}
 .bg{position:fixed;inset:0;pointer-events:none}.orb{position:absolute;border-radius:50%;filter:blur(80px)}.o1{width:600px;height:600px;background:radial-gradient(circle,#3b82f6,transparent 70%);top:-200px;left:-200px;opacity:.35}.o2{width:500px;height:500px;background:radial-gradient(circle,#facc15,transparent 70%);bottom:-100px;right:-100px;opacity:.22}
 .app{position:relative;z-index:1;min-height:100vh;display:flex;justify-content:center;padding:20px 16px 100px}.container{width:100%;max-width:460px;opacity:0;transform:translateY(20px);transition:.9s}.container.show{opacity:1;transform:translateY(0)}
 .header{text-align:center;padding:18px 0 12px}.mini{width:68px;height:68px;margin:0 auto 10px;border-radius:18px;background:linear-gradient(145deg,#ffef8a,#facc15);display:grid;place-items:center;font-size:32px}.brand{font-family:'Space Grotesk';font-weight:800;font-size:28px;line-height:.85}.brand .d{color:var(--gold)}
@@ -37,24 +37,24 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 .chartWrap{display:flex;gap:10px;margin-top:14px;align-items:flex-end}.barCol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}.barBg{width:100%;height:80px;background:rgba(255,255,255,.08);border-radius:10px;display:flex;align-items:flex-end;overflow:hidden}.barFill{width:100%;border-radius:10px 10px 0 0;transition:1s}
 .pie{width:110px;height:110px;border-radius:50%;background:conic-gradient(#facc15 0% 40%,#3b82f6 40% 75%,#22c55e 75% 100%);margin:0 auto;box-shadow:0 0 0 4px rgba(255,255,255,.1)}
 .setRow{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}.setRow:last-child{border:none}
-.historyTable{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px}.historyTable th{background:rgba(250,204,21,.15);padding:8px;text-align:left;font-size:10px;color:#facc15}.historyTable td{padding:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.histItem{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;margin-bottom:8px}
 </style></head>
 <body>
-<div id="notifBar">🔔 Alert: Your 2.5GB expires in 2 hours! Auto-saving to Vault...</div>
-<div id="splash"><div class="logoBox">🦏</div><div class="splash-title">RHINO <b>DATA BANK</b></div><div class="sub">Ver: 0.3 - History Added</div><div class="loaderWrap"><div class="track"><div class="bar"></div></div><div style="text-align:center;margin-top:8px;font-size:10px;color:#60a5fa;letter-spacing:1px">LOADING VAULT Ver: 0.3...</div></div></div>
+<div id="notifBar"></div>
+<div id="splash" onclick="hideSplash()"><div class="logoBox">🦏</div><div class="splash-title">RHINO <b>DATA BANK</b></div><div class="sub">Ver: 0.2</div><div class="loaderWrap"><div class="track"><div class="bar"></div></div><div style="text-align:center;margin-top:8px;font-size:10px;color:#60a5fa;letter-spacing:1px">LOADING VAULT Ver: 0.2... TAP TO SKIP</div></div></div>
 <div class="bg"><div class="orb o1"></div><div class="orb o2"></div></div>
 <div class="app"><div class="container" id="app">
-<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Save Data Forever • Ver: 0.3</div></div>
+<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Save Data Forever • Ver: 0.2</div></div>
 
-<div id="screen-login" class="screen active"><div class="card"><div class="cTitle">Sign Up / Login Ver: 0.3</div>
+<div id="screen-login" class="screen active"><div class="card"><div class="cTitle">Sign Up / Login Ver: 0.2</div>
 <div class="label">📱 Phone Number *</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="phone" placeholder="Enter 07xxxxxxxx"></div>
 <div class="label">👤 Full Name *</div><div class="inputWrap"><div class="icon">👤</div><input class="input" id="name" placeholder="Enter your full name"></div>
 <div class="label">📶 Network</div><select class="input" id="network" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile Uganda</option><option>Both Premium</option></select>
-<button class="btn" onclick="login()">🔓 SIGN UP / LOGIN Ver: 0.3</button>
+<button class="btn" onclick="login()">🔓 SIGN UP / LOGIN Ver: 0.2</button>
 <button class="btn btnGoogle" onclick="googleLogin()"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"> Continue with Google</button>
 </div></div>
 
-<div id="screen-home" class="screen"><div class="bal"><div style="font-size:10px;opacity:.8">TOTAL DATA VAULT BALANCE</div><div style="font-size:36px;font-weight:800;margin:6px 0">12.5 GB</div><div style="font-size:12px;opacity:.9" id="welcome">Welcome, User • Ver: 0.3</div></div>
+<div id="screen-home" class="screen"><div class="bal"><div style="font-size:10px;opacity:.8">TOTAL DATA VAULT BALANCE</div><div style="font-size:36px;font-weight:800;margin:6px 0">12.5 GB</div><div style="font-size:12px;opacity:.9" id="welcome">Welcome, User • Ver: 0.2</div></div>
 <div class="grid">
 <div class="act" onclick="showScreen('save')"><div style="font-size:24px">💾</div><div style="font-weight:700;font-size:12px;margin-top:6px">Save Data</div></div>
 <div class="act" onclick="showScreen('buy')"><div style="font-size:24px">📦</div><div style="font-weight:700;font-size:12px;margin-top:6px">Buy Bundle</div></div>
@@ -64,22 +64,17 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 <div class="act" onclick="showScreen('withdraw')"><div style="font-size:24px">⬆️</div><div style="font-weight:700;font-size:12px;margin-top:6px">Withdraw Data</div></div>
 <div class="act" onclick="showScreen('refer')"><div style="font-size:24px">🎁</div><div style="font-weight:700;font-size:12px;margin-top:6px">Refer & Earn</div></div>
 <div class="act" onclick="showScreen('vault')"><div style="font-size:24px">🛡️</div><div style="font-weight:700;font-size:12px;margin-top:6px">My Vault</div></div>
-<div class="act" onclick="showScreen('history')" style="border-color:var(--gold)"><div style="font-size:24px">📜</div><div style="font-weight:700;font-size:12px;margin-top:6px">History</div></div>
-<div class="act" onclick="showScreen('support')"><div style="font-size:24px">📞</div><div style="font-weight:700;font-size:12px;margin-top:6px">Support</div></div>
+<div class="act" onclick="showScreen('history')" style="border:1px solid #facc15"><div style="font-size:24px">📜</div><div style="font-weight:700;font-size:12px;margin-top:6px">History</div></div>
 </div></div>
 
-<!-- NEW: HISTORY SCREEN WITH PDF PRINT -->
-<div id="screen-history" class="screen"><div class="card"><div class="cTitle">📜 Transaction History</div>
-<div class="bal" style="text-align:center;padding:12px"><div style="font-size:10px;opacity:.8">TOTAL TRANSACTIONS</div><div id="totalTx" style="font-size:20px;font-weight:800">0</div></div>
-<div id="historyList" style="max-height:300px;overflow-y:auto"></div>
-<div class="grid" style="margin-top:12px">
-<button class="btn" onclick="printToPDF()">🖨️ PRINT TO PDF</button>
-<button class="btn btnGhost" onclick="clearHistory()">🗑️ CLEAR</button>
-</div>
-<button class="btn btnGhost" style="margin-top:8px" onclick="showScreen('home')">← Back</button>
+<div id="screen-history" class="screen"><div class="card"><div class="cTitle">📜 Transaction History Ver: 0.2</div>
+<div class="bal" style="text-align:center;padding:12px"><div style="font-size:10px;opacity:.8">TOTAL TRANSACTIONS</div><div style="font-size:28px;font-weight:800" id="totalCount">0</div></div>
+<div id="historyList"><div style="text-align:center;padding:20px;opacity:.6;font-size:12px">No history yet. Save data to see history here.</div></div>
+<button class="btn" onclick="printHistoryPDF()" style="background:linear-gradient(180deg,#22c55e,#16a34a)">🖨️ PRINT TO PDF</button>
+<button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-analytics" class="screen"><div class="card"><div class="cTitle">📊 Analytics Dashboard</div>
+<div id="screen-analytics" class="screen"><div class="card"><div class="cTitle">📊 Analytics Dashboard Ver: 0.2</div>
 <div class="grid"><div class="bal" style="margin:0;text-align:center"><div style="font-size:10px;opacity:.8">Total Saved</div><div style="font-size:20px;font-weight:800">47.5 GB</div></div><div class="bal" style="margin:0;text-align:center;background:linear-gradient(135deg,#facc15,#eab308);color:#000"><div style="font-size:10px">Earned Refer</div><div style="font-size:20px;font-weight:800">5.5 GB</div></div></div>
 <div style="margin-top:16px"><b style="font-size:12px">📈 Weekly Usage</b>
 <div class="chartWrap">
@@ -89,31 +84,28 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 <div class="barCol"><div class="barBg"><div class="barFill" style="height:90%;background:#ef4444"></div></div><span style="font-size:10px">Thu</span></div>
 <div class="barCol"><div class="barBg"><div class="barFill" style="height:55%;background:#a855f7"></div></div><span style="font-size:10px">Fri</span></div>
 </div></div>
-<div style="margin-top:18px"><b style="font-size:12px">🥧 Pie Chart - Networks</b><div style="display:flex;align-items:center;gap:16px;margin-top:10px"><div class="pie"></div><div style="font-size:11px;line-height:1.8"><div><span style="display:inline-block;width:10px;height:10px;background:#facc15;border-radius:2px"></span> MTN 40%</div><div><span style="display:inline-block;width:10px;height:10px;background:#3b82f6;border-radius:2px"></span> Airtel 35%</div><div><span style="display:inline-block;width:10px;height:10px;background:#22c55e;border-radius:2px"></span> Lyca 25%</div></div></div></div>
 <button class="btn btnGhost" style="margin-top:16px" onclick="showScreen('home')">← Back</button>
 </div></div>
 
 <div id="screen-momo" class="screen"><div class="card"><div class="cTitle">💳 Convert Data to MOMO</div>
-<div class="bal" style="text-align:center"><div style="font-size:36px">💰</div><div style="font-weight:800;margin-top:6px">1GB = 2,000 UGX</div><div style="font-size:11px;opacity:.8;margin-top:4px">Convert your vault data to Mobile Money instantly</div></div>
+<div class="bal" style="text-align:center"><div style="font-size:36px">💰</div><div style="font-weight:800;margin-top:6px">1GB = 2,000 UGX</div></div>
 <div class="label">💾 Amount to Convert</div><select class="input" id="momoAmount" style="padding-left:16px"><option>1 GB = 2,000 UGX</option><option>5 GB = 10,000 UGX</option><option>10 GB = 20,000 UGX</option></select>
-<div class="label" style="margin-top:10px">📱 MOMO Number</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="momoNum" placeholder="07xxxxxxxx"></div>
-<button class="btn" onclick="convertMomo()">💳 CONVERT TO MOMO</button>
+<div class="label" style="margin-top:10px">📱 MOMO Number</div><div class="inputWrap"><div class="icon">📞</div><input class="input" placeholder="07xxxxxxxx"></div>
+<button class="btn" onclick="doAction('MOMO Convert', document.getElementById('momoAmount').value)">💳 CONVERT TO MOMO</button>
 <button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
 <div id="screen-deposit" class="screen"><div class="card"><div class="cTitle">⬇️ Deposit Data</div>
-<div class="bal" style="text-align:center"><div style="font-size:36px">⬇️</div><div style="font-weight:800">Deposit from Network to Vault</div></div>
-<div class="label">📶 From Network</div><select class="input" id="depositNet" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile Uganda</option></select>
-<div class="label" style="margin-top:10px">💾 Amount</div><select class="input" id="depositAmt" style="padding-left:16px"><option>1 GB</option><option>2.5 GB</option><option>5 GB</option></select>
-<button class="btn" onclick="doDeposit()">⬇️ DEPOSIT NOW</button>
+<div class="label">📶 From Network</div><select class="input" id="depNet" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile Uganda</option></select>
+<div class="label" style="margin-top:10px">💾 Amount</div><select class="input" id="depAmt" style="padding-left:16px"><option>1 GB</option><option>2.5 GB</option><option>5 GB</option></select>
+<button class="btn" onclick="doAction('Deposit', document.getElementById('depAmt').value + ' from ' + document.getElementById('depNet').value)">⬇️ DEPOSIT NOW</button>
 <button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
 <div id="screen-withdraw" class="screen"><div class="card"><div class="cTitle">⬆️ Withdraw Data</div>
-<div class="bal" style="text-align:center"><div style="font-size:36px">⬆️</div><div style="font-weight:800">Withdraw from Vault to Network</div></div>
-<div class="label">📶 To Network</div><select class="input" id="withdrawNet" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile Uganda</option></select>
-<div class="label" style="margin-top:10px">💾 Amount</div><select class="input" id="withdrawAmt" style="padding-left:16px"><option>1 GB</option><option>2.5 GB</option><option>5 GB</option></select>
-<button class="btn" onclick="doWithdraw()">⬆️ WITHDRAW NOW</button>
+<div class="label">📶 To Network</div><select class="input" id="withNet" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile Uganda</option></select>
+<div class="label" style="margin-top:10px">💾 Amount</div><select class="input" id="withAmt" style="padding-left:16px"><option>1 GB</option><option>2.5 GB</option><option>5 GB</option></select>
+<button class="btn" onclick="doAction('Withdraw', document.getElementById('withAmt').value + ' to ' + document.getElementById('withNet').value)">⬆️ WITHDRAW NOW</button>
 <button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
@@ -124,11 +116,100 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 <button class="btn btnGhost" style="margin-top:10px" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-save" class="screen"><div class="card"><div class="cTitle">💾 Save Data Forever</div><select class="input" id="saveAmount" style="padding-left:16px"><option>1 GB - Save 30 Days</option><option>5 GB - Save Forever ⭐ Popular</option><option>10 GB - Premium Forever</option></select><button class="btn" onclick="doSave()">💾 SAVE TO VAULT</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-buy" class="screen"><div class="card"><div class="cTitle">📦 Buy Data Bundle</div><div class="bundle active" onclick="selectBundle(this)"><div><b>1 GB Daily</b></div><div><b style="color:var(--gold)">5,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>5 GB Weekly ⭐ Best</b></div><div><b style="color:var(--gold)">20,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>12.5 GB Monthly</b></div><div><b style="color:var(--gold)">45,000 UGX</b></div></div><button class="btn" onclick="doBuy()">💳 BUY WITH MOMO</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
+<div id="screen-save" class="screen"><div class="card"><div class="cTitle">💾 Save Data Forever</div><select class="input" id="saveAmount" style="padding-left:16px"><option>1 GB - Save 30 Days</option><option>5 GB - Save Forever ⭐ Popular</option><option>10 GB - Premium Forever</option></select><button class="btn" onclick="doAction('Save', document.getElementById('saveAmount').value)">💾 SAVE TO VAULT</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
+<div id="screen-buy" class="screen"><div class="card"><div class="cTitle">📦 Buy Data Bundle</div><div class="bundle active" onclick="selectBundle(this)"><div><b>1 GB Daily</b></div><div><b style="color:var(--gold)">5,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>5 GB Weekly ⭐ Best</b></div><div><b style="color:var(--gold)">20,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>12.5 GB Monthly</b></div><div><b style="color:var(--gold)">45,000 UGX</b></div></div><button class="btn" onclick="doAction('Buy Bundle', 'Bundle Purchase')">💳 BUY WITH MOMO</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
 <div id="screen-vault" class="screen"><div class="card"><div class="cTitle">🛡️ My Data Vault</div><div class="bal"><div style="font-size:10px;opacity:.8">Total Locked Forever</div><div style="font-size:30px;font-weight:800">12.5 GB</div></div><div class="listItem"><div><b>MTN Vault 5GB</b></div><div style="color:var(--gold)">Forever</div></div><div class="listItem"><div><b>Airtel Vault 2.5GB</b></div><div style="color:var(--gold)">Forever</div></div><div class="listItem" style="border:none"><div><b>Lyca Mobile Uganda 5GB</b></div><div style="color:var(--gold)">Forever</div></div><button class="btn" onclick="showScreen('save')">💾 SAVE MORE</button></div></div>
 
 <div id="screen-support" class="screen"><div class="card"><div class="cTitle">For Support:</div>
 <div class="bal" style="background:rgba(255,255,255,.06);padding:18px">
-<div style="margin-bottom:14px">
-  
+<div style="margin-bottom:14px"><div style="font-size:11px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Tel / Whatsapp</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;background:#22c55e;border-radius:10px;display:grid;place-items:center;font-size:18px">📞</div><div style="font-size:16px;font-weight:800;color:var(--gold)">+256 745 550 768</div></div><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style="margin:0;padding:10px;font-size:11px" onclick="window.open('https://wa.me/256745550768','_blank')">💬 WHATSAPP</button><button class="btn btnGhost" style="margin:0;padding:10px;font-size:11px" onclick="window.location.href='tel:+256745550768'">📞 CALL</button></div></div>
+<div style="height:1px;background:rgba(255,255,255,.08);margin:4px 0 14px"></div>
+<div><div style="font-size:11px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">E-mail</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;background:var(--gold);border-radius:10px;display:grid;place-items:center;font-size:18px">📧</div><div style="font-size:12px;font-weight:700">rhinoengineering2012@gmail.com</div></div></div>
+</div><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
+
+<div id="screen-profile" class="screen"><div class="card" style="text-align:center"><img src="https://i.pravatar.cc/150?u=rhino" class="profilePic"><div style="margin-top:10px;font-weight:800;font-size:18px" id="profileName">User</div><div style="font-size:12px;opacity:.6" id="profilePhone">07xxxxxxxx</div><button class="btn btnGhost" style="margin-top:16px" onclick="showScreen('home')">← Back Home</button></div></div>
+<div id="screen-settings" class="screen"><div class="card"><div class="cTitle">⚙️ Settings Ver: 0.2</div><div class="setRow"><div><b>🌙 Dark Mode</b></div><div class="toggle on" id="themeToggle" onclick="toggleTheme()"></div></div><div class="setRow"><div><b>🔔 Notifications</b></div><div class="toggle on"></div></div><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
+
+</div></div>
+
+<div class="bottom"><div class="nav active" id="nav-home" onclick="showScreen('home')"><span>🏠</span>Home</div><div class="nav" id="nav-vault" onclick="showScreen('vault')"><span>🛡️</span>Vault</div><div class="nav" id="nav-history" onclick="showScreen('history')"><span>📜</span>History</div><div class="nav" id="nav-support" onclick="showScreen('support')"><span>💬</span>Support</div><div class="nav" id="nav-profile" onclick="showScreen('profile')"><span>👤</span>Profile</div></div>
+
+<script>
+let historyData = JSON.parse(localStorage.getItem('rhinoHistory')||'[]');
+let splashHidden = false;
+function hideSplash(){
+ if(splashHidden) return;
+ splashHidden = true;
+ document.getElementById('splash').classList.add('hide');
+ document.getElementById('app').classList.add('show');
+ setTimeout(()=>{ document.getElementById('splash').style.display='none'; },700);
+}
+setTimeout(hideSplash, 1500);
+window.addEventListener('load', ()=> setTimeout(hideSplash, 500));
+document.addEventListener('keydown', hideSplash);
+
+function showScreen(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById('screen-'+id).classList.add('active');
+ document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
+ const nav = document.getElementById('nav-'+id);
+ if(nav) nav.classList.add('active');
+ if(id==='home'){ document.getElementById('nav-home').classList.add('active'); }
+ if(id==='history') renderHistory();
+ window.scrollTo(0,0);
+}
+function login(){
+ const p=document.getElementById('phone').value;
+ const n=document.getElementById('name').value;
+ if(!p||!n){ showNotif('⚠️ Enter phone and name'); return; }
+ document.getElementById('welcome').innerText='Welcome, '+n+' • Ver: 0.2';
+ document.getElementById('profileName').innerText=n;
+ document.getElementById('profilePhone').innerText=p;
+ showScreen('home');
+ showNotif('✅ Welcome '+n+'! Ver: 0.2 Loaded');
+}
+function googleLogin(){ showScreen('home'); showNotif('✅ Google Login Success Ver: 0.2'); }
+function showNotif(msg){
+ const bar=document.getElementById('notifBar');
+ bar.innerText=msg; bar.style.display='block';
+ setTimeout(()=>bar.style.display='none',4000);
+}
+function selectBundle(el){ document.querySelectorAll('.bundle').forEach(b=>b.classList.remove('active')); el.classList.add('active'); }
+function copyRefer(){ navigator.clipboard.writeText(document.getElementById('referLink').innerText); showNotif('📋 Copied!'); }
+function shareRefer(){ if(navigator.share){ navigator.share({title:'Rhino', text:document.getElementById('referLink').innerText}); } else copyRefer(); }
+function toggleTheme(){ document.body.classList.toggle('light'); document.getElementById('themeToggle').classList.toggle('on'); }
+
+function doAction(type, detail){
+ const now=new Date();
+ const entry={type, detail, date: now.toLocaleString(), timestamp: now.getTime()};
+ historyData.unshift(entry);
+ localStorage.setItem('rhinoHistory', JSON.stringify(historyData));
+ showNotif('✅ '+type+' Success! Added to History');
+ renderHistory();
+}
+function renderHistory(){
+ document.getElementById('totalCount').innerText=historyData.length;
+ const list=document.getElementById('historyList');
+ if(historyData.length===0){ list.innerHTML='<div style="text-align:center;padding:20px;opacity:.6;font-size:12px">No history yet.</div>'; return; }
+ list.innerHTML=historyData.map(h=>`<div class="histItem"><div style="display:flex;justify-content:space-between"><b style="font-size:12px">${h.type}</b><span style="font-size:10px;opacity:.6">${h.date}</span></div><div style="font-size:11px;margin-top:4px;opacity:.8">${h.detail}</div></div>`).join('');
+}
+function printHistoryPDF(){
+ if(historyData.length===0){ showNotif('⚠️ No history to print'); return; }
+ const { jsPDF }=window.jspdf;
+ const doc=new jsPDF();
+ doc.setFontSize(18); doc.text('RHINO DATA BANK - Ver: 0.2',10,15);
+ doc.setFontSize(11); doc.text('Transaction History Report',10,22);
+ doc.text('Date: '+new Date().toLocaleString(),10,28);
+ doc.line(10,30,200,30);
+ let y=38;
+ historyData.forEach((h,i)=>{
+  if(y>270){ doc.addPage(); y=15; }
+  doc.setFontSize(10); doc.text((i+1)+'. '+h.type+' - '+h.detail,10,y);
+  doc.setFontSize(8); doc.text(h.date,10,y+5); y+=12;
+ });
+ doc.save('Rhino-History-Ver0.2.pdf');
+ showNotif('📄 PDF Downloaded! Ver: 0.2');
+}
+renderHistory();
+</script>
+</body></html>
