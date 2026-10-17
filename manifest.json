@@ -1,24 +1,15 @@
 {
   "name": "RHINO DATA BANK",
   "short_name": "RHINO DATA BANK",
-  "description": "Save Data Forever MTN Airtel Uganda Premium Data Vault Ver: 0.2 Support +256 745 550 768",
-  "start_url": "./index.html",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#020b1f",
   "theme_color": "#facc15",
-  "orientation": "portrait",
   "icons": [
     {
       "src": "icon.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     }
   ]
 }
