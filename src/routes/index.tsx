@@ -8,7 +8,7 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "RHINO DATABANK — Data Bank of Africa" },
-      { name: "description", content: "Save expiring MTN, Airtel and Africell data bundles and withdraw anytime." },
+      { name: "description", content: "Save expiring MTN, Airtel and Lyca Mobile data bundles and withdraw anytime." },
       { property: "og:title", content: "RHINO DATABANK — Data Bank of Africa" },
       { property: "og:description", content: "Never lose expiring data again. Deposit, store and withdraw your bundles." },
       { property: "og:image", content: BG },

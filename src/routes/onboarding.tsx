@@ -17,7 +17,7 @@ export const Route = createFileRoute("/onboarding")({
 
 const pages = [
   { img: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80", title: "Your Data Expires. We Save It.", sub: "Stop losing 100GB+ yearly. The average Ugandan loses UGX 500k in expired bundles. RHINO saves it." },
-  { img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80", title: "Deposit Before Midnight", sub: "Secure your MTN, Airtel and Africell bundles before 11:59pm. Pay only a 10% fee. Keep 90%." },
+  { img: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80", title: "Deposit Before Midnight", sub: "Secure your MTN, Airtel and Lyca Mobile bundles before 11:59pm. Pay only a 10% fee. Keep 90%." },
   { img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80", title: "Withdraw Anytime, Any Network", sub: "Get your data back as data, MoMo Cash, or sell it on the market. Instant." },
 ];
 

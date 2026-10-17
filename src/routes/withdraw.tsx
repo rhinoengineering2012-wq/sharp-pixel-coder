@@ -23,7 +23,7 @@ const dests = [
   { id: "Convert to MoMo Cash", icon: Wallet, tone: "text-success" },
   { id: "Sell to Rhino Market", icon: Store, tone: "text-gold" },
 ];
-const nets = ["MTN", "Airtel", "Africell"];
+const nets = ["MTN", "Airtel", "Lyca Mobile"];
 
 function Withdraw() {
   const b = useBank();
