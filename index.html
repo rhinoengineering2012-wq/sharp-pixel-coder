@@ -2,57 +2,82 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>RHINO DATA BANK</title>
+<title>RHINO DATA BANK v0.2</title>
 <link rel="manifest" href="./manifest.json"><link rel="icon" href="./icon.png">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Space+Grotesk:wght@400;500;700&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<!-- STARLINK FONTS: Inter + Space Grotesk -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#FFD60A;--gold-glow:rgba(255,214,10,.45);--bg:#070A12;--card:rgba(255,255,255,.06);--card2:rgba(255,255,255,.08);--text:#E8E9ED;--muted:#9AA0B2;--border:rgba(255,255,255,.08)}
-[data-theme="light"]{--bg:#F7F7F5;--card:#FFFFFF;--card2:#F0F0EE;--text:#0A0A0A;--muted:#6B7280;--border:rgba(0,0,0,.08)}
+:root{
+  --blue:#0A4BFF; --blue-dark:#082D9A; --gold:#FFC300; --gold-glow:rgba(255,195,0,.35);
+  --bg:#F5F8FF; --card:#FFFFFF; --text:#0A1931; --muted:#6B7A99; --border:rgba(10,75,255,.08);
+}
+[data-theme="dark"]{
+  --bg:#050A1F; --card:#0E1838; --text:#E8EEFF; --muted:#8B9BBF; --border:rgba(255,255,255,.08);
+}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif!important;min-height:100vh;transition:.4s}
-h1,h2,.cTitle{font-family:'Syne',sans-serif!important;font-weight:800!important}
-.card{background:linear-gradient(180deg,var(--card2) 0%,var(--card) 100%)!important;border:1px solid var(--border)!important;border-radius:24px!important}
-.btn{background:var(--gold)!important;color:#000!important;font-weight:700!important;border-radius:100px!important;box-shadow:0 0 30px var(--gold-glow)!important}
-.btnGhost{background:var(--card)!important;color:var(--text)!important;box-shadow:none!important;border:1px solid var(--border)!important}
-.bal{background:linear-gradient(135deg,#FFD60A 0%,#FFB800 100%)!important;border-radius:20px!important}
-.input{background:var(--card)!important;border:1px solid var(--border)!important;color:var(--text)!important;border-radius:16px!important}
-.bottom{background:rgba(7,10,18,.92)!important;backdrop-filter:blur(30px)!important;border-top:1px solid var(--border)!important}
-[data-theme="light"] .bottom{background:rgba(255,255,255,.92)!important}
-.themeFab{position:fixed;top:16px;right:16px;z-index:9999;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:8px 14px;font-size:11px;font-weight:700;cursor:pointer;color:var(--text)}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif!important;min-height:100vh;transition:.4s;padding-bottom:90px}
+h1,.cTitle{font-family:'Space Grotesk',sans-serif!important;font-weight:700!important;letter-spacing:-.03em}
+.card{background:var(--card)!important;border:1px solid var(--border)!important;border-radius:24px!important;box-shadow:0 8px 32px rgba(10,75,255,.06)!important}
+.btn{background:var(--blue)!important;color:#fff!important;font-family:'Inter',sans-serif!important;font-weight:700!important;border-radius:100px!important;box-shadow:0 8px 24px rgba(10,75,255,.3)!important}
+.btnGold{background:var(--gold)!important;color:#000!important;box-shadow:0 8px 24px var(--gold-glow)!important}
+.btnGhost{background:var(--card)!important;color:var(--text)!important;border:1px solid var(--border)!important;box-shadow:none!important}
+.bal{background:linear-gradient(135deg,var(--blue) 0%,var(--blue-dark) 100%)!important;border-radius:20px!important;color:#fff!important}
+.balGold{background:linear-gradient(135deg,#FFD60A 0%,#FFB800 100%)!important;color:#000!important}
+.input{background:var(--card)!important;border:1px solid var(--border)!important;color:var(--text)!important;border-radius:16px!important;font-family:'Inter',sans-serif!important}
+.bottom{background:rgba(255,255,255,.9)!important;backdrop-filter:blur(30px)!important;border-top:1px solid var(--border)!important}
+[data-theme="dark"] .bottom{background:rgba(5,10,31,.9)!important}
+.bundle{border-radius:20px!important;background:var(--card)!important;border:1px solid var(--border)!important}
+.bundle.active{border-color:var(--blue)!important;box-shadow:0 0 0 2px rgba(10,75,255,.15)!important}
+.listItem{border-bottom:1px solid var(--border)!important}
+.themeFab{position:fixed;top:14px;right:14px;z-index:9999;background:var(--card);border:1px solid var(--border);border-radius:100px;padding:8px 14px;font-size:11px;font-weight:700;cursor:pointer;color:var(--text);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+#splash{position:fixed;inset:0;z-index:10000;background:linear-gradient(180deg,#0A1931 0%,#050A1F 100%);display:grid;place-items:center;transition:.6s}
 </style>
 </head>
-<body data-theme="dark">
-<button class="themeFab" onclick="toggleTheme()" id="tBtn">☀️ LIGHT</button>
-<div id="splash" style="position:fixed;inset:0;z-index:10000;background:#070A12;display:grid;place-items:center"><div style="text-align:center"><div style="font-family:Syne;font-weight:800;font-size:52px;color:#fff;line-height:.85">RHINO<br><span style="color:#FFD60A">DATA BANK</span></div><div style="font-family:Sora;color:#9AA0B2;font-size:11px;letter-spacing:.3em;margin-top:14px">BILLIONAIRE EDITION v0.2</div></div></div>
-<div id="app" style="opacity:0;max-width:480px;margin:0 auto;padding:16px;padding-bottom:100px">
+<body data-theme="light">
+<button class="themeFab" onclick="toggleTheme()" id="tBtn">🌙 DARK</button>
 
-<div id="screen-login" class="screen active"><div class="card" style="padding:20px"><div class="cTitle">🔐 RHINO LOGIN - v0.2</div><input id="phone" class="input" style="padding:16px;margin-top:12px;width:100%" placeholder="Phone 0783554841"><input id="name" class="input" style="padding:16px;margin-top:10px;width:100%" placeholder="Full Name"><button class="btn" style="margin-top:14px;width:100%;padding:16px" onclick="login()">🚀 ENTER VAULT</button></div></div>
+<div id="splash"><div style="text-align:center"><div style="font-family:Space Grotesk;font-weight:700;font-size:48px;color:#fff;line-height:.85">RHINO<br><span style="color:#FFC300">DATA BANK</span></div><div style="font-family:Inter;color:#8B9BBF;font-size:11px;letter-spacing:.3em;margin-top:12px">BLUE PREMIUM • v0.2 • STARLINK FONT</div></div></div>
 
-<div id="screen-home" class="screen"><div class="card" style="padding:20px"><div class="cTitle">🏠 Home</div><div id="welcome" style="font-size:13px;color:var(--muted);margin-top:6px">Welcome, Lindon • v0.2</div><div class="bal" style="padding:16px;margin-top:14px"><div style="font-size:10px;opacity:.8;color:#000">Total Locked Forever</div><div style="font-size:30px;font-weight:800;color:#000">12.5 GB</div></div></div></div>
+<div id="app" style="opacity:0;max-width:480px;margin:0 auto;padding:16px">
 
-<div id="screen-vault" class="screen"><div class="card" style="padding:20px"><div class="cTitle">🛡️ My Data Vault</div><div class="bal" style="padding:14px;margin-top:10px"><div style="font-size:10px;color:#000">Total Locked Forever</div><div style="font-size:30px;font-weight:800;color:#000">12.5 GB</div></div></div></div>
+<!-- KEEPING YOUR ORIGINAL 10 SCREENS EXACT -->
+<div id="screen-login" class="screen active"><div class="card" style="padding:22px"><div class="cTitle">🔐 RHINO LOGIN - v0.2</div><input id="phone" class="input" style="padding:16px;margin-top:12px;width:100%" placeholder="Phone 0783554841"><input id="name" class="input" style="padding:16px;margin-top:10px;width:100%" placeholder="Full Name"><button class="btn" style="margin-top:14px;width:100%;padding:16px" onclick="login()">🚀 ENTER VAULT</button><div style="text-align:center;margin-top:12px;font-size:11px;color:var(--muted)">Blue Premium • Starlink Font • v0.2</div></div></div>
 
-<div id="screen-profile" class="screen"><div class="card" style="padding:20px"><div class="cTitle">👤 My Profile</div><div style="text-align:center;padding:10px 0"><div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(145deg,#ffef8a,#facc15);display:grid;place-items:center;font-size:36px;margin:0 auto 10px;border:3px solid var(--gold)">🦏</div><div style="font-weight:800" id="profileName">NATUKWASA LINDON</div><div style="font-size:11px;opacity:.6" id="profilePhone">0783554841 • v0.2</div><div style="margin-top:8px;display:inline-block;background:var(--gold);color:#000;font-weight:800;font-size:10px;padding:5px 12px;border-radius:100px">v0.2 • SUPPORT 0745 550 768</div></div></div></div>
+<div id="screen-home" class="screen"><div class="card" style="padding:20px"><div class="cTitle">🏠 Home</div><div id="welcome" style="font-size:13px;color:var(--muted);margin-top:6px">Welcome, Lindon • v0.2</div><div class="bal" style="padding:18px;margin-top:14px"><div style="font-size:11px;opacity:.8">Total Locked Forever</div><div style="font-size:32px;font-weight:800">12.5 GB</div><div style="font-size:11px;opacity:.8;margin-top:4px">💎 Blue Premium Vault</div></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><div class="card" style="padding:16px;text-align:center;cursor:pointer" onclick="showScreen('buy')"><div style="font-size:26px">🛒</div><b style="font-size:13px">Buy</b></div><div class="card" style="padding:16px;text-align:center;cursor:pointer" onclick="showScreen('save')"><div style="font-size:26px">💾</div><b style="font-size:13px">Save</b></div></div><button class="btn btnGold" style="width:100%;padding:16px;margin-top:12px" onclick="showScreen('vault')">🛡️ VIEW VAULT</button></div></div>
 
-<!-- KEEP YOUR OTHER SCREENS - buy, save, history, support as before -->
-<div id="screen-buy" class="screen"><div class="card" style="padding:20px"><div class="cTitle">🛒 Buy Bundles</div><button class="btn" style="margin-top:12px;width:100%;padding:16px" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-save" class="screen"><div class="card" style="padding:20px"><div class="cTitle">💾 Save Data</div><button class="btn" style="margin-top:12px;width:100%;padding:16px" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-history" class="screen"><div class="card" style="padding:20px"><div class="cTitle">📜 History</div><button class="btn" style="margin-top:12px;width:100%;padding:16px" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-support" class="screen"><div class="card" style="padding:20px"><div class="cTitle">💬 Support - v0.2</div><div style="margin-top:10px">WhatsApp: +256 745 550 768</div><button class="btn" style="margin-top:12px;width:100%;padding:16px" onclick="showScreen('home')">← Back</button></div></div>
+<div id="screen-buy" class="screen"><div class="card" style="padding:20px"><div class="cTitle">🛒 Buy Bundles</div><div class="bundle active" onclick="selectBundle(this)" style="padding:14px;margin-top:10px;display:flex;justify-content:space-between"><div><b>2.5 GB • MTN</b><div style="font-size:11px;color:var(--muted)">Forever • No Expiry</div></div><div style="color:var(--blue);font-weight:800">20k</div></div><div class="bundle" onclick="selectBundle(this)" style="padding:14px;margin-top:8px;display:flex;justify-content:space-between"><div><b>5 GB • Airtel</b><div style="font-size:11px;color:var(--muted)">Forever</div></div><div style="color:var(--blue);font-weight:800">35k</div></div><button class="btn" style="margin-top:14px;width:100%;padding:16px">💳 BUY NOW</button><button class="btn btnGhost" style="margin-top:8px;width:100%;padding:14px" onclick="showScreen('home')">← Back</button></div></div>
+
+<div id="screen-save" class="screen"><div class="card" style="padding:20px"><div class="cTitle">💾 Save Data</div><div class="balGold" style="padding:16px;margin-top:10px;border-radius:20px"><div style="font-size:10px;opacity:.7">Available Balance</div><div style="font-size:26px;font-weight:800">UGX 125,000</div><div style="font-size:11px;opacity:.8">0783554841 • LINDON • v0.2</div></div><input class="input" style="padding:16px;margin-top:12px;width:100%" value="20000"><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><button class="btn" onclick="alert('💳 Pay initiated!')">💰 PAY NOW</button><button class="btn btnGhost" onclick="alert('💸 Withdraw!')">💸 WITHDRAW</button></div><button class="btn btnGhost" style="margin-top:10px;width:100%" onclick="showScreen('home')">← Back</button></div></div>
+
+<div id="screen-vault" class="screen"><div class="card" style="padding:20px"><div class="cTitle">🛡️ My Data Vault</div><div class="bal" style="padding:16px;margin-top:10px"><div style="font-size:10px;opacity:.8">Total Locked Forever</div><div style="font-size:30px;font-weight:800">12.5 GB</div></div><div class="listItem" style="padding:14px 0;display:flex;justify-content:space-between"><div><b>MTN Vault 5GB</b></div><div style="color:var(--blue);font-weight:700">Forever</div></div><div class="listItem" style="padding:14px 0;display:flex;justify-content:space-between"><div><b>Airtel Vault 2.5GB</b></div><div style="color:var(--blue);font-weight:700">Forever</div></div><div class="listItem" style="padding:14px 0;display:flex;justify-content:space-between;border:none"><div><b>Rhino Premium 5GB</b></div><div style="color:#22c55e;font-weight:700">Forever</div></div><button class="btn" style="margin-top:10px;width:100%;padding:16px" onclick="showScreen('save')">💾 SAVE MORE</button></div></div>
+
+<div id="screen-history" class="screen"><div class="card" style="padding:20px"><div class="cTitle">📜 Transaction History</div><div class="listItem" style="padding:12px 0;display:flex;justify-content:space-between"><div><b>Saved 2.5 GB</b><div style="font-size:10px;color:var(--muted)">Today • MTN • v0.2</div></div><div style="color:#22c55e">+2.5 GB</div></div><div class="listItem" style="padding:12px 0;display:flex;justify-content:space-between"><div><b>Bought 5 GB</b><div style="font-size:10px;color:var(--muted)">Yesterday • Airtel</div></div><div>-20k UGX</div></div><div class="listItem" style="padding:12px 0;display:flex;justify-content:space-between;border:none"><div><b>MoMo Withdraw</b><div style="font-size:10px;color:var(--muted)">3 days ago • 0783554841</div></div><div>-50k UGX</div></div><button class="btn btnGhost" style="width:100%;padding:14px" onclick="showScreen('home')">← Back</button></div></div>
+
+<div id="screen-support" class="screen"><div class="card" style="padding:20px"><div class="cTitle">💬 Support Center - v0.2</div><div class="card" style="padding:14px;margin-top:10px;display:flex;gap:12px;align-items:center;cursor:pointer" onclick="window.open('https://wa.me/256745550768','_blank')"><div style="font-size:26px">💬</div><div><b>WhatsApp Support</b><div style="font-size:11px;color:var(--muted)">+256 745 550 768 • Lindon</div></div></div><div class="card" style="padding:14px;margin-top:8px;display:flex;gap:12px;align-items:center" onclick="window.open('tel:+256745550768')"><div style="font-size:26px">📞</div><div><b>Call Support</b></div></div><div class="card" style="padding:14px;margin-top:8px;display:flex;gap:12px;align-items:center" onclick="window.open('mailto:rhinoengineering2012@gmail.com')"><div style="font-size:26px">📧</div><div><b>Email</b><div style="font-size:11px;color:var(--muted)">rhinoengineering2012@gmail.com</div></div></div><button class="btn btnGhost" style="margin-top:10px;width:100%;padding:14px" onclick="showScreen('home')">← Back</button></div></div>
+
+<div id="screen-profile" class="screen"><div class="card" style="padding:20px"><div class="cTitle">👤 My Profile</div><div style="text-align:center;padding:12px 0"><div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#0A4BFF,#082D9A);display:grid;place-items:center;font-size:36px;margin:0 auto 10px;border:3px solid var(--gold);color:#fff">🦏</div><div style="font-weight:800;font-size:16px" id="profileName">NATUKWASA LINDON</div><div style="font-size:11px;color:var(--muted)" id="profilePhone">0783554841 • v0.2</div><div style="margin-top:8px;display:inline-block;background:var(--gold);color:#000;font-weight:800;font-size:10px;padding:6px 14px;border-radius:100px">v0.2 • BLUE PREMIUM</div></div><div class="listItem" style="padding:12px 0;display:flex;justify-content:space-between"><div><b>MoMo</b></div><b>0783554841</b></div><div class="listItem" style="padding:12px 0;display:flex;justify-content:space-between"><div><b>WhatsApp</b></div><b>+256 745 550 768</b></div><div class="listItem" style="padding:12px 0;display:flex;justify-content:space-between"><div><b>Email</b></div><b style="font-size:11px">rhinoengineering2012@gmail.com</b></div><button class="btn" style="margin-top:14px;width:100%;padding:16px" onclick="logout()">🔓 LOGOUT</button></div></div>
+
+<div id="screen-wallet" class="screen"><div class="card" style="padding:20px"><div class="cTitle">💼 Wallet</div><div class="balGold" style="padding:16px;margin-top:10px;border-radius:20px"><div style="font-size:10px">Balance</div><div style="font-size:26px;font-weight:800">UGX 125,000</div></div><button class="btn btnGhost" style="margin-top:10px;width:100%" onclick="showScreen('home')">← Back</button></div></div>
 
 </div>
-<div class="bottom" id="bottomNav" style="display:none;position:fixed;bottom:0;left:0;right:0;padding:10px 0;justify-content:space-around">
+<div class="bottom" id="bottomNav" style="display:none;position:fixed;bottom:0;left:0;right:0;padding:10px 0;justify-content:space-around;z-index:100">
 <div class="nav" onclick="showScreen('home')" style="text-align:center;font-size:10px;cursor:pointer"><div style="font-size:20px">🏠</div>Home</div>
 <div class="nav" onclick="showScreen('vault')" style="text-align:center;font-size:10px;cursor:pointer"><div style="font-size:20px">🛡️</div>Vault</div>
 <div class="nav" onclick="showScreen('history')" style="text-align:center;font-size:10px;cursor:pointer"><div style="font-size:20px">📜</div>History</div>
 <div class="nav" onclick="showScreen('support')" style="text-align:center;font-size:10px;cursor:pointer"><div style="font-size:20px">💬</div>Support</div>
 <div class="nav" onclick="showScreen('profile')" style="text-align:center;font-size:10px;cursor:pointer"><div style="font-size:20px">👤</div>Profile</div>
 </div>
+
 <script>
-setTimeout(()=>{document.getElementById('splash').style.display='none';document.getElementById('app').style.opacity='1'},2500);
-function login(){showScreen('home');document.getElementById('bottomNav').style.display='flex';}
-function showScreen(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+n).classList.add('active');}
-function toggleTheme(){const b=document.body;const btn=document.getElementById('tBtn');if(b.getAttribute('data-theme')==='dark'){b.setAttribute('data-theme','light');btn.textContent='🌙 DARK'}else{b.setAttribute('data-theme','dark');btn.textContent='☀️ LIGHT'}}
+setTimeout(()=>{document.getElementById('splash').style.opacity='0';setTimeout(()=>document.getElementById('splash').style.display='none',600);document.getElementById('app').style.opacity='1'},2500);
+function login(){const p=document.getElementById('phone').value.trim();const n=document.getElementById('name').value.trim();if(!p||!n){alert('Enter phone & name');return}
+document.getElementById('screen-login').classList.remove('active');showScreen('home');document.getElementById('bottomNav').style.display='flex';
+const short=n.split(' ')[0];document.getElementById('welcome').innerText='Welcome, '+short+' • v0.2 Blue Premium';document.getElementById('profileName').innerText=n;document.getElementById('profilePhone').innerText=p+' • v0.2';}
+function showScreen(name){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const t=document.getElementById('screen-'+name);if(t)t.classList.add('active');window.scrollTo(0,0);}
+function selectBundle(el){document.querySelectorAll('.bundle').forEach(b=>b.classList.remove('active'));el.classList.add('active');}
+function logout(){document.getElementById('bottomNav').style.display='none';document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-login').classList.add('active');}
+function toggleTheme(){const b=document.body;const btn=document.getElementById('tBtn');if(b.getAttribute('data-theme')==='light'){b.setAttribute('data-theme','dark');btn.textContent='☀️ LIGHT';localStorage.setItem('rhino-theme','dark')}else{b.setAttribute('data-theme','light');btn.textContent='🌙 DARK';localStorage.setItem('rhino-theme','light')}}
+const saved=localStorage.getItem('rhino-theme');if(saved){document.body.setAttribute('data-theme',saved);document.getElementById('tBtn').textContent=saved==='light'?'🌙 DARK':'☀️ LIGHT'}
 </script>
 <style>.screen{display:none}.screen.active{display:block}</style>
 </body></html>
