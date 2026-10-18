@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RHINO DATA BANK - Ver: 0.2</title>
+<title>RHINO DATA BANK - Ver: 0.4</title>
 <link rel="icon" type="image/png" href="icon.png">
-<link rel="apple-touch-icon" href="icon.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#facc15">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>*{margin:0;padding:0;box-sizing:border-box}:root{--gold:#facc15}body{font-family:'Outfit',sans-serif;background:#020b1f;color:#fff;min-height:100vh;overflow-x:hidden;transition:.3s}
-body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255,255,255,.9);border-color:rgba(0,0,0,.1)}body.light .bottom{background:rgba(255,255,255,.94)}body.light .bal{background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff}
+body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255,255,255,.92);border-color:rgba(0,0,0,.1)}body.light .bottom{background:rgba(255,255,255,.96)}body.light .bal{background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff}
 #splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(1200px 800px at 50% -10%, #1e40af 0%, #0a192f 50%, #020b1f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .6s,opacity .5s;cursor:pointer}#splash.hide{transform:translateY(-100%);opacity:0;pointer-events:none}
 .logoBox{width:280px;height:280px;border-radius:48px;background:linear-gradient(145deg,#ffef8a,#facc15,#eab308);display:grid;place-items:center;font-size:110px;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 2px rgba(250,204,21,.5),0 0 90px rgba(250,204,21,.4);animation:float 3s infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .splash-title{margin-top:28px;font-family:'Space Grotesk';font-size:36px;font-weight:800;text-align:center}.splash-title b{color:var(--gold)}.sub{margin-top:10px;color:#93c5fd;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700}
 .loaderWrap{margin-top:32px;width:220px}.track{height:4px;background:rgba(255,255,255,.1);border-radius:100px;overflow:hidden}.bar{height:100%;width:0%;background:linear-gradient(90deg,#3b82f6,#facc15);animation:load 1.5s forwards}@keyframes load{0%{width:0%}100%{width:100%}}
 .bg{position:fixed;inset:0;pointer-events:none}.orb{position:absolute;border-radius:50%;filter:blur(80px)}.o1{width:600px;height:600px;background:radial-gradient(circle,#3b82f6,transparent 70%);top:-200px;left:-200px;opacity:.35}.o2{width:500px;height:500px;background:radial-gradient(circle,#facc15,transparent 70%);bottom:-100px;right:-100px;opacity:.22}
-.app{position:relative;z-index:1;min-height:100vh;display:flex;justify-content:center;padding:20px 16px 100px}.container{width:100%;max-width:460px;opacity:0;transform:translateY(20px);transition:.9s}.container.show{opacity:1;transform:translateY(0)}
+.app{position:relative;z-index:1;min-height:100vh;display:flex;justify-content:center;padding:20px 16px 110px}.container{width:100%;max-width:460px;opacity:0;transform:translateY(20px);transition:.9s}.container.show{opacity:1;transform:translateY(0)}
 .header{text-align:center;padding:18px 0 12px}.mini{width:68px;height:68px;margin:0 auto 10px;border-radius:18px;background:linear-gradient(145deg,#ffef8a,#facc15);display:grid;place-items:center;font-size:32px}.brand{font-family:'Space Grotesk';font-weight:800;font-size:28px;line-height:.85}.brand .d{color:var(--gold)}
 .tag{display:inline-block;margin-top:8px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.28);padding:6px 14px;border-radius:100px;font-size:11px;color:#bfdbfe}
 .screen{display:none;animation:fade .35s ease}.screen.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
@@ -28,7 +28,7 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 .btnDanger{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff}
 .btnGoogle{background:#fff;color:#0f172a;display:flex;align-items:center;justify-content:center;gap:8px}
 .bal{background:linear-gradient(135deg,#0ea5e9,#1e40af);border-radius:20px;padding:18px;border:1px solid rgba(255,255,255,.18);margin-bottom:12px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.act{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;text-align:center;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.act{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;text-align:center;cursor:pointer;transition:.2s}.act:active{transform:scale(.96)}
 .listItem{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .bundle{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);border-radius:16px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}.bundle.active{border-color:var(--gold);background:rgba(250,204,21,.12)}
 .bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(2,11,31,.94);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-around;padding:8px 0;z-index:10}.nav{flex:1;text-align:center;font-size:10px;font-weight:600;color:#475569;cursor:pointer;padding:4px 0}.nav.active{color:var(--gold)}.nav span{font-size:18px;display:block;margin-bottom:2px}
@@ -38,23 +38,44 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 .chartWrap{display:flex;gap:10px;margin-top:14px;align-items:flex-end}.barCol{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}.barBg{width:100%;height:80px;background:rgba(255,255,255,.08);border-radius:10px;display:flex;align-items:flex-end;overflow:hidden}.barFill{width:100%;border-radius:10px 10px 0 0;transition:1s}
 .setRow{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}.setRow:last-child{border:none}
 .histItem{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;margin-bottom:8px}
+.badge-new{background:var(--gold);color:#000;font-size:9px;padding:2px 6px;border-radius:100px;font-weight:800;margin-left:6px}
+.stars{display:flex;gap:4px;justify-content:center;margin:12px 0}.star{font-size:28px;cursor:pointer;opacity:.3;transition:.2s}.star.active{opacity:1}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);z-index:10000;display:none;place-items:center;padding:20px}.modal.show{display:grid}
+.rangeWrap{margin-top:10px}input[type=range]{width:100%;accent-color:var(--gold)}
 </style></head>
 <body>
 <div id="notifBar"></div>
-<div id="splash" onclick="hideSplash()"><div class="logoBox">🦏</div><div class="splash-title">RHINO <b>DATA BANK</b></div><div class="sub">Ver: 0.2</div><div class="loaderWrap"><div class="track"><div class="bar"></div></div><div style="text-align:center;margin-top:8px;font-size:10px;color:#60a5fa;letter-spacing:1px">LOADING VAULT Ver: 0.2... TAP TO SKIP</div></div></div>
+<div id="splash" onclick="hideSplash()"><div class="logoBox">🦏</div><div class="splash-title">RHINO <b>DATA BANK</b></div><div class="sub">Ver: 0.4 • BIG STAGE • SUPABASE</div><div class="loaderWrap"><div class="track"><div class="bar"></div></div><div style="text-align:center;margin-top:8px;font-size:10px;color:#60a5fa;letter-spacing:1px">LOADING VAULT Ver: 0.4... TAP TO SKIP</div></div></div>
 <div class="bg"><div class="orb o1"></div><div class="orb o2"></div></div>
-<div class="app"><div class="container" id="app">
-<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Save Data Forever • Ver: 0.2</div></div>
 
-<div id="screen-login" class="screen active"><div class="card"><div class="cTitle">Sign Up / Login Ver: 0.2</div>
-<div class="label">📱 Phone Number *</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="phone" placeholder="Enter 07xxxxxxxx"></div>
-<div class="label">👤 Full Name *</div><div class="inputWrap"><div class="icon">👤</div><input class="input" id="name" placeholder="Enter your full name"></div>
-<div class="label">📶 Network</div><select class="input" id="network" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile Uganda</option><option>Both Premium</option></select>
-<button class="btn" onclick="login()">🔓 SIGN UP / LOGIN Ver: 0.2</button>
-<button class="btn btnGoogle" onclick="googleLogin()"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"> Continue with Google</button>
+<div class="modal" id="googleModal"><div class="card" style="max-width:380px;width:100%"><div class="cTitle">Continue with Google</div>
+<div class="label">📧 Google Email *</div><div class="inputWrap"><div class="icon">📧</div><input class="input" id="googleEmail" placeholder="yourname@gmail.com"></div>
+<div class="label">👤 Full Name *</div><div class="inputWrap"><div class="icon">👤</div><input class="input" id="googleName" placeholder="Your Google name"></div>
+<button class="btn" onclick="confirmGoogleLogin()">🔓 SIGN IN WITH GOOGLE</button>
+<button class="btn btnGhost" onclick="closeGoogleModal()">Cancel</button>
 </div></div>
 
-<div id="screen-home" class="screen"><div class="bal"><div style="font-size:10px;opacity:.8">TOTAL DATA VAULT BALANCE</div><div style="font-size:36px;font-weight:800;margin:6px 0">12.5 GB</div><div style="font-size:12px;opacity:.9" id="welcome">Welcome, User • Ver: 0.2</div></div>
+<div class="modal" id="rateModal"><div class="card" style="max-width:380px;width:100%"><div class="cTitle">⭐ Rate RHINO on Google</div>
+<div style="text-align:center"><div class="stars" id="starBox"><span class="star" onclick="setStars(1)">⭐</span><span class="star" onclick="setStars(2)">⭐</span><span class="star" onclick="setStars(3)">⭐</span><span class="star" onclick="setStars(4)">⭐</span><span class="star" onclick="setStars(5)">⭐</span></div><div id="rateText" style="font-size:12px;opacity:.7">Tap to rate</div>
+<textarea id="rateComment" class="input" style="padding:12px;margin-top:12px;min-height:80px;resize:none" placeholder="What do you love about RHINO? (optional)"></textarea>
+<button class="btn" onclick="submitRating()" style="margin-top:12px">🚀 SUBMIT TO GOOGLE</button>
+<button class="btn btnGhost" onclick="closeRateModal()">Later</button>
+</div></div></div>
+
+<div class="app"><div class="container" id="app">
+<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Ver: 0.4 • Per-User Vault • Supabase Ready</div></div>
+
+<div id="screen-login" class="screen active"><div class="card"><div class="cTitle">Sign Up / Login Ver: 0.4</div>
+<div class="label">📱 Phone Number *</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="phone" placeholder="07xxxxxxxx" maxlength="10"></div>
+<div class="label">👤 Full Name *</div><div class="inputWrap"><div class="icon">👤</div><input class="input" id="name" placeholder="Enter your full name"></div>
+<div class="label">📶 Select Your Network *</div><select class="input" id="network" style="padding-left:16px" onchange="updateNetworkHint()"><option value="">-- Choose Network --</option><option value="MTN Uganda">MTN Uganda (076,077,078)</option><option value="Airtel Uganda">Airtel Uganda (070,074,075)</option><option value="Lyca Mobile Uganda">Lyca Mobile Uganda (072)</option><option value="Both Premium">Both Premium</option></select>
+<div id="netHint" style="font-size:10px;color:#fde68a;margin:6px 0 0 4px;min-height:14px"></div>
+<button class="btn" onclick="login()">🔓 SIGN UP / LOGIN Ver: 0.4</button>
+<button class="btn btnGoogle" onclick="openGoogleModal()"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"> Continue with Google</button>
+<div style="text-align:center;margin-top:12px;font-size:10px;opacity:.5">Ver 0.4 • Each user has private vault & history • Supabase</div>
+</div></div>
+
+<div id="screen-home" class="screen"><div class="bal"><div style="font-size:10px;opacity:.8">YOUR DATA VAULT BALANCE</div><div style="font-size:36px;font-weight:800;margin:6px 0" id="balanceDisplay">0 GB</div><div style="font-size:12px;opacity:.9" id="welcome">Welcome • Ver: 0.4</div><div style="font-size:10px;opacity:.6;margin-top:4px" id="userNetworkTag"></div></div>
 <div class="grid">
 <div class="act" onclick="showScreen('save')"><div style="font-size:24px">💾</div><div style="font-weight:700;font-size:12px;margin-top:6px">Save Data</div></div>
 <div class="act" onclick="showScreen('buy')"><div style="font-size:24px">📦</div><div style="font-weight:700;font-size:12px;margin-top:6px">Buy Bundle</div></div>
@@ -65,86 +86,112 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 <div class="act" onclick="showScreen('refer')"><div style="font-size:24px">🎁</div><div style="font-weight:700;font-size:12px;margin-top:6px">Refer & Earn</div></div>
 <div class="act" onclick="showScreen('vault')"><div style="font-size:24px">🛡️</div><div style="font-weight:700;font-size:12px;margin-top:6px">My Vault</div></div>
 <div class="act" onclick="showScreen('history')" style="border:1px solid #facc15"><div style="font-size:24px">📜</div><div style="font-weight:700;font-size:12px;margin-top:6px">History</div></div>
+<div class="act" onclick="showScreen('signups')" style="border:1px solid #22c55e"><div style="font-size:24px">👥</div><div style="font-weight:700;font-size:12px;margin-top:6px">Sign Ups</div></div>
+<div class="act" onclick="openRateModal()" style="border:1px solid #facc15;grid-column:span 2;background:linear-gradient(135deg,rgba(250,204,21,.15),rgba(250,204,21,.05))"><div style="font-size:24px">⭐</div><div style="font-weight:700;font-size:12px;margin-top:6px">Rate Us on Google</div></div>
 </div></div>
 
-<div id="screen-history" class="screen"><div class="card"><div class="cTitle">📜 Transaction History Ver: 0.2</div>
-<div class="bal" style="text-align:center;padding:12px"><div style="font-size:10px;opacity:.8">TOTAL TRANSACTIONS</div><div style="font-size:28px;font-weight:800" id="totalCount">0</div></div>
+<div id="screen-signups" class="screen"><div class="card"><div class="cTitle">👥 All Sign Ups Ver: 0.4</div>
+<div class="bal" style="text-align:center;padding:12px"><div style="font-size:10px;opacity:.8">TOTAL USERS REGISTERED</div><div style="font-size:28px;font-weight:800" id="signupCount">0</div></div>
+<div id="signupList"></div>
+<div style="margin-top:12px" class="grid"><button class="btn" style="margin:0;background:linear-gradient(180deg,#22c55e,#16a34a)" onclick="printSignupsPDF()">🖨️ PRINT PDF</button><button class="btn btnGhost" style="margin:0" onclick="clearSignups()">🗑️ Clear</button></div>
+<button class="btn btnGhost" onclick="showScreen('home')">← Back Home</button>
+</div></div>
+
+<div id="screen-history" class="screen"><div class="card"><div class="cTitle">📜 Your History Ver: 0.4</div>
+<div class="bal" style="text-align:center;padding:12px"><div style="font-size:10px;opacity:.8" id="historyUserLabel">TOTAL TRANSACTIONS</div><div style="font-size:28px;font-weight:800" id="totalCount">0</div></div>
 <div id="historyList"></div>
 <button class="btn" onclick="printHistoryPDF()" style="background:linear-gradient(180deg,#22c55e,#16a34a)">🖨️ PRINT TO PDF</button>
 <button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-analytics" class="screen"><div class="card"><div class="cTitle">📊 Analytics Dashboard Ver: 0.2</div>
-<div class="grid"><div class="bal" style="margin:0;text-align:center"><div style="font-size:10px;opacity:.8">Total Saved</div><div style="font-size:20px;font-weight:800">47.5 GB</div></div><div class="bal" style="margin:0;text-align:center;background:linear-gradient(135deg,#facc15,#eab308);color:#000"><div style="font-size:10px">Earned Refer</div><div style="font-size:20px;font-weight:800">5.5 GB</div></div></div>
+<div id="screen-analytics" class="screen"><div class="card"><div class="cTitle">📊 Analytics Ver: 0.4</div>
+<div class="grid"><div class="bal" style="margin:0;text-align:center"><div style="font-size:10px;opacity:.8">Your Saved</div><div style="font-size:20px;font-weight:800" id="analyticsSaved">0 GB</div></div><div class="bal" style="margin:0;text-align:center;background:linear-gradient(135deg,#facc15,#eab308);color:#000"><div style="font-size:10px">Earned Refer</div><div style="font-size:20px;font-weight:800" id="analyticsRefer">0 GB</div></div></div>
 <div style="margin-top:16px"><b style="font-size:12px">📈 Weekly Usage</b><div class="chartWrap">
-<div class="barCol"><div class="barBg"><div class="barFill" style="height:40%;background:#3b82f6"></div></div><span style="font-size:10px">Mon</span></div>
-<div class="barCol"><div class="barBg"><div class="barFill" style="height:75%;background:#facc15"></div></div><span style="font-size:10px">Tue</span></div>
-<div class="barCol"><div class="barBg"><div class="barFill" style="height:60%;background:#22c55e"></div></div><span style="font-size:10px">Wed</span></div>
-<div class="barCol"><div class="barBg"><div class="barFill" style="height:90%;background:#ef4444"></div></div><span style="font-size:10px">Thu</span></div>
-<div class="barCol"><div class="barBg"><div class="barFill" style="height:55%;background:#a855f7"></div></div><span style="font-size:10px">Fri</span></div>
+<div class="barCol"><div class="barBg"><div class="barFill" id="barMon" style="height:20%;background:#3b82f6"></div></div><span style="font-size:10px">Mon</span></div>
+<div class="barCol"><div class="barBg"><div class="barFill" id="barTue" style="height:30%;background:#facc15"></div></div><span style="font-size:10px">Tue</span></div>
+<div class="barCol"><div class="barBg"><div class="barFill" id="barWed" style="height:15%;background:#22c55e"></div></div><span style="font-size:10px">Wed</span></div>
+<div class="barCol"><div class="barBg"><div class="barFill" id="barThu" style="height:40%;background:#ef4444"></div></div><span style="font-size:10px">Thu</span></div>
+<div class="barCol"><div class="barBg"><div class="barFill" id="barFri" style="height:25%;background:#a855f7"></div></div><span style="font-size:10px">Fri</span></div>
 </div></div>
+<div style="margin-top:16px;background:rgba(255,255,255,.06);border-radius:14px;padding:12px"><div style="font-size:11px;font-weight:700">⭐ Average Google Rating</div><div style="display:flex;align-items:center;gap:8px;margin-top:6px"><span style="font-size:20px">4.9</span><span style="color:var(--gold)">★★★★★</span><span style="font-size:10px;opacity:.6">(1,243 reviews)</span></div></div>
 <button class="btn btnGhost" style="margin-top:16px" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-momo" class="screen"><div class="card"><div class="cTitle">💳 Convert Data to MOMO</div>
+<div id="screen-momo" class="screen"><div class="card"><div class="cTitle">💳 Convert Data to MOMO Ver: 0.4</div>
 <div class="bal" style="text-align:center"><div style="font-size:36px">💰</div><div style="font-weight:800;margin-top:6px">1GB = 2,000 UGX</div></div>
 <div class="label">💾 Amount to Convert</div><select class="input" id="momoAmount" style="padding-left:16px"><option>1 GB = 2,000 UGX</option><option>5 GB = 10,000 UGX</option><option>10 GB = 20,000 UGX</option></select>
-<div class="label" style="margin-top:10px">📱 MOMO Number</div><div class="inputWrap"><div class="icon">📞</div><input class="input" placeholder="07xxxxxxxx"></div>
+<div class="label" style="margin-top:10px">📱 MOMO Number</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="momoPhone" placeholder="07xxxxxxxx"></div>
 <button class="btn" onclick="doAction('MOMO Convert', document.getElementById('momoAmount').value)">💳 CONVERT TO MOMO</button>
 <button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-deposit" class="screen"><div class="card"><div class="cTitle">⬇️ Deposit Data</div>
+<div id="screen-deposit" class="screen"><div class="card"><div class="cTitle">⬇️ Deposit Data Ver: 0.4</div>
 <div class="label">📶 From Network</div><select class="input" id="depNet" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile Uganda</option></select>
 <div class="label" style="margin-top:10px">💾 Amount</div><select class="input" id="depAmt" style="padding-left:16px"><option>1 GB</option><option>2.5 GB</option><option>5 GB</option></select>
-<button class="btn" onclick="doAction('Deposit', document.getElementById('depAmt').value + ' from ' + document.getElementById('depNet').value)">⬇️ DEPOSIT NOW</button>
+<button class="btn" onclick="doAction('Deposit', document.getElementById('depAmt').value + ' from ' + document.getElementById('depNet').value, true)">⬇️ DEPOSIT NOW</button>
 <button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-withdraw" class="screen"><div class="card"><div class="cTitle">⬆️ Withdraw Data</div>
+<div id="screen-withdraw" class="screen"><div class="card"><div class="cTitle">⬆️ Withdraw Data Ver: 0.4</div>
 <div class="label">📶 To Network</div><select class="input" id="withNet" style="padding-left:16px"><option>MTN Uganda</option><option>Airtel Uganda</option><option>Lyca Mobile Uganda</option></select>
 <div class="label" style="margin-top:10px">💾 Amount</div><select class="input" id="withAmt" style="padding-left:16px"><option>1 GB</option><option>2.5 GB</option><option>5 GB</option></select>
-<button class="btn" onclick="doAction('Withdraw', document.getElementById('withAmt').value + ' to ' + document.getElementById('withNet').value)">⬆️ WITHDRAW NOW</button>
+<button class="btn" onclick="doAction('Withdraw', document.getElementById('withAmt').value + ' to ' + document.getElementById('withNet').value, false, true)">⬆️ WITHDRAW NOW</button>
 <button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-refer" class="screen"><div class="card"><div class="cTitle">🎁 Refer & Get Rewards</div>
+<div id="screen-refer" class="screen"><div class="card"><div class="cTitle">🎁 Refer & Get Rewards Ver: 0.4</div>
 <div class="bal" style="text-align:center"><div style="font-size:40px">🎁</div><div style="font-size:18px;font-weight:800;margin-top:6px">Get 1GB For Every Friend!</div></div>
 <div style="margin-top:12px"><div class="label">🔗 Your Refer Link</div><div class="input" style="padding-left:12px;font-size:11px;background:#0f172a;color:#facc15;border:1px dashed var(--gold)" id="referLink">https://rhinoengineering2012-wq.github.io/sharp-pixel-coder/?ref=LINDON0783</div>
 <div class="grid"><button class="btn" onclick="copyRefer()">📋 COPY LINK</button><button class="btn btnGhost" onclick="shareRefer()">💬 SHARE</button></div></div>
 <button class="btn btnGhost" style="margin-top:10px" onclick="showScreen('home')">← Back</button>
 </div></div>
 
-<div id="screen-save" class="screen"><div class="card"><div class="cTitle">💾 Save Data Forever</div><select class="input" id="saveAmount" style="padding-left:16px"><option>1 GB - Save 30 Days</option><option>5 GB - Save Forever ⭐ Popular</option><option>10 GB - Premium Forever</option></select><button class="btn" onclick="doAction('Save', document.getElementById('saveAmount').value)">💾 SAVE TO VAULT</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-buy" class="screen"><div class="card"><div class="cTitle">📦 Buy Data Bundle</div><div class="bundle active" onclick="selectBundle(this)"><div><b>1 GB Daily</b></div><div><b style="color:var(--gold)">5,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>5 GB Weekly ⭐ Best</b></div><div><b style="color:var(--gold)">20,000 UGX</b></div></div><div class="bundle" onclick="selectBundle(this)"><div><b>12.5 GB Monthly</b></div><div><b style="color:var(--gold)">45,000 UGX</b></div></div><button class="btn" onclick="doAction('Buy Bundle', 'Bundle Purchase')">💳 BUY WITH MOMO</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-vault" class="screen"><div class="card"><div class="cTitle">🛡️ My Data Vault</div><div class="bal"><div style="font-size:10px;opacity:.8">Total Locked Forever</div><div style="font-size:30px;font-weight:800">12.5 GB</div></div><div class="listItem"><div><b>MTN Vault 5GB</b></div><div style="color:var(--gold)">Forever</div></div><div class="listItem"><div><b>Airtel Vault 2.5GB</b></div><div style="color:var(--gold)">Forever</div></div><div class="listItem" style="border:none"><div><b>Lyca Mobile Uganda 5GB</b></div><div style="color:var(--gold)">Forever</div></div><button class="btn" onclick="showScreen('save')">💾 SAVE MORE</button></div></div>
+<div id="screen-save" class="screen"><div class="card"><div class="cTitle">💾 Save Data Forever Ver: 0.4</div><select class="input" id="saveAmount" style="padding-left:16px"><option>1 GB - Save 30 Days</option><option>5 GB - Save Forever ⭐ Popular</option><option>10 GB - Premium Forever</option></select><button class="btn" onclick="doAction('Save', document.getElementById('saveAmount').value, true)">💾 SAVE TO VAULT</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
 
-<div id="screen-support" class="screen"><div class="card"><div class="cTitle">For Support:</div>
+<div id="screen-buy" class="screen"><div class="card"><div class="cTitle">📦 Buy Data Bundle Ver: 0.4</div>
+<div class="label">📶 Choose Network *</div><select class="input" id="buyNetwork" style="padding-left:16px" onchange="updateBuyPrice()"><option value="">-- Select Network --</option><option value="MTN Uganda">MTN Uganda</option><option value="Airtel Uganda">Airtel Uganda</option><option value="Lyca Mobile Uganda">Lyca Mobile Uganda</option><option value="Both Premium">Both Premium</option></select>
+<div class="label" style="margin-top:12px">💾 Custom Data Amount (50 MB to 1 TB) *</div>
+<div style="display:flex;gap:8px"><input class="input" id="customAmount" type="number" placeholder="e.g. 1500" style="padding-left:16px;flex:1" oninput="updateBuyPrice()"><select class="input" id="customUnit" style="padding-left:10px;width:110px" onchange="updateBuyPrice()"><option value="MB">MB</option><option value="GB" selected>GB</option><option value="TB">TB</option></select></div>
+<div class="rangeWrap"><input type="range" id="amountRange" min="50" max="10240" value="1000" step="50" oninput="syncRangeToInput()"><div style="display:flex;justify-content:space-between;font-size:10px;opacity:.6;margin-top:4px"><span>50 MB</span><span>1 TB</span></div></div>
+<div id="pricePreview" class="bal" style="text-align:center;margin-top:12px;background:linear-gradient(135deg,#facc15,#eab308);color:#000;display:none"><div style="font-size:10px">ESTIMATED PRICE</div><div style="font-size:24px;font-weight:800" id="priceValue">0 UGX</div><div style="font-size:11px" id="priceDetail">-</div></div>
+<div style="margin-top:12px"><div class="label">Quick Bundles</div>
+<div class="bundle active" onclick="selectBundleQuick(this,1000,'GB')"><div><b>1 GB Daily</b></div><div><b style="color:var(--gold)">5,000 UGX</b></div></div>
+<div class="bundle" onclick="selectBundleQuick(this,5,'GB')"><div><b>5 GB Weekly ⭐ Best</b></div><div><b style="color:var(--gold)">20,000 UGX</b></div></div>
+<div class="bundle" onclick="selectBundleQuick(this,12.5,'GB')"><div><b>12.5 GB Monthly</b></div><div><b style="color:var(--gold)">45,000 UGX</b></div></div>
+<div class="bundle" onclick="selectBundleQuick(this,100,'GB')"><div><b>100 GB Enterprise</b></div><div><b style="color:var(--gold)">250,000 UGX</b></div></div>
+</div>
+<button class="btn" onclick="buyCustomData()">💳 BUY WITH MOMO Ver 0.4</button>
+<button class="btn btnGhost" onclick="showScreen('home')">← Back</button>
+</div></div>
+
+<div id="screen-vault" class="screen"><div class="card"><div class="cTitle">🛡️ My Data Vault Ver: 0.4</div><div class="bal"><div style="font-size:10px;opacity:.8">Your Total Locked Forever</div><div style="font-size:30px;font-weight:800" id="vaultBalance">0 GB</div><div style="font-size:10px;opacity:.6" id="vaultUser">-</div></div><div id="vaultList"></div><button class="btn" onclick="showScreen('save')">💾 SAVE MORE</button></div></div>
+
+<div id="screen-support" class="screen"><div class="card"><div class="cTitle">For Support Ver: 0.4</div>
 <div class="bal" style="background:rgba(255,255,255,.06);padding:18px">
 <div style="margin-bottom:14px"><div style="font-size:11px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Tel / Whatsapp</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;background:#22c55e;border-radius:10px;display:grid;place-items:center;font-size:18px">📞</div><div style="font-size:16px;font-weight:800;color:var(--gold)">+256 745 550 768</div></div><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style="margin:0;padding:10px;font-size:11px" onclick="window.open('https://wa.me/256745550768','_blank')">💬 WHATSAPP</button><button class="btn btnGhost" style="margin:0;padding:10px;font-size:11px" onclick="window.location.href='tel:+256745550768'">📞 CALL</button></div></div>
 <div style="height:1px;background:rgba(255,255,255,.08);margin:4px 0 14px"></div>
 <div><div style="font-size:11px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">E-mail</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;background:var(--gold);border-radius:10px;display:grid;place-items:center;font-size:18px">📧</div><div style="font-size:12px;font-weight:700">rhinoengineering2012@gmail.com</div></div></div>
+<div style="margin-top:14px;background:linear-gradient(135deg,rgba(250,204,21,.15),rgba(250,204,21,.05));border:1px solid var(--gold);border-radius:14px;padding:12px;text-align:center"><div style="font-weight:800;font-size:13px">⭐ Love RHINO?</div><div style="font-size:11px;opacity:.7;margin-top:4px">Rate us on Google & get 500MB bonus!</div><button class="btn" style="margin-top:8px;padding:10px;font-size:11px" onclick="openRateModal()">⭐ RATE ON GOOGLE</button></div>
 </div><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
 
-<div id="screen-profile" class="screen"><div class="card"><div class="cTitle">👤 My Profile Ver: 0.2</div>
+<div id="screen-profile" class="screen"><div class="card"><div class="cTitle">👤 My Profile Ver: 0.4</div>
 <div style="text-align:center;position:relative">
 <img id="profileImg" src="https://i.pravatar.cc/150?u=rhino" class="profilePic" onclick="document.getElementById('photoInput').click()">
 <div style="margin-top:8px"><button class="btn btnGhost" style="padding:8px 14px;font-size:11px;margin:0 auto;display:inline-block;width:auto" onclick="document.getElementById('photoInput').click()">📸 UPLOAD PHOTO</button></div>
 <input type="file" id="photoInput" accept="image/*" style="display:none" onchange="uploadPhoto(event)">
-<div style="margin-top:14px;font-weight:800;font-size:18px" id="profileName">User</div><div style="font-size:12px;opacity:.6" id="profilePhone">07xxxxxxxx</div>
+<div style="margin-top:14px;font-weight:800;font-size:18px" id="profileName">User</div><div style="font-size:12px;opacity:.6" id="profilePhone">07xxxxxxxx</div><div style="font-size:10px;color:var(--gold);margin-top:4px" id="profileNetwork">-</div>
 </div>
-
 <div style="margin-top:18px">
 <div class="setRow"><div><b>🌙 Theme Switcher</b><div style="font-size:10px;opacity:.6">Dark / Light Mode</div></div><div class="toggle on" id="themeToggle" onclick="toggleTheme()"></div></div>
 <div class="setRow"><div><b>💾 Auto Data Saver</b><div style="font-size:10px;opacity:.6">Auto-save expiring data</div></div><div class="toggle on" id="saverToggle" onclick="toggleSaver()"></div></div>
 <div class="setRow"><div><b>🔔 Notifications</b><div style="font-size:10px;opacity:.6">Alerts & updates</div></div><div class="toggle on" id="notifToggle" onclick="toggleNotif()"></div></div>
 </div>
-
+<div style="margin-top:14px;background:rgba(255,255,255,.06);border-radius:14px;padding:12px"><div style="font-size:11px;font-weight:700">⭐ Your Rating</div><div style="font-size:12px;opacity:.6;margin-top:4px" id="myRatingDisplay">Not rated yet — tap to rate!</div><button class="btn btnGhost" style="margin-top:8px;padding:8px;font-size:11px" onclick="openRateModal()">⭐ RATE NOW</button></div>
 <button class="btn btnDanger" style="margin-top:18px" onclick="logout()">🚪 LOG OUT</button>
 <button class="btn btnGhost" style="margin-top:8px" onclick="showScreen('home')">← Back Home</button>
 </div></div>
 
-<div id="screen-settings" class="screen"><div class="card"><div class="cTitle">⚙️ Settings Ver: 0.2</div>
+<div id="screen-settings" class="screen"><div class="card"><div class="cTitle">⚙️ Settings Ver: 0.4</div>
 <div class="setRow"><div><b>🌙 Dark Mode</b></div><div class="toggle on" id="themeToggle2" onclick="toggleTheme()"></div></div>
 <div class="setRow"><div><b>💾 Auto Data Saver</b></div><div class="toggle on" id="saverToggle2" onclick="toggleSaver()"></div></div>
 <div class="setRow"><div><b>🔔 Notifications</b></div><div class="toggle on" id="notifToggle2" onclick="toggleNotif()"></div></div>
@@ -155,108 +202,61 @@ body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255
 <div class="bottom"><div class="nav active" id="nav-home" onclick="showScreen('home')"><span>🏠</span>Home</div><div class="nav" id="nav-vault" onclick="showScreen('vault')"><span>🛡️</span>Vault</div><div class="nav" id="nav-history" onclick="showScreen('history')"><span>📜</span>History</div><div class="nav" id="nav-support" onclick="showScreen('support')"><span>💬</span>Support</div><div class="nav" id="nav-profile" onclick="showScreen('profile')"><span>👤</span>Profile</div></div>
 
 <script>
-let historyData = JSON.parse(localStorage.getItem('rhinoHistory')||'[]');
+// CONFIG - Replace with your Supabase keys for online save
+const SUPABASE_URL = "https://YOUR_PROJECT.supabase.co";
+const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";
+let supabaseClient=null;
+try{ if(SUPABASE_URL.includes("supabase.co") && !SUPABASE_URL.includes("YOUR_PROJECT")) supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY); }catch(e){}
+
+let currentUser=null;
+let signupData = JSON.parse(localStorage.getItem('rhinoSignups')||'[]');
 let notifEnabled = localStorage.getItem('rhinoNotif')!=='off';
 let saverEnabled = localStorage.getItem('rhinoSaver')!=='off';
 let splashHidden=false;
+let selectedRating=0;
+const MTN_PREFIXES=['076','077','078','079','039'];
+const AIRTEL_PREFIXES=['070','074','075','020'];
+const LYCA_PREFIXES=['072'];
 function hideSplash(){ if(splashHidden) return; splashHidden=true; document.getElementById('splash').classList.add('hide'); document.getElementById('app').classList.add('show'); setTimeout(()=>{ document.getElementById('splash').style.display='none'; },700); }
-setTimeout(hideSplash,1500); window.addEventListener('load',()=>setTimeout(hideSplash,500));
-
-function showScreen(id){
- document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
- document.getElementById('screen-'+id).classList.add('active');
- document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));
- const nav=document.getElementById('nav-'+id); if(nav) nav.classList.add('active');
- if(id==='home') document.getElementById('nav-home').classList.add('active');
- if(id==='history') renderHistory();
- window.scrollTo(0,0);
-}
-function login(){
- const p=document.getElementById('phone').value; const n=document.getElementById('name').value;
- if(!p||!n){ showNotif('⚠️ Enter phone and name'); return; }
- document.getElementById('welcome').innerText='Welcome, '+n+' • Ver: 0.2';
- document.getElementById('profileName').innerText=n; document.getElementById('profilePhone').innerText=p;
- localStorage.setItem('rhinoUser', JSON.stringify({name:n,phone:p}));
- showScreen('home'); showNotif('✅ Welcome '+n+'! Ver: 0.2 Loaded');
-}
-function googleLogin(){ showScreen('home'); showNotif('✅ Google Login Success Ver: 0.2'); }
-function showNotif(msg){
- if(!notifEnabled && !msg.includes('Notification')) return;
- const bar=document.getElementById('notifBar'); bar.innerText=msg; bar.style.display='block';
- setTimeout(()=>bar.style.display='none',4000);
-}
+setTimeout(hideSplash,1600);
+function getUserKey(phone){ return 'rhinoHistory_'+phone; }
+function getVaultKey(phone){ return 'rhinoVault_'+phone; }
+function getRatingKey(phone){ return 'rhinoRating_'+phone; }
+function updateNetworkHint(){ const net=document.getElementById('network').value; const hint=document.getElementById('netHint'); if(net==='MTN Uganda') hint.innerText='✓ Must start with 076, 077, 078, 079'; else if(net==='Airtel Uganda') hint.innerText='✓ Must start with 070, 074, 075, 020'; else if(net==='Lyca Mobile Uganda') hint.innerText='✓ Must start with 072'; else hint.innerText=''; }
+function validatePhoneForNetwork(phone, network){ const p=phone.replace(/[^0-9]/g,''); if(p.length!==10) return false; const pref=p.substring(0,3); if(network==='MTN Uganda') return MTN_PREFIXES.includes(pref); if(network==='Airtel Uganda') return AIRTEL_PREFIXES.includes(pref); if(network==='Lyca Mobile Uganda') return LYCA_PREFIXES.includes(pref); return true; }
+function showScreen(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); const target=document.getElementById('screen-'+id); if(target) target.classList.add('active'); else { document.getElementById('screen-home').classList.add('active'); id='home'; } document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active')); const nav=document.getElementById('nav-'+id); if(nav) nav.classList.add('active'); if(id==='home') document.getElementById('nav-home').classList.add('active'); if(id==='history') renderHistory(); if(id==='signups') renderSignups(); if(id==='vault') renderVault(); if(id==='analytics') renderAnalytics(); window.scrollTo(0,0); }
+async function login(){ const p=document.getElementById('phone').value.trim(); const n=document.getElementById('name').value.trim(); const net=document.getElementById('network').value; if(!p||!n||!net){ showNotif('⚠️ Fill phone, name and network'); return; } if(!/^[0-9]{10}$/.test(p)){ showNotif('⚠️ Phone must be 10 digits: 07xxxxxxxx'); return; } if(!validatePhoneForNetwork(p, net)){ showNotif('⚠️ Phone '+p+' does NOT match '+net); return; } const exists=signupData.find(u=>u.phone===p); if(!exists){ const entry={name:n,phone:p,network:net,date:new Date().toLocaleString(),timestamp:Date.now()}; signupData.unshift(entry); localStorage.setItem('rhinoSignups', JSON.stringify(signupData)); if(supabaseClient){ await supabaseClient.from('rhino_users').upsert({phone:p,name:n,network:net}); } } else { exists.name=n; exists.network=net; localStorage.setItem('rhinoSignups', JSON.stringify(signupData)); } currentUser={name:n,phone:p,network:net}; localStorage.setItem('rhinoCurrentUser', JSON.stringify(currentUser)); localStorage.setItem('rhinoUser', JSON.stringify(currentUser)); if(!localStorage.getItem(getUserKey(p))) localStorage.setItem(getUserKey(p), JSON.stringify([])); if(!localStorage.getItem(getVaultKey(p))) localStorage.setItem(getVaultKey(p), JSON.stringify({balanceGB:0,items:[]})); updateUIForUser(); showScreen('home'); showNotif('✅ Welcome '+n+'! '+net+' • Ver: 0.4'); }
+function openGoogleModal(){ document.getElementById('googleModal').classList.add('show'); }
+function closeGoogleModal(){ document.getElementById('googleModal').classList.remove('show'); }
+async function confirmGoogleLogin(){ const email=document.getElementById('googleEmail').value.trim(); const gName=document.getElementById('googleName').value.trim(); if(!email||!gName){ showNotif('⚠️ Enter Google email and name'); return; } if(!/^[^@]+@[^@]+\.[^@]+$/.test(email)){ showNotif('⚠️ Enter valid Gmail'); return; } const entry={name:gName,phone:email,network:'Google Auth ('+email+')',date:new Date().toLocaleString(),timestamp:Date.now(),email:email}; signupData.unshift(entry); localStorage.setItem('rhinoSignups', JSON.stringify(signupData)); currentUser={name:gName,phone:email,network:'Google Auth',email:email}; localStorage.setItem('rhinoCurrentUser', JSON.stringify(currentUser)); localStorage.setItem('rhinoUser', JSON.stringify(currentUser)); localStorage.setItem(getUserKey(email), JSON.stringify([])); localStorage.setItem(getVaultKey(email), JSON.stringify({balanceGB:0,items:[]})); if(supabaseClient){ await supabaseClient.from('rhino_users').upsert({phone:email,name:gName,network:'Google Auth',email:email}); } closeGoogleModal(); updateUIForUser(); showScreen('home'); showNotif('✅ Google Login Success: '+email); }
+function showNotif(msg){ if(!notifEnabled && !msg.includes('Notification')) return; const bar=document.getElementById('notifBar'); bar.innerText=msg; bar.style.display='block'; setTimeout(()=>bar.style.display='none',4000); }
 function selectBundle(el){ document.querySelectorAll('.bundle').forEach(b=>b.classList.remove('active')); el.classList.add('active'); }
 function copyRefer(){ navigator.clipboard.writeText(document.getElementById('referLink').innerText); showNotif('📋 Copied!'); }
 function shareRefer(){ if(navigator.share){ navigator.share({title:'Rhino', text:document.getElementById('referLink').innerText}); } else copyRefer(); }
-
-function toggleTheme(){
- document.body.classList.toggle('light');
- document.querySelectorAll('[id^=themeToggle]').forEach(t=>t.classList.toggle('on'));
- localStorage.setItem('rhinoTheme', document.body.classList.contains('light')?'light':'dark');
- showNotif(document.body.classList.contains('light')?'☀️ Light Mode ON':'🌙 Dark Mode ON');
-}
-function toggleSaver(){
- saverEnabled=!saverEnabled;
- document.querySelectorAll('[id^=saverToggle]').forEach(t=>t.classList.toggle('on', saverEnabled));
- localStorage.setItem('rhinoSaver', saverEnabled?'on':'off');
- showNotif(saverEnabled?'💾 Auto Data Saver ON - Will auto-save expiring data':'💾 Auto Data Saver OFF');
-}
-function toggleNotif(){
- notifEnabled=!notifEnabled;
- document.querySelectorAll('[id^=notifToggle]').forEach(t=>t.classList.toggle('on', notifEnabled));
- localStorage.setItem('rhinoNotif', notifEnabled?'on':'off');
- if(notifEnabled) showNotif('🔔 Notifications ON');
-}
-
-function uploadPhoto(e){
- const file=e.target.files[0]; if(!file) return;
- const reader=new FileReader();
- reader.onload=function(ev){
-  document.getElementById('profileImg').src=ev.target.result;
-  localStorage.setItem('rhinoPhoto', ev.target.result);
-  showNotif('📸 Photo Updated!');
- };
- reader.readAsDataURL(file);
-}
-function logout(){
- if(confirm('Are you sure you want to log out?')){
-  localStorage.removeItem('rhinoUser');
-  document.getElementById('phone').value=''; document.getElementById('name').value='';
-  showScreen('login');
-  showNotif('🚪 Logged out successfully Ver: 0.2');
- }
-}
-function doAction(type, detail){
- const now=new Date(); const entry={type, detail, date: now.toLocaleString(), timestamp: now.getTime()};
- historyData.unshift(entry); localStorage.setItem('rhinoHistory', JSON.stringify(historyData));
- if(saverEnabled && type==='Save') detail+=' [Auto-Saved]';
- showNotif('✅ '+type+' Success! Added to History'); renderHistory();
-}
-function renderHistory(){
- const tc=document.getElementById('totalCount'); if(tc) tc.innerText=historyData.length;
- const list=document.getElementById('historyList');
- if(historyData.length===0){ list.innerHTML='<div style="text-align:center;padding:20px;opacity:.6;font-size:12px">No history yet.</div>'; return; }
- list.innerHTML=historyData.map(h=>`<div class="histItem"><div style="display:flex;justify-content:space-between"><b style="font-size:12px">${h.type}</b><span style="font-size:10px;opacity:.6">${h.date}</span></div><div style="font-size:11px;margin-top:4px;opacity:.8">${h.detail}</div></div>`).join('');
-}
-function printHistoryPDF(){
- if(historyData.length===0){ showNotif('⚠️ No history to print'); return; }
- const { jsPDF }=window.jspdf; const doc=new jsPDF();
- doc.setFontSize(18); doc.text('RHINO DATA BANK - Ver: 0.2',10,15);
- doc.setFontSize(11); doc.text('Transaction History Report',10,22);
- doc.text('Date: '+new Date().toLocaleString(),10,28); doc.line(10,30,200,30);
- let y=38; historyData.forEach((h,i)=>{ if(y>270){ doc.addPage(); y=15; } doc.setFontSize(10); doc.text((i+1)+'. '+h.type+' - '+h.detail,10,y); doc.setFontSize(8); doc.text(h.date,10,y+5); y+=12; });
- doc.save('Rhino-History-Ver0.2.pdf'); showNotif('📄 PDF Downloaded! Ver: 0.2');
-}
-// Restore saved states
-window.addEventListener('DOMContentLoaded', ()=>{
- const theme=localStorage.getItem('rhinoTheme'); if(theme==='light'){ document.body.classList.add('light'); }
- else document.body.classList.remove('light');
- const photo=localStorage.getItem('rhinoPhoto'); if(photo) document.getElementById('profileImg').src=photo;
- const user=JSON.parse(localStorage.getItem('rhinoUser')||'null'); if(user){ document.getElementById('profileName').innerText=user.name; document.getElementById('profilePhone').innerText=user.phone; document.getElementById('welcome').innerText='Welcome, '+user.name+' • Ver: 0.2'; }
- if(localStorage.getItem('rhinoNotif')==='off'){ notifEnabled=false; document.querySelectorAll('[id^=notifToggle]').forEach(t=>t.classList.remove('on')); }
- if(localStorage.getItem('rhinoSaver')==='off'){ saverEnabled=false; document.querySelectorAll('[id^=saverToggle]').forEach(t=>t.classList.remove('on')); }
- if(document.body.classList.contains('light')){ document.querySelectorAll('[id^=themeToggle]').forEach(t=>t.classList.add('on')); } else { document.querySelectorAll('[id^=themeToggle]').forEach(t=>{ if(localStorage.getItem('rhinoTheme')!=='light' && localStorage.getItem('rhinoTheme')!==null) {} }); }
-});
-renderHistory();
+function toggleTheme(){ document.body.classList.toggle('light'); document.querySelectorAll('[id^=themeToggle]').forEach(t=>t.classList.toggle('on')); localStorage.setItem('rhinoTheme', document.body.classList.contains('light')?'light':'dark'); showNotif(document.body.classList.contains('light')?'☀️ Light Mode ON':'🌙 Dark Mode ON'); }
+function toggleSaver(){ saverEnabled=!saverEnabled; document.querySelectorAll('[id^=saverToggle]').forEach(t=>t.classList.toggle('on', saverEnabled)); localStorage.setItem('rhinoSaver', saverEnabled?'on':'off'); showNotif(saverEnabled?'💾 Auto Data Saver ON':'💾 Auto Data Saver OFF'); }
+function toggleNotif(){ notifEnabled=!notifEnabled; document.querySelectorAll('[id^=notifToggle]').forEach(t=>t.classList.toggle('on', notifEnabled)); localStorage.setItem('rhinoNotif', notifEnabled?'on':'off'); if(notifEnabled) showNotif('🔔 Notifications ON'); }
+function uploadPhoto(e){ const file=e.target.files[0]; if(!file) return; const reader=new FileReader(); reader.onload=function(ev){ if(!currentUser) return; document.getElementById('profileImg').src=ev.target.result; localStorage.setItem('rhinoPhoto_'+currentUser.phone, ev.target.result); showNotif('📸 Photo Updated! Ver 0.4'); }; reader.readAsDataURL(file); }
+function logout(){ localStorage.removeItem('rhinoCurrentUser'); currentUser=null; document.getElementById('phone').value=''; document.getElementById('name').value=''; document.getElementById('network').value=''; showScreen('login'); showNotif('🚪 Logged out Ver: 0.4 — login to see your private vault'); }
+async function doAction(type, detail, addToVault=false, subtract=false){ if(!currentUser){ showNotif('⚠️ Please login first'); showScreen('login'); return; } const key=getUserKey(currentUser.phone); let hist=JSON.parse(localStorage.getItem(key)||'[]'); const now=new Date(); const entry={type, detail, date: now.toLocaleString(), timestamp: now.getTime()}; hist.unshift(entry); localStorage.setItem(key, JSON.stringify(hist)); if(supabaseClient){ await supabaseClient.from('rhino_transactions').insert({phone:currentUser.phone,type:type,detail:detail}); } if(addToVault || type==='Save' || type==='Deposit'){ addVaultData(detail); } if(subtract){ subVaultData(detail); } showNotif('✅ '+type+' Success! Ver: 0.4'); renderHistory(); renderVault(); renderAnalytics(); }
+function addVaultData(detail){ const vKey=getVaultKey(currentUser.phone); let vault=JSON.parse(localStorage.getItem(vKey)||'{"balanceGB":0,"items":[]}'); let gb=parseFloat(detail)||0; if(detail.includes('MB')) gb=(parseFloat(detail)||0)/1024; if(detail.includes('TB')) gb=(parseFloat(detail)||0)*1024; if(isNaN(gb)) gb=1; vault.balanceGB+=gb; vault.items.unshift({detail, date:new Date().toLocaleString(), gb}); localStorage.setItem(vKey, JSON.stringify(vault)); updateUIForUser(); }
+function subVaultData(detail){ const vKey=getVaultKey(currentUser.phone); let vault=JSON.parse(localStorage.getItem(vKey)||'{"balanceGB":0,"items":[]}'); let gb=parseFloat(detail)||0; if(detail.includes('MB')) gb=(parseFloat(detail)||0)/1024; if(detail.includes('TB')) gb=(parseFloat(detail)||0)*1024; vault.balanceGB=Math.max(0, vault.balanceGB-gb); localStorage.setItem(vKey, JSON.stringify(vault)); updateUIForUser(); }
+function updateUIForUser(){ if(!currentUser) return; document.getElementById('welcome').innerText='Welcome, '+currentUser.name+' • Ver: 0.4'; document.getElementById('profileName').innerText=currentUser.name; document.getElementById('profilePhone').innerText=currentUser.phone; document.getElementById('profileNetwork').innerText=currentUser.network; document.getElementById('userNetworkTag').innerText=currentUser.network+' • '+currentUser.phone; const vKey=getVaultKey(currentUser.phone); let vault=JSON.parse(localStorage.getItem(vKey)||'{"balanceGB":0,"items":[]}'); const balText=vault.balanceGB>=1024? (vault.balanceGB/1024).toFixed(2)+' TB' : vault.balanceGB>=1? vault.balanceGB.toFixed(2)+' GB' : Math.round(vault.balanceGB*1024)+' MB'; document.getElementById('balanceDisplay').innerText=balText; document.getElementById('vaultBalance').innerText=balText; document.getElementById('vaultUser').innerText=currentUser.name+' • '+currentUser.network; const photo=localStorage.getItem('rhinoPhoto_'+currentUser.phone); if(photo) document.getElementById('profileImg').src=photo; const rKey=getRatingKey(currentUser.phone); const myRate=JSON.parse(localStorage.getItem(rKey)||'null'); if(myRate){ document.getElementById('myRatingDisplay').innerHTML='You rated: '+'⭐'.repeat(myRate.stars)+' ('+myRate.stars+'/5)'; } }
+function renderHistory(){ if(!currentUser){ document.getElementById('historyList').innerHTML='<div style="text-align:center;padding:20px;opacity:.6">Please login to see YOUR private history.</div>'; return; } const key=getUserKey(currentUser.phone); const hist=JSON.parse(localStorage.getItem(key)||'[]'); document.getElementById('totalCount').innerText=hist.length; document.getElementById('historyUserLabel').innerText=currentUser.name+' • TOTAL'; const list=document.getElementById('historyList'); if(hist.length===0){ list.innerHTML='<div style="text-align:center;padding:20px;opacity:.6;font-size:12px">No history yet for '+currentUser.name+'<br>Your actions are private to you.</div>'; return; } list.innerHTML=hist.map(h=>`<div class="histItem"><div style="display:flex;justify-content:space-between"><b style="font-size:12px">${h.type}</b><span style="font-size:10px;opacity:.6">${h.date}</span></div><div style="font-size:11px;margin-top:4px;opacity:.8">${h.detail}</div></div>`).join(''); }
+function renderVault(){ if(!currentUser) return; const vKey=getVaultKey(currentUser.phone); let vault=JSON.parse(localStorage.getItem(vKey)||'{"balanceGB":0,"items":[]}'); const list=document.getElementById('vaultList'); if(vault.items.length===0){ list.innerHTML='<div style="text-align:center;padding:20px;opacity:.6;font-size:12px">Vault empty for '+currentUser.name+'<br>Deposit data to start.</div>'; return; } list.innerHTML=vault.items.map(it=>`<div class="listItem"><div><b>${it.detail}</b><div style="font-size:10px;opacity:.5">${it.date}</div></div><div style="color:var(--gold);font-weight:700">${it.gb>=1?it.gb.toFixed(2)+' GB':Math.round(it.gb*1024)+' MB'}</div></div>`).join(''); }
+function renderSignups(){ const sc=document.getElementById('signupCount'); if(sc) sc.innerText=signupData.length; const list=document.getElementById('signupList'); if(!list) return; if(signupData.length===0){ list.innerHTML='<div style="text-align:center;padding:20px;opacity:.6;font-size:12px">No sign ups yet.</div>'; return; } list.innerHTML=signupData.map((u,i)=>`<div class="histItem"><div style="display:flex;justify-content:space-between"><b style="font-size:12px">${i+1}. ${u.name}</b><span style="font-size:10px;background:var(--gold);color:#000;padding:2px 6px;border-radius:100px">${u.network}</span></div><div style="font-size:11px;margin-top:4px">📱 ${u.phone}</div><div style="font-size:9px;opacity:.5;margin-top:2px">${u.date}</div></div>`).join(''); }
+function renderAnalytics(){ if(!currentUser) return; const vKey=getVaultKey(currentUser.phone); let vault=JSON.parse(localStorage.getItem(vKey)||'{"balanceGB":0,"items":[]}'); document.getElementById('analyticsSaved').innerText=vault.balanceGB>=1024? (vault.balanceGB/1024).toFixed(1)+' TB' : vault.balanceGB.toFixed(1)+' GB'; const key=getUserKey(currentUser.phone); const hist=JSON.parse(localStorage.getItem(key)||'[]'); const refCount=hist.filter(h=>h.type.includes('Refer')).length; document.getElementById('analyticsRefer').innerText=refCount+' GB'; const base=Math.min(hist.length*8,90); ['barMon','barTue','barWed','barThu','barFri'].forEach((id,i)=>{ const el=document.getElementById(id); if(el) el.style.height=(10+base*Math.random())+'%'; }); }
+function clearSignups(){ if(confirm('Clear all sign ups?')){ signupData=[]; localStorage.setItem('rhinoSignups', JSON.stringify(signupData)); renderSignups(); showNotif('🗑️ Sign ups cleared'); } }
+function printHistoryPDF(){ if(!currentUser){ showNotif('⚠️ Login first'); return; } const key=getUserKey(currentUser.phone); const hist=JSON.parse(localStorage.getItem(key)||'[]'); if(hist.length===0){ showNotif('⚠️ No history to print'); return; } const { jsPDF }=window.jspdf; const doc=new jsPDF(); doc.setFontSize(18); doc.text('RHINO DATA BANK - Ver: 0.4',10,15); doc.setFontSize(11); doc.text('Private History for '+currentUser.name+' - '+currentUser.phone,10,22); doc.text('Date: '+new Date().toLocaleString(),10,28); doc.line(10,30,200,30); let y=38; hist.forEach((h,i)=>{ if(y>270){ doc.addPage(); y=15; } doc.setFontSize(10); doc.text((i+1)+'. '+h.type+' - '+h.detail,10,y); doc.setFontSize(8); doc.text(h.date,10,y+5); y+=12; }); doc.save('Rhino-History-'+currentUser.phone+'-Ver0.4.pdf'); showNotif('📄 PDF Downloaded! Ver: 0.4'); }
+function printSignupsPDF(){ if(signupData.length===0){ showNotif('⚠️ No sign ups'); return; } const { jsPDF }=window.jspdf; const doc=new jsPDF(); doc.setFontSize(18); doc.text('RHINO DATA BANK - Ver: 0.4',10,15); doc.setFontSize(11); doc.text('All Sign Ups Report',10,22); let y=38; signupData.forEach((u,i)=>{ if(y>270){ doc.addPage(); y=15; } doc.setFontSize(10); doc.text((i+1)+'. '+u.name+' - '+u.phone+' - '+u.network,10,y); doc.setFontSize(8); doc.text(u.date,10,y+5); y+=12; }); doc.save('Rhino-Signups-Ver0.4.pdf'); showNotif('📄 Sign Ups PDF!'); }
+function updateBuyPrice(){ const amt=parseFloat(document.getElementById('customAmount').value); const unit=document.getElementById('customUnit').value; const net=document.getElementById('buyNetwork').value; if(!amt||!net){ document.getElementById('pricePreview').style.display='none'; return; } let mb=amt; if(unit==='GB') mb=amt*1024; if(unit==='TB') mb=amt*1024*1024; if(mb<50||mb>1024*1024){ showNotif('⚠️ Amount must be 50 MB to 1 TB'); return; } let pricePerGB=5000; if(net.includes('Airtel')) pricePerGB=4800; if(net.includes('Lyca')) pricePerGB=4500; const gb=mb/1024; const total=Math.round(gb*pricePerGB); document.getElementById('pricePreview').style.display='block'; document.getElementById('priceValue').innerText=total.toLocaleString()+' UGX'; document.getElementById('priceDetail').innerText=amt+' '+unit+' on '+net+' • '+(mb>=1024?gb.toFixed(2)+' GB':mb+' MB'); }
+function syncRangeToInput(){ const range=document.getElementById('amountRange').value; let mb=parseInt(range); let val=mb; let unit='MB'; if(mb>=1024){ val=(mb/1024).toFixed(1); unit='GB'; if(mb>=1024*1024){ val=(mb/1024/1024).toFixed(2); unit='TB'; } } document.getElementById('customAmount').value=val; document.getElementById('customUnit').value=unit; updateBuyPrice(); }
+function selectBundleQuick(el, amt, unit){ document.querySelectorAll('.bundle').forEach(b=>b.classList.remove('active')); el.classList.add('active'); document.getElementById('customAmount').value=amt; document.getElementById('customUnit').value=unit; updateBuyPrice(); }
+function buyCustomData(){ const net=document.getElementById('buyNetwork').value; const amt=document.getElementById('customAmount').value; const unit=document.getElementById('customUnit').value; if(!net){ showNotif('⚠️ Select network first'); return; } if(!amt){ showNotif('⚠️ Enter data amount (50 MB to 1 TB)'); return; } let mb=parseFloat(amt); if(unit==='GB') mb=amt*1024; if(unit==='TB') mb=amt*1024*1024; if(mb<50||mb>1048576){ showNotif('⚠️ Must be 50 MB to 1 TB'); return; } const priceText=document.getElementById('priceValue').innerText; doAction('Buy Bundle', amt+' '+unit+' on '+net+' - '+priceText, true); }
+function openRateModal(){ document.getElementById('rateModal').classList.add('show'); }
+function closeRateModal(){ document.getElementById('rateModal').classList.remove('show'); }
+function setStars(n){ selectedRating=n; document.querySelectorAll('.star').forEach((s,i)=>{ s.classList.toggle('active', i<n); }); const texts=['','😡 Poor','😐 Fair','🙂 Good','😍 Great','🤩 Excellent!']; document.getElementById('rateText').innerText=texts[n]; }
+async function submitRating(){ if(!currentUser){ showNotif('⚠️ Login to rate'); return; } if(selectedRating===0){ showNotif('⚠️ Tap stars to rate'); return; } const comment=document.getElementById('rateComment').value; const rKey=getRatingKey(currentUser.phone); localStorage.setItem(rKey, JSON.stringify({stars:selectedRating,comment,date:new Date().toLocaleString(),name:currentUser.name})); if(supabaseClient){ await supabaseClient.from('rhino_ratings').insert({phone:currentUser.phone,rating:selectedRating,comment:comment}); } closeRateModal(); const bonus=(selectedRating>=4)?0.5:0; if(bonus>0){ addVaultData(bonus+' GB Rating Bonus'); showNotif('✅ Thank you! ⭐ '+selectedRating+'/5 rated • 500MB bonus added!'); window.open('https://search.google.com/local/writereview?placeid=RhinoDataBankUganda','_blank'); } else { showNotif('✅ Thanks for rating '+selectedRating+'/5 Ver 0.4'); window.open('https://www.google.com/search?q=Rhino+Data+Bank+Uganda+review','_blank'); } updateUIForUser(); }
+window.addEventListener('DOMContentLoaded', ()=>{ const theme=localStorage.getItem('rhinoTheme'); if(theme==='light'){ document.body.classList.add('light'); } const savedUser=JSON.parse(localStorage.getItem('rhinoCurrentUser')||'null'); if(savedUser){ currentUser=savedUser; updateUIForUser(); showScreen('home'); } else { showScreen('login'); } if(localStorage.getItem('rhinoNotif')==='off'){ notifEnabled=false; document.querySelectorAll('[id^=notifToggle]').forEach(t=>t.classList.remove('on')); } if(localStorage.getItem('rhinoSaver')==='off'){ saverEnabled=false; document.querySelectorAll('[id^=saverToggle]').forEach(t=>t.classList.remove('on')); } renderSignups(); });
 </script>
 </body></html>
