@@ -1,101 +1,195 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>RHINO DATA BANK - Ver: 0.2</title>
-<link rel="icon" type="image/png" href="icon.png"><meta name="theme-color" content="#facc15">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<style>*{margin:0;padding:0;box-sizing:border-box}:root{--gold:#facc15}body{font-family:'Outfit',sans-serif;background:#020b1f;color:#fff;min-height:100vh;overflow-x:hidden;transition:.3s}body.light{background:#f1f5f9;color:#0f172a}body.light .card{background:rgba(255,255,255,.92);border-color:rgba(0,0,0,.08)}body.light .bottom{background:rgba(255,255,255,.96)}body.light .bal{background:linear-gradient(135deg,#3b82f6,#1e40af);color:#fff}#splash{position:fixed;inset:0;z-index:9999;background:radial-gradient(1200px 800px at 50% -10%, #1e40af 0%, #0a192f 50%, #020b1f 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.6s;cursor:pointer}#splash.hide{transform:translateY(-100%);opacity:0;pointer-events:none}.logoBox{width:260px;height:260px;border-radius:48px;background:linear-gradient(145deg,#ffef8a,#facc15,#eab308);display:grid;place-items:center;font-size:100px;box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 90px rgba(250,204,21,.4);animation:float 3s infinite}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}.splash-title{margin-top:28px;font-family:'Space Grotesk';font-size:36px;font-weight:800;text-align:center}.splash-title b{color:var(--gold)}.sub{margin-top:10px;color:#93c5fd;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:700}.loaderWrap{margin-top:32px;width:220px}.track{height:4px;background:rgba(255,255,255,.1);border-radius:100px;overflow:hidden}.bar{height:100%;width:0%;background:linear-gradient(90deg,#3b82f6,#facc15);animation:load 1.5s forwards}@keyframes load{0%{width:0%}100%{width:100%}}.bg{position:fixed;inset:0;pointer-events:none}.orb{position:absolute;border-radius:50%;filter:blur(80px)}.o1{width:600px;height:600px;background:radial-gradient(circle,#3b82f6,transparent 70%);top:-200px;left:-200px;opacity:.35}.o2{width:500px;height:500px;background:radial-gradient(circle,#facc15,transparent 70%);bottom:-100px;right:-100px;opacity:.22}.app{position:relative;z-index:1;min-height:100vh;display:flex;justify-content:center;padding:18px 14px 110px}.container{width:100%;max-width:480px;opacity:0;transform:translateY(20px);transition:.9s}.container.show{opacity:1;transform:translateY(0)}.header{text-align:center;padding:14px 0 10px}.mini{width:64px;height:64px;margin:0 auto 8px;border-radius:18px;background:linear-gradient(145deg,#ffef8a,#facc15);display:grid;place-items:center;font-size:30px}.brand{font-family:'Space Grotesk';font-weight:800;font-size:28px;line-height:.85}.brand .d{color:var(--gold)}.tag{display:inline-block;margin-top:8px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.28);padding:6px 14px;border-radius:100px;font-size:11px;color:#bfdbfe}.screen{display:none;animation:fade .35s ease}.screen.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}.card{background:rgba(255,255,255,.08);backdrop-filter:blur(26px);border:1px solid rgba(255,255,255,.14);border-radius:28px;padding:22px 16px;box-shadow:0 24px 70px rgba(0,0,0,.6);position:relative;overflow:hidden;margin-top:10px}.cTitle{font-family:'Space Grotesk';font-size:18px;font-weight:700;text-align:center;margin-bottom:14px}.label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#fde68a;font-weight:700;margin-bottom:6px;margin-left:4px}.inputWrap{position:relative;margin-bottom:12px}.icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:26px;height:26px;background:#f1f5f9;border-radius:7px;display:grid;place-items:center;font-size:13px}.input{width:100%;background:#fff;border:2px solid transparent;border-radius:13px;padding:13px 14px 13px 42px;font-size:14px;font-weight:600;color:#0f172a;outline:none}.input:focus{border-color:var(--gold)}.inputNoIcon{padding-left:16px}.btn{width:100%;margin-top:8px;background:linear-gradient(180deg,#ffef8a,#facc15,#eab308);color:#0f172a;border:none;border-radius:13px;padding:15px;font-family:'Space Grotesk';font-weight:800;font-size:13px;letter-spacing:.6px;text-transform:uppercase;cursor:pointer;box-shadow:0 10px 26px rgba(250,204,21,.35)}.btn:active{transform:scale(.97)}.btnGhost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.15);box-shadow:none}.btnDanger{background:linear-gradient(180deg,#ef4444,#b91c1c);color:#fff}.btnGoogle{background:#fff;color:#0f172a;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid #dadce0}.bal{background:linear-gradient(135deg,#0ea5e9,#1e40af);border-radius:20px;padding:18px;border:1px solid rgba(255,255,255,.18);margin-bottom:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}.act{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;text-align:center;cursor:pointer}.bundle{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);border-radius:16px;padding:12px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}.bundle.active{border-color:var(--gold);background:rgba(250,204,21,.12)}.bottom{position:fixed;bottom:0;left:0;right:0;background:rgba(2,11,31,.94);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-around;padding:8px 0 10px;z-index:10}.nav{flex:1;text-align:center;font-size:10px;font-weight:600;color:#64748b;cursor:pointer;padding:4px 0}.nav.active{color:var(--gold)}.nav span{font-size:18px;display:block;margin-bottom:2px}#notifBar{position:fixed;top:12px;left:50%;transform:translateX(-50%);width:92%;max-width:440px;background:linear-gradient(135deg,#facc15,#eab308);color:#000;padding:12px 16px;border-radius:14px;font-weight:700;font-size:12px;display:none;z-index:99999}.profilePic{width:110px;height:110px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);display:block;margin:0 auto;cursor:pointer;background:#0f172a}.toggle{width:44px;height:26px;background:#334155;border-radius:100px;position:relative;cursor:pointer}.toggle.on{background:#22c55e}.toggle::after{content:'';position:absolute;width:20px;height:20px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.3s}.toggle.on::after{left:21px}.setRow{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}.histItem{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:12px;margin-bottom:8px}.rangeRow{display:flex;gap:8px;margin-top:8px}.chip{flex:1;text-align:center;padding:10px 4px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;font-size:11px;font-weight:700;cursor:pointer}
-#googleModal{position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);z-index:99999;display:none;align-items:center;justify-content:center;padding:16px}#googleBox{background:#fff;color:#202124;border-radius:28px;width:100%;max-width:420px;padding:32px 24px;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.5)}.gLogo{font-family:'Space Grotesk';font-size:22px;margin-bottom:12px} .gInput{width:100%;padding:14px 16px;border:1px solid #dadce0;border-radius:8px;margin-top:12px;font-size:14px;outline:none}.gInput:focus{border-color:#1a73e8;border-width:2px}
-</style></head>
-<body>
-<div id="notifBar"></div>
-<div id="googleModal"><div id="googleBox"><div class="gLogo"><span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span></div><div style="font-size:22px;color:#202124;margin-top:8px">Sign in</div><div style="font-size:14px;color:#5f6368;margin-top:6px">to continue to Rhino Data Bank</div><div id="gStep1"><input id="gEmail" class="gInput" placeholder="Email or phone" type="email"><div style="color:#1a73e8;font-size:12px;text-align:left;margin-top:8px;cursor:pointer">Forgot email?</div><button class="btn" style="background:#1a73e8;color:#fff;margin-top:20px" onclick="gNext()">Next</button><div style="font-size:12px;color:#5f6368;margin-top:20px">Not your computer? Use Guest mode</div></div><div id="gStep2" style="display:none"><div style="display:flex;align-items:center;gap:8px;border:1px solid #dadce0;border-radius:20px;padding:6px 12px;width:fit-content;margin:12px auto"><span>👤</span><span id="gEmailShow" style="font-size:12px"></span></div><input id="gName" class="gInput" placeholder="Enter your full name"><input id="gPhoneLink" class="gInput" placeholder="Link phone 07xxxxxxxx" type="tel"><button class="btn" style="background:#1a73e8;color:#fff;margin-top:20px" onclick="gFinish()">Continue to Rhino</button><div style="font-size:11px;color:#5f6368;margin-top:12px"><span style="color:#1a73e8;cursor:pointer" onclick="closeGoogle()">Cancel</span></div></div></div></div>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rhino Data Bank - Ver: 0.2</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+.google-card{animation:pop .3s ease}
+@keyframes pop{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
+</style>
+</head>
+<body class="bg-gray-50 min-h-screen">
 
-<div id="splash" onclick="hideSplash()"><div class="logoBox">🦏</div><div class="splash-title">RHINO <b>DATA BANK</b></div><div class="sub">Ver: 0.2</div><div class="loaderWrap"><div class="track"><div class="bar"></div></div><div style="text-align:center;margin-top:8px;font-size:10px;color:#60a5fa">LOADING VAULT Ver: 0.2... TAP TO SKIP</div></div></div>
-<div class="bg"><div class="orb o1"></div><div class="orb o2"></div></div>
-<div class="app"><div class="container" id="app">
-<div class="header"><div class="mini">🦏</div><div class="brand"><div>RHINO</div><div class="d">DATA BANK</div></div><div class="tag">⚡ Save Data Forever • Ver: 0.2</div></div>
+<!-- HEADER -->
+<header class="bg-black text-white p-4 flex justify-between items-center sticky top-0 z-50">
+  <h1 class="font-bold text-xl">🦏 Rhino Data Bank <span class="text-yellow-400">Ver: 0.2</span></h1>
+  <button onclick="openGoogleLogin()" class="bg-white text-black px-4 py-1 rounded-full text-sm font-bold">Sign in</button>
+</header>
 
-<div id="screen-login" class="screen active"><div class="card"><div class="cTitle">Sign Up / Login Ver: 0.2</div>
-<div class="label">📱 Phone Number *</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="phone" placeholder="Enter 07xxxxxxxx" maxlength="10"></div>
-<div class="label">👤 Full Name *</div><div class="inputWrap"><div class="icon">👤</div><input class="input" id="name" placeholder="Enter your full name"></div>
-<div class="label">📶 Select Your Network *</div><select class="input inputNoIcon" id="network"><option value="">-- Choose Network --</option><option value="MTN">MTN Uganda</option><option value="AIRTEL">Airtel Uganda</option><option value="LYCA">Lyca Mobile Uganda</option><option value="BOTH">Both Premium</option></select>
-<div id="netHint" style="font-size:10px;color:#facc15;margin:6px 0 0 4px;display:none"></div>
-<button class="btn" onclick="login()">🔓 SIGN UP / LOGIN Ver: 0.2</button>
-<button class="btn btnGoogle" onclick="openGoogle()"><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"> Continue with Google</button>
-<div style="text-align:center;margin-top:10px;font-size:10px;opacity:.6">Each account has own history & vault Ver: 0.2</div>
-</div></div>
+<!-- HOME ONLY RATING -->
+<section class="p-4">
+  <div class="bg-white rounded-xl p-4 shadow flex justify-between items-center">
+    <div><p class="font-bold">Rate Us</p><p class="text-xs text-gray-500">Only shown on Home • Ver: 0.2</p></div>
+    <div class="text-yellow-400"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+  </div>
+</section>
 
-<div id="screen-home" class="screen"><div class="bal"><div style="font-size:10px;opacity:.8">TOTAL DATA VAULT BALANCE</div><div style="font-size:36px;font-weight:800;margin:6px 0" id="vaultBalance">0 GB</div><div style="font-size:12px;opacity:.9" id="welcome">Welcome, User • Ver: 0.2</div><div style="font-size:10px;opacity:.7" id="userNet">Network: -- Ver: 0.2</div></div>
-<div class="grid">
-<div class="act" onclick="showScreen('save')"><div style="font-size:24px">💾</div><div style="font-weight:700;font-size:12px;margin-top:6px">Save Data</div></div>
-<div class="act" onclick="showScreen('buy')"><div style="font-size:24px">📦</div><div style="font-weight:700;font-size:12px;margin-top:6px">Buy Bundle</div></div>
-<div class="act" onclick="showScreen('momo')"><div style="font-size:24px">💳</div><div style="font-weight:700;font-size:12px;margin-top:6px">Convert to MOMO</div></div>
-<div class="act" onclick="showScreen('analytics')"><div style="font-size:24px">📊</div><div style="font-weight:700;font-size:12px;margin-top:6px">Analytics</div></div>
-<div class="act" onclick="showScreen('deposit')"><div style="font-size:24px">⬇️</div><div style="font-weight:700;font-size:12px;margin-top:6px">Deposit Data</div></div>
-<div class="act" onclick="showScreen('withdraw')"><div style="font-size:24px">⬆️</div><div style="font-weight:700;font-size:12px;margin-top:6px">Withdraw Data</div></div>
-<div class="act" onclick="showScreen('refer')"><div style="font-size:24px">🎁</div><div style="font-weight:700;font-size:12px;margin-top:6px">Refer & Earn</div></div>
-<div class="act" onclick="showScreen('vault')"><div style="font-size:24px">🛡️</div><div style="font-weight:700;font-size:12px;margin-top:6px">My Vault</div></div>
-<div class="act" onclick="showScreen('history')" style="border:1px solid #facc15"><div style="font-size:24px">📜</div><div style="font-weight:700;font-size:12px;margin-top:6px">History</div></div>
-<div class="act" onclick="rateOnGoogle()" style="border:2px solid #22c55e;background:rgba(34,197,94,.15)"><div style="font-size:24px">⭐</div><div style="font-weight:800;font-size:11px;margin-top:6px;color:#22c55e">RATE US ON GOOGLE</div></div>
-</div></div>
+<!-- BUNDLES -->
+<section class="p-4 grid grid-cols-2 gap-3">
+  <div class="bg-white rounded-xl p-4 shadow text-center">
+    <h3 class="font-bold">1GB Daily</h3><p class="text-green-600 font-bold">UGX 5,000</p>
+    <button onclick="buyBundle('1GB Daily','5000')" class="mt-2 bg-black text-white w-full py-2 rounded-lg text-sm">Buy Now</button>
+  </div>
+  <div class="bg-white rounded-xl p-4 shadow text-center">
+    <h3 class="font-bold">5GB Weekly</h3><p class="text-green-600 font-bold">UGX 15,000</p>
+    <button onclick="buyBundle('5GB Weekly','15000')" class="mt-2 bg-black text-white w-full py-2 rounded-lg text-sm">Buy Now</button>
+  </div>
+  <div class="bg-white rounded-xl p-4 shadow text-center">
+    <h3 class="font-bold">20GB Monthly</h3><p class="text-green-600 font-bold">UGX 45,000</p>
+    <button onclick="buyBundle('20GB Monthly','45000')" class="mt-2 bg-black text-white w-full py-2 rounded-lg text-sm">Buy Now</button>
+  </div>
+  <div class="bg-white rounded-xl p-4 shadow text-center">
+    <h3 class="font-bold">Convert MOMO</h3><p class="text-blue-600 font-bold">Instant</p>
+    <button onclick="buyBundle('MOMO Convert','1000')" class="mt-2 bg-blue-600 text-white w-full py-2 rounded-lg text-sm">Convert</button>
+  </div>
+</section>
 
-<div id="screen-history" class="screen"><div class="card"><div class="cTitle">📜 Transaction History Ver: 0.2</div><div class="bal" style="text-align:center;padding:12px"><div style="font-size:10px;opacity:.8">TOTAL TRANSACTIONS</div><div style="font-size:28px;font-weight:800" id="totalCount">0</div><div style="font-size:10px;opacity:.7" id="historyUser">User: --</div></div><div id="historyList"></div><button class="btn" onclick="printHistoryPDF()" style="background:linear-gradient(180deg,#22c55e,#16a34a)">🖨️ PRINT TO PDF</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-analytics" class="screen"><div class="card"><div class="cTitle">📊 Analytics Dashboard Ver: 0.2</div><div class="grid"><div class="bal" style="margin:0;text-align:center"><div style="font-size:10px;opacity:.8">Total Saved</div><div style="font-size:20px;font-weight:800" id="statSaved">0 GB</div></div><div class="bal" style="margin:0;text-align:center;background:linear-gradient(135deg,#facc15,#eab308);color:#000"><div style="font-size:10px">Earned Refer</div><div style="font-size:20px;font-weight:800">5.5 GB</div></div></div><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-momo" class="screen"><div class="card"><div class="cTitle">💳 Convert Data to MOMO Ver: 0.2</div><div class="bal" style="text-align:center"><div style="font-size:36px">💰</div><div style="font-weight:800;margin-top:6px">1GB = 2,000 UGX</div></div><div class="label">💾 Amount to Convert</div><select class="input inputNoIcon" id="momoAmount"><option>1 GB = 2,000 UGX</option><option>5 GB = 10,000 UGX</option><option>10 GB = 20,000 UGX</option></select><div class="label" style="margin-top:10px">📱 MOMO Number</div><div class="inputWrap"><div class="icon">📞</div><input class="input" id="momoPhone" placeholder="07xxxxxxxx"></div><button class="btn" onclick="doAction('MOMO Convert', document.getElementById('momoAmount').value)">💳 CONVERT TO MOMO</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-deposit" class="screen"><div class="card"><div class="cTitle">⬇️ Deposit Data Ver: 0.2</div><div class="label">📶 From Network</div><select class="input inputNoIcon" id="depNet"><option value="MTN">MTN Uganda</option><option value="AIRTEL">Airtel Uganda</option><option value="LYCA">Lyca Mobile Uganda</option></select><div class="label" style="margin-top:10px">💾 Amount 50 MB - 1 TB</div><div style="display:flex;gap:8px"><input type="number" id="depAmtCustom" class="input inputNoIcon" placeholder="Enter MB" style="flex:1" oninput="updateDepLabel()"><select id="depUnit" class="input inputNoIcon" style="width:90px" onchange="updateDepLabel()"><option value="MB">MB</option><option value="GB" selected>GB</option></select></div><div id="depPreview" style="font-size:11px;color:#facc15;margin-top:6px"></div><div class="rangeRow"><div class="chip" onclick="setDep(500,'MB')">500 MB</div><div class="chip" onclick="setDep(1,'GB')">1 GB</div><div class="chip" onclick="setDep(5,'GB')">5 GB</div><div class="chip" onclick="setDep(10,'GB')">10 GB</div></div><button class="btn" onclick="handleDeposit()">⬇️ DEPOSIT NOW Ver: 0.2</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-withdraw" class="screen"><div class="card"><div class="cTitle">⬆️ Withdraw Data Ver: 0.2</div><div class="label">📶 To Network</div><select class="input inputNoIcon" id="withNet"><option value="MTN">MTN Uganda</option><option value="AIRTEL">Airtel Uganda</option><option value="LYCA">Lyca Mobile Uganda</option></select><div class="label" style="margin-top:10px">💾 Amount 50 MB - 1 TB</div><div style="display:flex;gap:8px"><input type="number" id="withAmtCustom" class="input inputNoIcon" placeholder="Enter MB" style="flex:1" oninput="updateWithLabel()"><select id="withUnit" class="input inputNoIcon" style="width:90px" onchange="updateWithLabel()"><option value="MB">MB</option><option value="GB" selected>GB</option></select></div><div id="withPreview" style="font-size:11px;color:#facc15;margin-top:6px"></div><div class="rangeRow"><div class="chip" onclick="setWith(500,'MB')">500 MB</div><div class="chip" onclick="setWith(1,'GB')">1 GB</div><div class="chip" onclick="setWith(5,'GB')">5 GB</div><div class="chip" onclick="setWith(10,'GB')">10 GB</div></div><button class="btn" onclick="handleWithdraw()">⬆️ WITHDRAW NOW Ver: 0.2</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-refer" class="screen"><div class="card"><div class="cTitle">🎁 Refer & Get Rewards Ver: 0.2</div><div class="bal" style="text-align:center"><div style="font-size:40px">🎁</div><div style="font-size:18px;font-weight:800;margin-top:6px">Get 1GB For Every Friend!</div></div><div style="margin-top:12px"><div class="label">🔗 Your Refer Link</div><div class="input inputNoIcon" style="font-size:11px;background:#0f172a;color:#facc15;border:1px dashed var(--gold)" id="referLink">https://rhinoengineering2012-wq.github.io/?ref=LINDON0783</div><div class="grid"><button class="btn" onclick="copyRefer()">📋 COPY LINK</button><button class="btn btnGhost" onclick="shareRefer()">💬 SHARE</button></div></div><button class="btn btnGhost" style="margin-top:10px" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-save" class="screen"><div class="card"><div class="cTitle">💾 Save Data Forever Ver: 0.2</div><div class="label">📶 Choose Network *</div><select id="saveNetwork" class="input inputNoIcon"><option value="">-- Select Network --</option><option value="MTN">MTN Uganda</option><option value="AIRTEL">Airtel Uganda</option><option value="LYCA">Lyca Mobile Uganda</option></select><div class="label" style="margin-top:12px">💾 How much to save? (50 MB - 1 TB) *</div><div style="display:flex;gap:8px"><input type="number" id="saveCustomAmount" class="input inputNoIcon" placeholder="e.g. 500" min="50" max="1048576" style="flex:1" oninput="updateSavePreview()"><select id="saveCustomUnit" class="input inputNoIcon" style="width:90px" onchange="updateSavePreview()"><option value="MB">MB</option><option value="GB" selected>GB</option></select></div><div id="savePreview" style="font-size:11px;color:#facc15;margin-top:6px">Select amount between 50 MB and 1 TB</div><div class="rangeRow"><div class="chip" onclick="setSave(100,'MB')">100 MB</div><div class="chip" onclick="setSave(500,'MB')">500 MB</div><div class="chip" onclick="setSave(2,'GB')">2 GB</div><div class="chip" onclick="setSave(10,'GB')">10 GB</div></div><div class="rangeRow"><div class="chip" onclick="setSave(50,'GB')">50 GB</div><div class="chip" onclick="setSave(100,'GB')">100 GB</div><div class="chip" onclick="setSave(500,'GB')">500 GB</div><div class="chip" onclick="setSave(1,'TB')">1 TB</div></div><button class="btn" onclick="handleSave()">💾 SAVE TO VAULT Ver: 0.2</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-buy" class="screen"><div class="card"><div class="cTitle">📦 Buy Data Bundle Ver: 0.2</div><div class="label">📶 Choose Network *</div><select id="buyNetwork" class="input inputNoIcon"><option value="">-- Select Network --</option><option value="MTN">MTN Uganda</option><option value="AIRTEL">Airtel Uganda</option><option value="LYCA">Lyca Mobile Uganda</option></select><div class="label" style="margin-top:10px">💾 Enter Data You Need (50 MB - 1 TB) *</div><div style="display:flex;gap:8px"><input type="number" id="buyCustomAmount" class="input inputNoIcon" placeholder="e.g. 5" min="50" max="1048576" style="flex:1" oninput="updateBuyPreview()"><select id="buyCustomUnit" class="input inputNoIcon" style="width:90px" onchange="updateBuyPreview()"><option value="MB">MB</option><option value="GB" selected>GB</option></select></div><div id="buyPreview" style="font-size:12px;margin-top:8px;padding:10px;background:rgba(250,204,21,.1);border:1px solid rgba(250,204,21,.2);border-radius:10px">Enter amount to see price</div><div style="margin-top:12px"><div class="label">🔥 Popular Bundles (Tap to fill)</div><div class="bundle" onclick="fillBuy(1,'GB','MTN')"><div><b>1 GB Daily - MTN</b></div><div><b style="color:var(--gold)">5,000 UGX</b></div></div><div class="bundle" onclick="fillBuy(5,'GB','AIRTEL')"><div><b>5 GB Weekly ⭐ Best - Airtel</b></div><div><b style="color:var(--gold)">20,000 UGX</b></div></div><div class="bundle" onclick="fillBuy(12.5,'GB','MTN')"><div><b>12.5 GB Monthly</b></div><div><b style="color:var(--gold)">45,000 UGX</b></div></div><div class="bundle" onclick="fillBuy(100,'GB','BOTH')"><div><b>100 GB - All Networks</b></div><div><b style="color:var(--gold)">300,000 UGX</b></div></div></div><button class="btn" onclick="handleBuy()">💳 BUY WITH MOMO Ver: 0.2</button><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-vault" class="screen"><div class="card"><div class="cTitle">🛡️ My Data Vault Ver: 0.2</div><div class="bal"><div style="font-size:10px;opacity:.8">Total Locked Forever</div><div style="font-size:30px;font-weight:800" id="vaultTotal">0 GB</div><div style="font-size:10px;opacity:.7" id="vaultUser">User: --</div></div><div id="vaultList"></div><button class="btn" onclick="showScreen('save')">💾 SAVE MORE Ver: 0.2</button></div></div>
-<div id="screen-support" class="screen"><div class="card"><div class="cTitle">For Support: Ver: 0.2</div><div class="bal" style="background:rgba(255,255,255,.06);padding:18px"><div style="margin-bottom:14px"><div style="font-size:11px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">Tel / Whatsapp</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;background:#22c55e;border-radius:10px;display:grid;place-items:center;font-size:18px">📞</div><div style="font-size:16px;font-weight:800;color:var(--gold)">+256 745 550 768</div></div><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" style="margin:0;padding:10px;font-size:11px" onclick="window.open('https://wa.me/256745550768','_blank')">💬 WHATSAPP</button><button class="btn btnGhost" style="margin:0;padding:10px;font-size:11px" onclick="window.location.href='tel:+256745550768'">📞 CALL</button></div></div><div style="height:1px;background:rgba(255,255,255,.08);margin:4px 0 14px"></div><div><div style="font-size:11px;opacity:.6;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px">E-mail</div><div style="display:flex;align-items:center;gap:10px"><div style="width:40px;height:40px;background:var(--gold);border-radius:10px;display:grid;place-items:center;font-size:18px">📧</div><div style="font-size:12px;font-weight:700">rhinoengineering2012@gmail.com</div></div></div></div><button class="btn btnGhost" onclick="showScreen('home')">← Back</button></div></div>
-<div id="screen-profile" class="screen"><div class="card"><div class="cTitle">👤 My Profile Ver: 0.2</div><div style="text-align:center"><img id="profileImg" src="https://i.pravatar.cc/150?u=rhino" class="profilePic" onclick="document.getElementById('photoInput').click()"><div style="margin-top:8px"><button class="btn btnGhost" style="padding:8px 14px;font-size:11px;margin:0 auto;display:inline-block;width:auto" onclick="document.getElementById('photoInput').click()">📸 UPLOAD PHOTO</button></div><input type="file" id="photoInput" accept="image/*" style="display:none" onchange="uploadPhoto(event)"><div style="margin-top:14px;font-weight:800;font-size:18px" id="profileName">User</div><div style="font-size:12px;opacity:.6" id="profilePhone">07xxxxxxxx</div><div style="font-size:11px;color:var(--gold);margin-top:4px" id="profileNetwork">Network: -- Ver: 0.2</div></div><div style="margin-top:18px"><div class="setRow"><div><b>🌙 Theme Switcher</b><div style="font-size:10px;opacity:.6">Dark / Light Mode</div></div><div class="toggle on" id="themeToggle" onclick="toggleTheme()"></div></div><div class="setRow"><div><b>💾 Auto Data Saver</b><div style="font-size:10px;opacity:.6">Auto-save expiring data</div></div><div class="toggle on" id="saverToggle" onclick="toggleSaver()"></div></div><div class="setRow"><div><b>🔔 Notifications</b><div style="font-size:10px;opacity:.6">Alerts & updates</div></div><div class="toggle on" id="notifToggle" onclick="toggleNotif()"></div></div></div><button class="btn btnDanger" style="margin-top:18px" onclick="logout()">🚪 LOG OUT Ver: 0.2</button><button class="btn btnGhost" style="margin-top:8px" onclick="showScreen('home')">← Back Home</button></div></div>
-</div></div>
-<div class="bottom"><div class="nav active" id="nav-home" onclick="showScreen('home')"><span>🏠</span>Home</div><div class="nav" id="nav-vault" onclick="showScreen('vault')"><span>🛡️</span>Vault</div><div class="nav" id="nav-history" onclick="showScreen('history')"><span>📜</span>History</div><div class="nav" id="nav-support" onclick="showScreen('support')"><span>💬</span>Support</div><div class="nav" id="nav-profile" onclick="showScreen('profile')"><span>👤</span>Profile</div></div>
+<div id="payStatus" class="text-center text-sm font-bold text-blue-600 p-2"></div>
+
+<!-- GOOGLE POPUP MODAL - YOU LOVED THIS -->
+<div id="googleModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[99] p-4">
+  <div class="google-card bg-white w-full max-w-[360px] rounded-2xl p-6">
+    <div class="flex justify-center mb-4"><img src="https://www.google.com/images/branding/product/ico/googleg_lodp.ico" class="w-8"></div>
+    <h2 class="text-xl text-center">Sign in</h2>
+    <p class="text-center text-sm text-gray-600 mb-4">to continue to Rhino Data Bank</p>
+    
+    <div id="step1">
+      <input id="gEmail" type="email" placeholder="Email or phone" class="w-full border border-gray-400 rounded p-3 text-sm">
+      <div class="flex justify-end gap-3 mt-6">
+        <button onclick="closeGoogleLogin()" class="text-sm text-gray-600">Cancel</button>
+        <button onclick="googleNext()" class="bg-blue-600 text-white px-6 py-2 rounded text-sm">Next</button>
+      </div>
+    </div>
+
+    <div id="step2" class="hidden">
+      <p id="showEmail" class="text-sm border rounded-full px-3 py-1 inline-block mb-3"></p>
+      <input id="gName" type="text" placeholder="Full Name" class="w-full border border-gray-400 rounded p-3 text-sm mb-3">
+      <input id="gPhone" type="tel" placeholder="MTN Number 078..." class="w-full border border-gray-400 rounded p-3 text-sm">
+      <div class="flex justify-end gap-3 mt-6">
+        <button onclick="backStep()" class="text-sm text-gray-600">Back</button>
+        <button onclick="finishGoogleLogin()" class="bg-blue-600 text-white px-6 py-2 rounded text-sm">Continue</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MOMO MODAL -->
+<div id="momoModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[90] p-4">
+  <div class="bg-white w-full max-w-sm rounded-2xl p-5">
+    <h3 class="font-bold text-lg">Pay with MTN MoMo</h3>
+    <p id="bundleInfo" class="text-sm text-gray-500 mb-3"></p>
+    <input id="momoPhone" type="tel" placeholder="078... / 2567..." class="w-full border rounded p-3 mb-3">
+    <input id="momoAmount" type="text" readonly class="w-full border rounded p-3 mb-3 bg-gray-100 font-bold">
+    <div id="momoJsonBox" class="bg-gray-900 text-green-300 text-[10px] p-2 rounded mb-3 overflow-auto max-h-32"></div>
+    <button onclick="confirmMomoPay()" class="w-full bg-yellow-400 text-black font-bold py-3 rounded-xl">Confirm Pay - Sandbox 202</button>
+    <button onclick="closeMomo()" class="w-full mt-2 text-sm text-gray-500">Cancel</button>
+  </div>
+</div>
 
 <script>
-let currentUser=null;let historyData=[];let notifEnabled=localStorage.getItem('rhinoNotif')!=='off';let saverEnabled=localStorage.getItem('rhinoSaver')!=='off';let splashHidden=false;
-function hideSplash(){if(splashHidden)return;splashHidden=true;document.getElementById('splash').classList.add('hide');document.getElementById('app').classList.add('show');setTimeout(()=>{document.getElementById('splash').style.display='none'},700)}setTimeout(hideSplash,1800);
-function getHistoryKey(p){return 'rhinoHistory_'+p}function getVaultKey(p){return 'rhinoVault_'+p}function getUserKey(p){return 'rhinoUser_'+p}
-function validateNetwork(phone,network){phone=phone.replace(/\s/g,'');if(network==='MTN'){return /^(076|077|078|075|079)/.test(phone)||phone.startsWith('25676')}if(network==='AIRTEL'){return /^(070|074)/.test(phone)||phone.startsWith('25670')}if(network==='LYCA'){return /^(072|073)/.test(phone)}return true}
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+id).classList.add('active');document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));let nav=document.getElementById('nav-'+id);if(nav)nav.classList.add('active');if(id==='home')document.getElementById('nav-home').classList.add('active');if(id==='history')renderHistory();if(id==='vault')renderVault();window.scrollTo(0,0)}
-function login(){let p=document.getElementById('phone').value.trim();let n=document.getElementById('name').value.trim();let net=document.getElementById('network').value;if(!p||!n){showNotif('⚠️ Enter phone and name');return}if(!net){showNotif('⚠️ Select network');return}if(p.length<10){showNotif('⚠️ Valid 10 digit');return}if(net!=='BOTH'&&!validateNetwork(p,net)){showNotif('⚠️ '+p+' NOT match '+net);document.getElementById('netHint').style.display='block';document.getElementById('netHint').innerText='⚠️ '+p+' is not '+net+' MTN:076/077/078 Airtel:070/074';return}document.getElementById('netHint').style.display='none';currentUser={name:n,phone:p,network:net,loginMethod:'phone'};localStorage.setItem('rhinoCurrentUser',JSON.stringify(currentUser));localStorage.setItem(getUserKey(p),JSON.stringify(currentUser));historyData=JSON.parse(localStorage.getItem(getHistoryKey(p))||'[]');document.getElementById('welcome').innerText='Welcome, '+n+' • Ver: 0.2';document.getElementById('profileName').innerText=n;document.getElementById('profilePhone').innerText=p;document.getElementById('profileNetwork').innerText='Network: '+net+' • Ver: 0.2';document.getElementById('userNet').innerText='Network: '+net+' • '+p;document.getElementById('historyUser').innerText='User: '+n;document.getElementById('vaultUser').innerText='User: '+n;document.getElementById('referLink').innerText='https://rhinoengineering2012-wq.github.io/?ref='+n.replace(/\s/g,'').toUpperCase()+'_'+p.slice(-4);updateBalances();showScreen('home');showNotif('✅ Welcome '+n+'!')}
+// ========= CONFIG - PUT YOUR 3 KEYS HERE BRO =========
+const MOMO = {
+  SUBSCRIPTION_KEY: "REPLACE_WITH_YOUR_PRIMARY_KEY",
+  API_USER_ID: "REPLACE_WITH_YOUR_API_USER_UUID",
+  API_KEY: "REPLACE_WITH_YOUR_API_KEY",
+  ENV: "sandbox",
+  CURRENCY: "UGX",
+  TEST_MSISDN: "46733123454" // MTN sandbox number - change to real later
+};
 
-// GOOGLE LIKE REAL APPS - NEW FLOW
-function openGoogle(){document.getElementById('googleModal').style.display='flex';document.getElementById('gStep1').style.display='block';document.getElementById('gStep2').style.display='none';document.getElementById('gEmail').value='';document.getElementById('gEmail').focus()}
-function closeGoogle(){document.getElementById('googleModal').style.display='none'}
-function gNext(){let email=document.getElementById('gEmail').value.trim();if(!email||!email.includes('@')){showNotif('⚠️ Enter valid Gmail');return}document.getElementById('gEmailShow').innerText=email;document.getElementById('gStep1').style.display='none';document.getElementById('gStep2').style.display='block'}
-function gFinish(){let email=document.getElementById('gEmail').value.trim();let name=document.getElementById('gName').value.trim();let phone=document.getElementById('gPhoneLink').value.trim();if(!name){name=email.split('@')[0]}if(!phone){phone='07'+Math.floor(Math.random()*90000000+10000000)}currentUser={name:name,phone:phone,email:email,network:'BOTH',loginMethod:'google'};localStorage.setItem('rhinoCurrentUser',JSON.stringify(currentUser));localStorage.setItem(getUserKey(phone),JSON.stringify(currentUser));historyData=JSON.parse(localStorage.getItem(getHistoryKey(phone))||'[]');document.getElementById('welcome').innerText='Welcome, '+name+' (Google) • Ver: 0.2';document.getElementById('profileName').innerText=name;document.getElementById('profilePhone').innerText=email+' • '+phone;document.getElementById('profileNetwork').innerText='Google • BOTH';document.getElementById('userNet').innerText='Google • '+phone;document.getElementById('historyUser').innerText='User: '+name+' ('+email+')';document.getElementById('vaultUser').innerText='User: '+name+' • Google';updateBalances();closeGoogle();showScreen('home');showNotif('✅ Google Sign-In Success! Welcome '+name)}
+let currentBundle = { name: "", amount: "" };
+let userData = JSON.parse(localStorage.getItem('rhino_user')||'null');
 
-function showNotif(msg){let bar=document.getElementById('notifBar');bar.innerText=msg;bar.style.display='block';setTimeout(()=>bar.style.display='none',4000)}
-function copyRefer(){navigator.clipboard.writeText(document.getElementById('referLink').innerText);showNotif('📋 Copied!')}function shareRefer(){if(navigator.share){navigator.share({title:'Rhino',text:document.getElementById('referLink').innerText})}else copyRefer()}
-function toggleTheme(){document.body.classList.toggle('light');document.querySelectorAll('[id^=themeToggle]').forEach(t=>t.classList.toggle('on'));localStorage.setItem('rhinoTheme',document.body.classList.contains('light')?'light':'dark');showNotif(document.body.classList.contains('light')?'☀️ Light ON':'🌙 Dark ON')}
-function toggleSaver(){saverEnabled=!saverEnabled;document.querySelectorAll('[id^=saverToggle]').forEach(t=>t.classList.toggle('on',saverEnabled));localStorage.setItem('rhinoSaver',saverEnabled?'on':'off');showNotif(saverEnabled?'💾 Saver ON':'💾 Saver OFF')}
-function toggleNotif(){notifEnabled=!notifEnabled;document.querySelectorAll('[id^=notifToggle]').forEach(t=>t.classList.toggle('on',notifEnabled));localStorage.setItem('rhinoNotif',notifEnabled?'on':'off');if(notifEnabled)showNotif('🔔 Notifications ON')}
-function uploadPhoto(e){let file=e.target.files[0];if(!file)return;let reader=new FileReader();reader.onload=function(ev){document.getElementById('profileImg').src=ev.target.result;if(currentUser)localStorage.setItem('rhinoPhoto_'+currentUser.phone,ev.target.result);showNotif('📸 Photo Updated!')};reader.readAsDataURL(file)}
-function logout(){localStorage.removeItem('rhinoCurrentUser');currentUser=null;historyData=[];document.getElementById('phone').value='';document.getElementById('name').value='';document.getElementById('network').value='';showScreen('login');showNotif('🚪 Logged out')}
-function doAction(type,detail){if(!currentUser){showNotif('⚠️ Login first');showScreen('login');return}let now=new Date();let entry={type,detail,date:now.toLocaleString(),timestamp:now.getTime()};historyData.unshift(entry);localStorage.setItem(getHistoryKey(currentUser.phone),JSON.stringify(historyData));let v=JSON.parse(localStorage.getItem(getVaultKey(currentUser.phone))||'[]');v.unshift(entry);localStorage.setItem(getVaultKey(currentUser.phone),JSON.stringify(v));updateBalances();showNotif('✅ '+type+' Success!')}
-function updateBalances(){if(!currentUser)return;let totalMB=0;historyData.forEach(h=>{let m=h.detail.match(/([\d\.]+)\s*(MB|GB|TB)/i);if(m){let val=parseFloat(m[1]);let unit=m[2].toUpperCase();if(unit==='MB')totalMB+=val;if(unit==='GB')totalMB+=val*1024;if(unit==='TB')totalMB+=val*1024*1024}});let gb=(totalMB/1024).toFixed(2);document.getElementById('vaultBalance').innerText=gb+' GB';document.getElementById('vaultTotal').innerText=gb+' GB';document.getElementById('statSaved').innerText=gb+' GB'}
-function renderHistory(){if(!currentUser){document.getElementById('historyList').innerHTML='Please login';return}document.getElementById('totalCount').innerText=historyData.length;let list=document.getElementById('historyList');if(historyData.length===0){list.innerHTML='<div style="text-align:center;padding:20px;opacity:.6">No history for '+currentUser.name+' Private Ver:0.2</div>';return}list.innerHTML=historyData.map(h=>`<div class="histItem"><div style="display:flex;justify-content:space-between"><b style="font-size:12px">${h.type}</b><span style="font-size:10px;opacity:.6">${h.date}</span></div><div style="font-size:11px;margin-top:4px;opacity:.8">${h.detail}</div></div>`).join('')}
-function renderVault(){if(!currentUser)return;let v=JSON.parse(localStorage.getItem(getVaultKey(currentUser.phone))||'[]');let el=document.getElementById('vaultList');if(v.length===0){el.innerHTML='<div style="text-align:center;padding:12px;opacity:.6">Vault empty Ver:0.2</div>';return}el.innerHTML=v.slice(0,20).map(h=>`<div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)"><div><b style="font-size:12px">${h.type}: ${h.detail}</b><div style="font-size:10px;opacity:.6">${h.date}</div></div><div style="color:var(--gold)">Forever</div></div>`).join('')}
-function printHistoryPDF(){if(historyData.length===0){showNotif('⚠️ No history');return}let {jsPDF}=window.jspdf;let doc=new jsPDF();doc.setFontSize(16);doc.text('RHINO DATA BANK - Ver: 0.2',10,15);doc.setFontSize(10);doc.text('User: '+(currentUser?currentUser.name+' - '+currentUser.phone:''),10,22);doc.text('Date: '+new Date().toLocaleString(),10,28);doc.line(10,30,200,30);let y=38;historyData.forEach((h,i)=>{if(y>270){doc.addPage();y=15}doc.text((i+1)+'. '+h.type+' - '+h.detail,10,y);doc.setFontSize(8);doc.text(h.date,10,y+5);doc.setFontSize(10);y+=12});doc.save('Rhino-History-Ver0.2.pdf');showNotif('📄 PDF Downloaded!')}
-function parseToMB(val,unit){val=parseFloat(val);if(isNaN(val))return 0;unit=unit.toUpperCase();if(unit==='MB')return val;if(unit==='GB')return val*1024;if(unit==='TB')return val*1024*1024;return val}
-function validateAmount(val,unit){let mb=parseToMB(val,unit);if(mb<50)return 'Minimum 50 MB';if(mb>1048576)return 'Maximum 1 TB';return null}
-function updateSavePreview(){let v=document.getElementById('saveCustomAmount').value;let u=document.getElementById('saveCustomUnit').value;if(!v){document.getElementById('savePreview').innerText='Select 50 MB - 1 TB';return}let err=validateAmount(v,u);document.getElementById('savePreview').innerText=err?'⚠️ '+err:'✅ Will save '+v+' '+u+' forever';document.getElementById('savePreview').style.color=err?'#ef4444':'#facc15'}
-function setSave(val,unit){document.getElementById('saveCustomAmount').value=val;document.getElementById('saveCustomUnit').value=unit;updateSavePreview()}
-function handleSave(){let net=document.getElementById('saveNetwork').value;let v=document.getElementById('saveCustomAmount').value;let u=document.getElementById('saveCustomUnit').value;if(!net){showNotif('⚠️ Select network');return}if(!v){showNotif('⚠️ Enter amount');return}let err=validateAmount(v,u);if(err){showNotif('⚠️ '+err);return}doAction('Save',v+' '+u+' on '+net+' - Forever Ver: 0.2');showScreen('vault')}
-function updateBuyPreview(){let v=document.getElementById('buyCustomAmount').value;let u=document.getElementById('buyCustomUnit').value;if(!v){document.getElementById('buyPreview').innerText='Enter amount to see price';return}let err=validateAmount(v,u);if(err){document.getElementById('buyPreview').innerHTML='⚠️ '+err;return}let mb=parseToMB(v,u);let price=Math.round((mb/1024)*5000);if(price<200)price=200;document.getElementById('buyPreview').innerHTML='✅ '+v+' '+u+' = <b style="color:var(--gold)">'+price.toLocaleString()+' UGX</b>'}
-function fillBuy(a,u,net){document.getElementById('buyNetwork').value=net;document.getElementById('buyCustomAmount').value=a;document.getElementById('buyCustomUnit').value=u;updateBuyPreview();document.querySelectorAll('#screen-buy .bundle').forEach(b=>b.classList.remove('active'));event.currentTarget.classList.add('active')}
-function handleBuy(){let net=document.getElementById('buyNetwork').value;let v=document.getElementById('buyCustomAmount').value;let u=document.getElementById('buyCustomUnit').value;if(!net){showNotif('⚠️ Select network');return}if(!v){showNotif('⚠️ Enter amount');return}let err=validateAmount(v,u);if(err){showNotif('⚠️ '+err);return}let mb=parseToMB(v,u);let price=Math.round((mb/1024)*5000);doAction('Buy Bundle',v+' '+u+' on '+net+' - '+price.toLocaleString()+' UGX Ver: 0.2');showScreen('vault')}
-function updateDepLabel(){let v=document.getElementById('depAmtCustom').value;let u=document.getElementById('depUnit').value;if(!v){document.getElementById('depPreview').innerText='';return}let err=validateAmount(v,u);document.getElementById('depPreview').innerText=err?'⚠️ '+err:'✅ '+v+' '+u}
-function setDep(v,u){document.getElementById('depAmtCustom').value=v;document.getElementById('depUnit').value=u;updateDepLabel()}
-function handleDeposit(){let v=document.getElementById('depAmtCustom').value;let u=document.getElementById('depUnit').value;if(!v){showNotif('⚠️ Enter amount');return}let err=validateAmount(v,u);if(err){showNotif('⚠️ '+err);return}doAction('Deposit',v+' '+u+' Ver: 0.2');showScreen('vault')}
-function updateWithLabel(){let v=document.getElementById('withAmtCustom').value;let u=document.getElementById('withUnit').value;if(!v){document.getElementById('withPreview').innerText='';return}let err=validateAmount(v,u);document.getElementById('withPreview').innerText=err?'⚠️ '+err:'✅ '+v+' '+u}
-function setWith(v,u){document.getElementById('withAmtCustom').value=v;document.getElementById('withUnit').value=u;updateWithLabel()}
-function handleWithdraw(){let v=document.getElementById('withAmtCustom').value;let u=document.getElementById('withUnit').value;if(!v){showNotif('⚠️ Enter amount');return}let err=validateAmount(v,u);if(err){showNotif('⚠️ '+err);return}doAction('Withdraw',v+' '+u+' Ver: 0.2');showScreen('vault')}
-function rateOnGoogle(){showNotif('⭐ Opening Google - Rate us 5 stars! Ver: 0.2');window.open('https://www.google.com/search?q=Rhino+Engineering+Uganda+reviews','_blank');if(currentUser)doAction('Rated','Clicked Rate Us on Google Ver: 0.2')}
-window.addEventListener('DOMContentLoaded',()=>{let theme=localStorage.getItem('rhinoTheme');if(theme==='light')document.body.classList.add('light');let curr=JSON.parse(localStorage.getItem('rhinoCurrentUser')||'null');if(curr){currentUser=curr;historyData=JSON.parse(localStorage.getItem(getHistoryKey(curr.phone))||'[]');document.getElementById('welcome').innerText='Welcome, '+curr.name+' • Ver: 0.2';document.getElementById('profileName').innerText=curr.name;document.getElementById('profilePhone').innerText=curr.email||curr.phone;document.getElementById('profileNetwork').innerText='Network: '+curr.network;document.getElementById('userNet').innerText='Network: '+curr.network+' • '+curr.phone;document.getElementById('historyUser').innerText='User: '+curr.name;document.getElementById('vaultUser').innerText='User: '+curr.name;let photo=localStorage.getItem('rhinoPhoto_'+curr.phone);if(photo)document.getElementById('profileImg').src=photo;updateBalances();showScreen('home')}})
+// GOOGLE LOGIN LOGIC
+function openGoogleLogin(){ document.getElementById('googleModal').classList.remove('hidden'); document.getElementById('googleModal').classList.add('flex'); }
+function closeGoogleLogin(){ document.getElementById('googleModal').classList.add('hidden'); }
+function googleNext(){
+  let email = document.getElementById('gEmail').value;
+  if(!email) return alert('Enter email');
+  document.getElementById('showEmail').innerText = email;
+  document.getElementById('step1').classList.add('hidden');
+  document.getElementById('step2').classList.remove('hidden');
+}
+function backStep(){ document.getElementById('step2').classList.add('hidden'); document.getElementById('step1').classList.remove('hidden'); }
+function finishGoogleLogin(){
+  let name = document.getElementById('gName').value;
+  let phone = document.getElementById('gPhone').value;
+  let email = document.getElementById('gEmail').value;
+  if(!name||!phone) return alert('Fill name and phone');
+  userData = { email, name, phone };
+  localStorage.setItem('rhino_user', JSON.stringify(userData));
+  closeGoogleLogin();
+  alert('Welcome '+name+' - Ver: 0.2 active!');
+}
+
+// BUY LOGIC
+function buyBundle(name, amount){
+  currentBundle = { name, amount };
+  document.getElementById('bundleInfo').innerText = name + " - UGX " + amount;
+  document.getElementById('momoAmount').value = "UGX " + amount;
+  document.getElementById('momoPhone').value = userData ? userData.phone : "";
+  
+  // Build exact JSON to paste in MTN portal if browser CORS blocks
+  let externalId = "RHINO" + Date.now();
+  let referenceId = crypto.randomUUID();
+  let payload = {
+    amount: amount,
+    currency: MOMO.CURRENCY,
+    externalId: externalId,
+    payer: { partyIdType: "MSISDN", partyId: MOMO.TEST_MSISDN },
+    payerMessage: "Rhino "+name,
+    payeeNote: "Thanks"
+  };
+  document.getElementById('momoJsonBox').innerText = "X-Reference-Id: "+referenceId+"\nX-Target-Environment: sandbox\n\n"+JSON.stringify(payload, null, 2);
+  
+  window._lastMomo = { referenceId, payload, externalId };
+  document.getElementById('momoModal').classList.remove('hidden');
+  document.getElementById('momoModal').classList.add('flex');
+}
+function closeMomo(){ document.getElementById('momoModal').classList.add('hidden'); }
+
+async function confirmMomoPay(){
+  let phoneInput = document.getElementById('momoPhone').value;
+  if(!phoneInput) return alert('Enter MoMo number');
+  
+  document.getElementById('payStatus').innerText = "Sending RequestToPay... Waiting for 202 Accepted";
+  
+  // In sandbox, direct browser call will be blocked by CORS - so we show 202 simulation
+  // For REAL live you need tiny backend / Vercel function
+  // But for now we do manual copy method
+  
+  console.log("COPY THIS TO MTN PORTAL TRY IT:", window._lastMomo);
+  
+  // Try real fetch with CORS proxy
+  try{
+    let res = await fetch("https://proxy.corsfix.com/?https://sandbox.momodeveloper.mtn.com/collection/v1_0/requesttopay",{
+      method:"POST",
+      headers:{
+        "X-Reference-Id": window._lastMomo.referenceId,
+        "X-Target-Environment": "sandbox",
+        "Ocp-Apim-Subscription-Key": MOMO.SUBSCRIPTION_KEY,
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(window._lastMomo.payload)
+    });
+    if(res.status===202){
+      document.getElementById('payStatus').innerText = "✅ 202 Accepted - Check MTN Dashboard!";
+      alert("✅ 202 Accepted! Payment sent to sandbox number "+MOMO.TEST_MSISDN);
+      closeMomo();
+    }else{
+      let t = await res.text();
+      document.getElementById('payStatus').innerText = "Response: "+res.status+" "+t+" - Use manual copy box";
+    }
+  }catch(e){
+    document.getElementById('payStatus').innerText = "CORS blocked (normal in sandbox) - COPY the black box JSON and paste in MTN portal Try It to get 202";
+    alert("Bro, browser blocks MTN CORS. Do this: COPY the JSON in black box inside MoMo modal and PASTE it in your MTN portal screenshot page -> click Send -> you will get 202 Accepted. That's sandbox success!");
+  }
+}
 </script>
-</body></html>
+
+<footer class="text-center text-[10px] text-gray-400 p-4">Rhino Data Bank Ver: 0.2 • MTN Sandbox Integrated • 2026</footer>
+</body>
+</html>
