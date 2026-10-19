@@ -19,6 +19,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as PurchasesRouteImport } from './routes/purchases'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as WithdrawRouteImport } from './routes/withdraw'
 
 const IndexRoute = IndexRouteImport.update({
@@ -71,6 +72,11 @@ const PurchasesRoute = PurchasesRouteImport.update({
   path: '/purchases',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WithdrawRoute = WithdrawRouteImport.update({
   id: '/withdraw',
   path: '/withdraw',
@@ -88,6 +94,7 @@ export interface FileRoutesByFullPath {
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/purchases': typeof PurchasesRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/withdraw': typeof WithdrawRoute
 }
 export interface FileRoutesByTo {
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/purchases': typeof PurchasesRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/withdraw': typeof WithdrawRoute
 }
 export interface FileRoutesById {
@@ -115,6 +123,7 @@ export interface FileRoutesById {
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
   '/purchases': typeof PurchasesRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/withdraw': typeof WithdrawRoute
 }
 export interface FileRouteTypes {
@@ -130,6 +139,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/profile'
     | '/purchases'
+    | '/reset-password'
     | '/withdraw'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -143,6 +153,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/profile'
     | '/purchases'
+    | '/reset-password'
     | '/withdraw'
   id:
     | '__root__'
@@ -156,6 +167,7 @@ export interface FileRouteTypes {
     | '/onboarding'
     | '/profile'
     | '/purchases'
+    | '/reset-password'
     | '/withdraw'
   fileRoutesById: FileRoutesById
 }
@@ -170,6 +182,7 @@ export interface RootRouteChildren {
   OnboardingRoute: typeof OnboardingRoute
   ProfileRoute: typeof ProfileRoute
   PurchasesRoute: typeof PurchasesRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   WithdrawRoute: typeof WithdrawRoute
 }
 
@@ -245,6 +258,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PurchasesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/withdraw': {
       id: '/withdraw'
       path: '/withdraw'
@@ -266,6 +286,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingRoute: OnboardingRoute,
   ProfileRoute: ProfileRoute,
   PurchasesRoute: PurchasesRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   WithdrawRoute: WithdrawRoute,
 }
 export const routeTree = rootRouteImport
