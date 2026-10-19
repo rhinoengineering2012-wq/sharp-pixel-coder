@@ -2,6 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Bell, ChevronRight, Fingerprint, Gift, HelpCircle, LogOut, ShieldCheck } from "lucide-react";
 import { Frame } from "@/components/rhino/AppFrame";
 import { useBank } from "@/lib/store";
+import { useRhinoAuth } from "@/components/rhino/AuthProvider";
+import { supabase } from "@/integrations/supabase/client";
+import { Button } from "@/components/ui/button";
+import { InstallButton } from "@/components/rhino/InstallButton";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({
@@ -27,12 +32,13 @@ const items = [
 
 function Profile() {
   const b = useBank();
+  const { user } = useRhinoAuth();
   return (
     <Frame className="pb-28">
       <div className="rounded-b-4xl bg-gradient-splash px-5 pb-8 pt-10 text-center">
         <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200" alt="Alex" className="mx-auto h-20 w-20 rounded-full border-4 border-gold object-cover" />
-        <p className="mt-3 text-xl font-extrabold text-primary-foreground">Alex Mukasa</p>
-        <p className="text-sm text-primary-foreground/70">+256 771 234 567</p>
+        <p className="mt-3 break-words text-xl font-extrabold text-primary-foreground">{user?.user_metadata?.['full_name'] ?? "Guest"}</p>
+        <p className="break-words text-sm text-primary-foreground/70">{user?.user_metadata?.['phone'] ?? user?.email ?? "Demo account"}</p>
         <span className="mt-3 inline-block rounded-full bg-gold px-3 py-1 text-xs font-bold text-ink">Gold Banker · {b.balance}GB</span>
       </div>
       <ul className="mx-5 mt-5 overflow-hidden rounded-3xl bg-card shadow-soft">
@@ -44,9 +50,7 @@ function Profile() {
           </li>
         ))}
       </ul>
-      <Link to="/login" className="mx-5 mt-5 flex h-12 items-center justify-center gap-2 rounded-[14px] border border-destructive text-sm font-bold text-destructive">
-        <LogOut className="h-4 w-4" />Sign Out
-      </Link>
+      <div className="mx-5 mt-5 flex flex-col gap-3">{user ? <Button variant="outline" className="h-12 border-destructive text-destructive" onClick={async () => { const { error } = await supabase.auth.signOut(); if (error) toast.error(error.message); else toast.success("Signed out"); }}><LogOut className="size-4" />Sign Out</Button> : <Button asChild className="h-12"><Link to="/login">Sign In / Create Account</Link></Button>}<InstallButton /></div>
     </Frame>
   );
 }
