@@ -14,11 +14,20 @@ export function detectNetwork(phone: string): Network | null {
   if (/^072/.test(phone)) return "Lyca";
   return null;
 }
-export const canPay = (payer: string, recipient: string, method: PaymentMethod) => validPhone(payer) && validPhone(recipient) && detectNetwork(payer) !== "Lyca" && (detectNetwork(payer) === null || detectNetwork(payer) === method);
+export function payerError(phone: string, method: PaymentMethod): string {
+  if (detectNetwork(phone) === "Lyca") return "Lyca cannot pay. Use MTN or Airtel MoMo to pay.";
+  if (!validPhone(phone)) return "Enter a 10-digit Ugandan number starting with 07.";
+  const network = detectNetwork(phone);
+  if (!network) return "Use an MTN (077/078) or Airtel (070/075) MoMo number.";
+  if (network !== method) return `Choose ${paymentName(network)} to pay from this number.`;
+  return "";
+}
+export const validRecipient = (phone: string) => validPhone(phone) && detectNetwork(phone) !== null;
+export const resolveRecipient = (payer: string, recipient: string, sameNumber: boolean) => sameNumber ? payer : recipient;
+export const canPay = (payer: string, recipient: string, method: PaymentMethod) => !payerError(payer, method) && validRecipient(recipient);
 export const DEMO_REQUEST_MS = 3000;
 export const DEMO_VERIFY_MS = 2000;
-export const PIN_WAIT_SECONDS = 60;
-export const demoPinAccepted = (pin: string) => pin === "1234";
+export const PIN_WAIT_SECONDS = 90;
 export const money = (amount: number) => `UGX ${amount.toLocaleString("en-UG")}`;
 export const bundleName = (bundle: Bundle) => `${bundle.gb}GB ${bundle.validity}`;
 export const paymentName = (method: PaymentMethod) => method === "MTN" ? "MTN MoMo" : "Airtel Money";

@@ -168,6 +168,13 @@ input { min-width: 0; }
 .network-airtel { background: #FF0000; color: #ffffff; }
 .network-lyca { background: #0A3DFF; color: #ffffff; }
 .checkout-sheet { padding-top: env(safe-area-inset-top, 0px); padding-bottom: max(20px, env(safe-area-inset-bottom, 0px)); animation: sheet-up 250ms ease-out; }
+.checkout-sheet.pro-theme {
+  --background: #081d62; --card: #102c80; --card-foreground: #f7f7f7;
+  --primary: #0A3DFF; --primary-foreground: #ffffff;
+  --muted-foreground: #d1dcff; --border: #3551a0; --input: #6680c4;
+  --gold: #FFC300; --gold-soft: #ffed94; --ring: #FFC300;
+}
+.checkout-sheet .momo-input { height: 60px; padding-right: 76px; font-size: 20px; border-radius: 8px; }
 @keyframes sheet-up { from { transform: translate(-50%, 100%); } to { transform: translate(-50%, 0); } }
 @keyframes phone-shake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-7deg); } 75% { transform: rotate(7deg); } }
 .phone-shake { animation: phone-shake 300ms ease-in-out infinite; }
