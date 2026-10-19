@@ -39,6 +39,7 @@ export function Checkout({ bundle, onClose }: { bundle: Bundle; onClose: () => v
         if (remaining === 0) { const row: Purchase = { ...purchase, status: "Failed", reason: "Payment request expired" }; persist(row); setPurchase(row); setPin(""); setStage("failed"); }
       }, 250); return () => clearInterval(timer);
     }
+    return undefined;
   }, [stage, purchase, pin, owner]);
   function pay() {
     if (!canPay(payer, recipient, method)) return;
