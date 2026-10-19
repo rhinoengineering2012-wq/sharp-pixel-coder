@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ArrowLeft, Check, CircleCheck, CircleX, Loader2, LockKeyhole, Smartphone } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CircleCheck, CircleX, Loader2, LockKeyhole, RectangleEllipsis, Smartphone } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -100,7 +100,7 @@ export function Checkout({ bundle, onClose }: { bundle: Bundle; onClose: () => v
         </div>}
         {(stage === "sending" || stage === "verifying") && <div role="status" className="flex min-h-[380px] flex-col items-center justify-center gap-5 text-center">{stage === "sending" ? <Smartphone className="phone-shake size-20 text-gold" /> : <Loader2 className="size-16 animate-spin text-gold" />}<h2 className="text-2xl font-bold">{stage === "sending" ? "Sending request…" : "Verifying demo payment…"}</h2><p className="text-sm text-muted-foreground">{stage === "sending" ? `Sending MoMo request to ${purchase?.payer}…` : "Please wait…"}</p><p className="text-xs text-muted-foreground">Sandbox simulation · no real charge</p></div>}
         {stage === "pin" && purchase && <div className="space-y-5 text-center">
-          <div aria-hidden="true" className="text-5xl">📱➡️🔢</div><p className="text-sm font-extrabold text-gold">ENTER PIN ON YOUR PHONE</p><h2 className="text-2xl font-extrabold text-destructive">Check your phone NOW!</h2>
+          <div aria-hidden="true" className="flex items-center justify-center gap-3 text-gold"><Smartphone className="size-12" /><ArrowRight className="size-8" /><RectangleEllipsis className="size-12" /></div><p className="text-sm font-extrabold text-gold">ENTER PIN ON YOUR PHONE</p><h2 className="text-2xl font-extrabold text-destructive">Check your phone NOW!</h2>
           <div className="space-y-3 rounded-lg bg-gold-soft p-4 text-left text-sm leading-6 text-gold-ink"><p className="text-xs font-extrabold">DEMO PREVIEW — no pop-up was sent</p><p>In live payments, {method} sends a pop-up to <strong>{purchase.payer}</strong>.</p><p>It says: <strong>“Pay {money(bundle.price)} to RHINO DATABANK”</strong></p><p className="font-bold">ENTER YOUR 5-DIGIT MoMo PIN on that pop-up and press OK.</p></div>
           <p className="text-sm leading-6 text-muted-foreground">For security, PIN is entered only on the MTN/Airtel prompt, not in this app.</p>
           <p role="status" className="text-sm text-muted-foreground">Waiting <strong className="text-gold">{seconds}s</strong>…</p>

@@ -18,7 +18,7 @@ export function payerError(phone: string, method: PaymentMethod): string {
   if (detectNetwork(phone) === "Lyca") return "Lyca cannot pay. Use MTN or Airtel MoMo to pay.";
   if (!validPhone(phone)) return "Enter a 10-digit Ugandan number starting with 07.";
   const network = detectNetwork(phone);
-  if (!network) return "Use an MTN (077/078) or Airtel (070/075) MoMo number.";
+  if (!network || network === "Lyca") return "Use an MTN (077/078) or Airtel (070/075) MoMo number.";
   if (network !== method) return `Choose ${paymentName(network)} to pay from this number.`;
   return "";
 }
