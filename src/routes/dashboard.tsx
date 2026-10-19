@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { AlertTriangle, BarChart3, Bell, Eye, EyeOff, Gift, History, PlusCircle, Share2, Wallet } from "lucide-react";
+import { AlertTriangle, BarChart3, Bell, Eye, EyeOff, Gift, History, PlusCircle, Share2, Wallet, ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Frame } from "@/components/rhino/AppFrame";
 import { UGX_PER_GB, useBank } from "@/lib/store";
@@ -49,6 +49,8 @@ function Dashboard() {
           <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200" alt="Alex" className="h-10 w-10 rounded-full object-cover" />
         </div>
       </header>
+
+      <Link to="/bundles" className="pro-theme mx-5 mb-5 flex items-center justify-between gap-3 rounded-2xl border border-gold p-4"><div><p className="text-xs font-bold text-gold">MTN · AIRTEL · LYCA</p><p className="mt-1 text-lg font-extrabold">Buy data bundles</p><p className="mt-1 text-xs text-muted-foreground">From UGX 5,000 · Demo checkout</p></div><ArrowRight className="size-6 shrink-0 text-gold" /></Link>
 
       <section className="relative mx-5 overflow-hidden rounded-4xl bg-gradient-card p-5 shadow-glow animate-rise">
         <img src={BG} alt="" className="absolute inset-0 h-full w-full object-cover opacity-10" />
