@@ -1,0 +1,18 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
+import { ArrowRight, Flame, Radio, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Frame } from "@/components/rhino/AppFrame";
+import { Checkout } from "@/components/rhino/Checkout";
+import { InstallButton } from "@/components/rhino/InstallButton";
+import { bundles, money, type Bundle, type Network } from "@/lib/purchases";
+
+export const Route = createFileRoute("/bundles")({ head: () => ({ meta: [
+  { title: "Data Bundles — RHINO DATABANK" }, { name: "description", content: "Browse MTN, Airtel and Lyca data bundles and try secure demo checkout in UGX." },
+  { property: "og:title", content: "Data Bundles — RHINO DATABANK" }, { property: "og:description", content: "Choose your network and data bundle with mobile-money demo checkout." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" },
+] }), component: Bundles });
+function Bundles() {
+  const [network, setNetwork] = useState<Network | "All">("All");
+  const [selected, setSelected] = useState<Bundle | null>(null);
+  return <Frame className="pro-theme"><header className="flex items-center justify-between border-b border-border px-5 py-3"><div className="flex items-center gap-2"><img src="/icons/icon-192.png" alt="" className="size-9 rounded-lg object-cover" /><span className="text-sm font-extrabold">RHINO DATABANK</span></div><InstallButton /></header><section className="px-5 pb-6 pt-7"><p className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase text-gold"><Radio className="size-4" />Stay connected</p><h1 className="text-3xl font-extrabold">Data bundles</h1><p className="mt-2 text-sm text-muted-foreground">Your network. Your number. Your next bundle.</p><div className="mt-6 flex gap-2" role="group" aria-label="Filter by network">{(["All", "MTN", "Airtel", "Lyca"] as const).map(n => <Button key={n} variant={network === n ? "default" : "outline"} className={`min-w-0 flex-1 rounded-lg px-2 ${network === n ? "bg-gold text-gold-ink hover:bg-gold/90" : "bg-card"}`} onClick={() => setNetwork(n)}>{n}</Button>)}</div></section><section className="grid gap-4 px-5">{bundles.filter(b => network === "All" || network === b.network).map(bundle => <article key={bundle.id} className="bundle-card rounded-2xl border border-border bg-card p-5 shadow-soft transition hover:border-gold"><div className="flex items-center justify-between"><span className={`network-badge ${bundle.network === "MTN" ? "network-mtn" : bundle.network === "Airtel" ? "network-airtel" : "network-lyca"}`}>{bundle.network === "Lyca" ? "Lyca Mobile" : bundle.network}</span>{bundle.hot && <span className="flex items-center gap-1 text-xs font-semibold text-gold"><Flame className="size-3" />Hot deal</span>}</div><div className="my-5 flex items-end justify-between"><div><p className="text-4xl font-extrabold">{bundle.gb}<span className="ml-1 text-xl text-muted-foreground">GB</span></p><p className="mt-1 text-sm text-muted-foreground">{bundle.validity}</p></div><p className="text-lg font-bold">{money(bundle.price)}</p></div><Button onClick={() => setSelected(bundle)} className="h-12 w-full rounded-xl bg-gold text-gold-ink hover:bg-gold/90">Buy Now<ArrowRight className="size-4" /></Button></article>)}</section><p className="flex items-center justify-center gap-2 px-5 py-6 text-xs text-muted-foreground"><ShieldCheck className="size-4" />Demo prices · no live charges</p>{selected && <Checkout bundle={selected} onClose={() => setSelected(null)} />}</Frame>;
+}
