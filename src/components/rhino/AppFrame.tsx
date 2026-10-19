@@ -1,8 +1,7 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import { ArrowLeft, BarChart3, Home, Receipt, User } from "lucide-react";
+import { ArrowLeft, Home, Receipt, User, Wifi } from "lucide-react";
 import type { ReactNode } from "react";
 import { Button } from "@/components/ui/button";
-import { InstallButton } from "./InstallButton";
 
 export function Frame({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <div className={`app-frame mx-auto w-full max-w-md bg-background ${className}`}>{children}</div>;
@@ -25,21 +24,20 @@ export function AppBar({ title, right }: { title: string; right?: ReactNode }) {
 
 const tabs = [
   { to: "/dashboard", label: "Home", icon: Home },
-  { to: "/history", label: "History", icon: Receipt },
-  { to: "/analytics", label: "Analytics", icon: BarChart3 },
+  { to: "/bundles", label: "Bundles", icon: Wifi },
+  { to: "/purchases", label: "My Purchases", icon: Receipt },
   { to: "/profile", label: "Profile", icon: User },
 ] as const;
 
 export function BottomNav() {
   return (
-    <nav aria-label="Main navigation" className="bottom-nav fixed inset-x-0 bottom-0 z-20 mx-auto grid w-full max-w-md grid-cols-5 items-center border-t border-border bg-card shadow-elegant">
+    <nav aria-label="Main navigation" className="pro-theme bottom-nav fixed inset-x-0 bottom-0 z-20 mx-auto grid w-full max-w-md grid-cols-4 items-center border-t border-border bg-card shadow-elegant">
       {tabs.map(({ to, label, icon: Icon }) => (
         <Link key={to} to={to} className="nav-item flex min-w-0 flex-col items-center gap-1 py-2 text-[10px] font-semibold text-ink" activeProps={{ className: "text-primary", "aria-current": "page" }}>
           <Icon className="h-6 w-6" />
           {label}
         </Link>
       ))}
-      <InstallButton />
     </nav>
   );
 }

@@ -11,12 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as BundlesRouteImport } from './routes/bundles'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as DepositRouteImport } from './routes/deposit'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as PurchasesRouteImport } from './routes/purchases'
 import { Route as WithdrawRouteImport } from './routes/withdraw'
 
 const IndexRoute = IndexRouteImport.update({
@@ -27,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const AnalyticsRoute = AnalyticsRouteImport.update({
   id: '/analytics',
   path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BundlesRoute = BundlesRouteImport.update({
+  id: '/bundles',
+  path: '/bundles',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -59,6 +66,11 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PurchasesRoute = PurchasesRouteImport.update({
+  id: '/purchases',
+  path: '/purchases',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WithdrawRoute = WithdrawRouteImport.update({
   id: '/withdraw',
   path: '/withdraw',
@@ -68,35 +80,41 @@ const WithdrawRoute = WithdrawRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
+  '/bundles': typeof BundlesRoute
   '/dashboard': typeof DashboardRoute
   '/deposit': typeof DepositRoute
   '/history': typeof HistoryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
+  '/purchases': typeof PurchasesRoute
   '/withdraw': typeof WithdrawRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
+  '/bundles': typeof BundlesRoute
   '/dashboard': typeof DashboardRoute
   '/deposit': typeof DepositRoute
   '/history': typeof HistoryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
+  '/purchases': typeof PurchasesRoute
   '/withdraw': typeof WithdrawRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/analytics': typeof AnalyticsRoute
+  '/bundles': typeof BundlesRoute
   '/dashboard': typeof DashboardRoute
   '/deposit': typeof DepositRoute
   '/history': typeof HistoryRoute
   '/login': typeof LoginRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
+  '/purchases': typeof PurchasesRoute
   '/withdraw': typeof WithdrawRoute
 }
 export interface FileRouteTypes {
@@ -104,46 +122,54 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/analytics'
+    | '/bundles'
     | '/dashboard'
     | '/deposit'
     | '/history'
     | '/login'
     | '/onboarding'
     | '/profile'
+    | '/purchases'
     | '/withdraw'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/analytics'
+    | '/bundles'
     | '/dashboard'
     | '/deposit'
     | '/history'
     | '/login'
     | '/onboarding'
     | '/profile'
+    | '/purchases'
     | '/withdraw'
   id:
     | '__root__'
     | '/'
     | '/analytics'
+    | '/bundles'
     | '/dashboard'
     | '/deposit'
     | '/history'
     | '/login'
     | '/onboarding'
     | '/profile'
+    | '/purchases'
     | '/withdraw'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AnalyticsRoute: typeof AnalyticsRoute
+  BundlesRoute: typeof BundlesRoute
   DashboardRoute: typeof DashboardRoute
   DepositRoute: typeof DepositRoute
   HistoryRoute: typeof HistoryRoute
   LoginRoute: typeof LoginRoute
   OnboardingRoute: typeof OnboardingRoute
   ProfileRoute: typeof ProfileRoute
+  PurchasesRoute: typeof PurchasesRoute
   WithdrawRoute: typeof WithdrawRoute
 }
 
@@ -161,6 +187,13 @@ declare module '@tanstack/react-router' {
       path: '/analytics'
       fullPath: '/analytics'
       preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bundles': {
+      id: '/bundles'
+      path: '/bundles'
+      fullPath: '/bundles'
+      preLoaderRoute: typeof BundlesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -205,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/purchases': {
+      id: '/purchases'
+      path: '/purchases'
+      fullPath: '/purchases'
+      preLoaderRoute: typeof PurchasesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/withdraw': {
       id: '/withdraw'
       path: '/withdraw'
@@ -218,12 +258,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AnalyticsRoute: AnalyticsRoute,
+  BundlesRoute: BundlesRoute,
   DashboardRoute: DashboardRoute,
   DepositRoute: DepositRoute,
   HistoryRoute: HistoryRoute,
   LoginRoute: LoginRoute,
   OnboardingRoute: OnboardingRoute,
   ProfileRoute: ProfileRoute,
+  PurchasesRoute: PurchasesRoute,
   WithdrawRoute: WithdrawRoute,
 }
 export const routeTree = rootRouteImport
