@@ -14,5 +14,5 @@
 - Capacitor loads the HTTPS hosted TanStack Start application because SSR output is not a static Android web bundle; Android SDK targets live in android/variables.gradle.
 - Account access uses managed Cloud Auth with one root AuthProvider; keep bundle browsing and mock checkout public so guests can try purchases.
 - Mock purchase records are validated and stored locally under identity-scoped keys as explicitly requested; never treat them as real payment evidence or persist PINs.
-- Checkout owns a cancellable timed demo state machine; a future live mobile-money adapter must use authenticated server functions and verified provider callbacks before fulfilling data.
+- Checkout owns a cancellable timed demo state machine using phone-confirmation actions, never PIN input; a future live mobile-money adapter must use authenticated server functions and verified provider callbacks before fulfilling data, because browser confirmation is not payment evidence.
 - Purchase screens scope their theme through semantic CSS tokens; shared vault screens retain their own presentation.
